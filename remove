@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm -f /etc/init.d/tdmServer.sh
+sudo update-rc.d -f tdmServer.sh remove
+
+echo "tdmServer remove is OK!"
+
+# End
