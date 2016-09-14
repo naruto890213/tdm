@@ -510,76 +510,47 @@ int Coding_With_NewHB(Data_Spm *para, imsi_node *node)
 	return 0;
 }
 
-int Coding_With_CFMD_Soeckt(unsigned char *Buff, int fd, char *SN, int num, tmd_pthread *para)
+static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC, int Vsim_Action_State)
 {
-	unsigned char buff[256] = {'\0'};
-	unsigned char sBuff[256] = {'\0'};
-    char Version[12] = {'\0'};       
-	unsigned int version;
-    Con_Data Data;                   
-    int length = sizeof(Con_Data);   
-    int len = 4;                     
-	int ifTest = 0;
-    int sendbytes = -1;              
-    int minite_Remain = -1;          
-    Tell_Server_Bill Tell_Server_para;
-                                     
+    unsigned char buff[256] = {'\0'};
+    unsigned char sBuff[256] = {'\0'};
+    Con_Data Data;
+    int length = sizeof(Con_Data);
+    int len = 4;
+    int sendbytes = -1;
+    int minite_Remain = -1;
     memset(&Data, 0, length);//add by lk 20151020
-    memset(&Tell_Server_para, 0, sizeof(Tell_Server_Bill));
-    memcpy(&Tell_Server_para, Buff, num);
-    memcpy(Version, Tell_Server_para.Version, 10);
-	version = atoll(Version);
-
-	pthread_mutex_lock(&Data_Fd.list_mutex);
-    para->node = get_data_list_by_SN(para->SN, &Data_Fd.head);
-    pthread_mutex_unlock(&Data_Fd.list_mutex);
-
-    if(para->node)
-        ifTest = para->node->ifTest;
 
     if(version >= 1601080936)
     {
         length = 40;
     }
-    printf("This come from %s SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u, ifTest is %d\n\n", __func__, SN, Tell_Server_para.Vsim_Action_State, Tell_Server_para.MCC, version, ifTest);
+    printf("This come from %s SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u, ifTest is %d\n\n", __func__, para->SN, Vsim_Action_State, MCC, version, para->ifTest);
 
-    switch(Tell_Server_para.Vsim_Action_State)
+    switch(Vsim_Action_State)
     {
-        case 2:
         case 0:
-            sendbytes = Get_Config_By_MCC(Tell_Server_para.MCC, Data.config, SN);
-            if(sendbytes == 0)
+        case 2:
+            Get_Config_By_MCC(MCC, Data.config, para);
+            memcpy(buff + 4, &Data, length);
+            len = 4 + length;
+
+            if(version >= 1601080936)
             {
-                LogMsg(MSG_ERROR, "Get_Config_By_MCC->faild!, SN->%s Get_Data_Config return:%d\n", __func__, SN, sendbytes);
+                memcpy(buff + len, &(para->ifTest), 4);
+                len = len + 4;
             }
-            else
-            {
-                memcpy(buff + 4, &Data, length);
-                len = 4 + length;
-            }
-            printf("This come from TAG_CFMD:%s the Config is %s\n", SN, Data.config);
-            break;
-        case 1:
-            break;
-        case 3:
+            printf("This come from TAG_CFMD:%s the Config is %s\n", para->SN, Data.config);
             break;
         default:
             break;
     }
 
     memcpy(buff, &minite_Remain, 4);
+    sendbytes = TT_Result_Pack1(buff, (TD_ComProtocl_SendFrame_t *)sBuff, len, TAG_CFMD, 0);
+    write(para->fd1, (char *)sBuff, sendbytes);
 
-#if 0
-	if(version >= 1601080936)
-	{
-		memcpy(buff + len, &ifTest, 4);
-    	len = len + 4;
-	}
-#endif
-    sendbytes = TT_Result_Pack1(buff, (TD_ComProtocl_SendFrame_t *)sBuff, len, TAG_CFMD, 0);	
-	write(fd, (char *)sBuff, sendbytes);
-
-	return 0;
+    return 0;
 }
 
 static int Coding_With_CFMD(Data_Spm *para)
@@ -595,8 +566,9 @@ static int Coding_With_CFMD(Data_Spm *para)
     memcpy(para->SN, Tell_Server_para.SN, 15);
     memcpy(Version, Tell_Server_para.Version, 10);
     para->version = atol(Version);//modify by lk 20160111
-
 	memcpy(Data.SN, para->SN, 15);
+
+	Coding_With_CFMD_Soeckt(para, para->version, Tell_Server_para.MCC, Tell_Server_para.Vsim_Action_State);//add by 20160914
 
     Hex2String(Tell_Server_para.Imsi, para->sIMSI, LEN_OF_IMSI);
     para->versionAPK = Tell_Server_para.ApkVersion;//add by 20160125
@@ -610,7 +582,6 @@ static int Coding_With_CFMD(Data_Spm *para)
 		case 0:
 			para->locale_flag = 1;
 			break;
-		case 3:
 		default:
 			break;
     }
@@ -624,9 +595,9 @@ static int Coding_With_CFMD(Data_Spm *para)
 	Local_Confirm_Pack(para->SN, para->sIMSI, Version, para->versionAPK, Tell_Server_para.ICCID, Data.Buff);
 
 	Data.len = strlen(Data.Buff);
-#if 0
-    printf("This come from TAG_CFMD SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u, the Dst is %s, node is %p\n\n", 
-			para->SN, Tell_Server_para.Vsim_Action_State, Tell_Server_para.MCC, para->version, Dst, para->node);
+#if 1
+    printf("This come from TAG_CFMD SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u, node is %p\n\n", 
+			para->SN, Tell_Server_para.Vsim_Action_State, Tell_Server_para.MCC, para->version, para->node);
 #endif
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
@@ -906,8 +877,13 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
 	if((Battery < 3) && (Battery != 0)) 
 	{
   		Coding_With_TT_Reinsert(0, fd, TAG_SHUTDOWN_CMD);
-		//LogMsg(MSG_MONITOR, "This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd\n", para->SN, cnt, Battery);
+		LogMsg(MSG_MONITOR, "This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd\n", para->SN, cnt, Battery);
 	}
+
+	if(para->node == NULL)
+    {
+		para->node = Get_Node_By_SN(para->SN);
+	}	
 
 	if(para->node)
 	{
@@ -1591,7 +1567,7 @@ static int Coding_With_CMD_Data_Pack(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned
             break;
         case TAG_CFMD:
             memcpy(para->SN, ((Tell_Server_Bill *)(p_Recv->Frame_Data))->SN, 15);
-            Coding_With_CFMD_Soeckt(TempBuf, fd, para->SN, para->num, para);
+            //Coding_With_CFMD_Soeckt(TempBuf, fd, para->SN, para->num, para);
             break;
     }
 
@@ -1706,6 +1682,8 @@ static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempB
 
 	if(para->num < 0)
 		para->num = 0;
+
+	printf("the 111111111 CMD_TAG is %02x\n", CMD_TAG);
 
     switch(CMD_TAG)
     {

@@ -598,10 +598,7 @@ ret:
 int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)
 {
     int ret = -1;
-#if 0
 	char buff[1024] = {'\0'};
-#else
-#endif
 
     pthread_mutex_lock(lock);
 
@@ -624,7 +621,6 @@ int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)
         *Fd = -1;
 		Delay(0, 50);
     }
-#if 0
 	else
 	{
 		ret = GetMsgFromSock(*Fd, buff, 0, 0, 1);
@@ -634,11 +630,7 @@ int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)
         	close(*Fd);
         	*Fd = -1;
 		}
-		printf("recv %d bytes from tomcat, the buff is %s\n", ret, buff);
 	}
-#else
-	Delay(0, 50);
-#endif
 
 ret:
     pthread_mutex_unlock(lock);
@@ -1252,6 +1244,23 @@ int Set_Dada_IP(Data_IP *para, char *ip)
 	return 0;
 }
 
+static int Get_SpeedStr_From_Socket(Data_Spm *para)
+{
+	int sn_num = (atoll(para->SN) % SOCKET_NUM);
+	int cnt = 0;
+	char buff[128] = {'\0'};	
+	char Dst[256] = {'\0'};
+
+	sprintf(buff, "45445445,3002,2|{'SN':'%s','MCC':'%d'}", para->SN, para->MCC);
+
+	cnt = Get_Deal_From_SimPool_socket(buff, Dst, 0, &Data_Fd.Deal_Fd[sn_num], &Data_Fd.Deal_mutex[sn_num]);
+
+	if(!cnt)
+		Get_Key_Value_Str(Dst, "speedStr", para->speedStr, 4);
+
+	return cnt;
+}
+
 int Set_Deal_From_SimPool(char *sn, char *imsi, int userCountry, int factoryFlag, int *minite_Remain)
 {
 	int cnt = -1;
@@ -1302,17 +1311,17 @@ int Set_Deal_From_SimPool(char *sn, char *imsi, int userCountry, int factoryFlag
 
 int SetFd_From_Device(char *SN, int socket1, int socket2)
 {
-	char buff[128] = {'\0'};
-
-	sprintf(buff, "45445445,4001,3|{'SN':'%s','fd1':%d,'fd2':%d}", SN, socket1, socket2);
-	Send_Device_Data(buff, NULL, 0);
-
 	return 0;
 }
 
-int Get_Config_By_MCC(int code, char *buff, char *sn)
+int Get_Config_By_MCC(int code, char *buff, Data_Spm *para)
 {
-    return -1;
+	if(strlen(para->speedStr) > 5)
+		memcpy(buff, para->speedStr, sizeof(para->speedStr));
+	else
+		Get_SpeedStr_From_Socket(para);
+		
+    return 0;
 }
 
 static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
