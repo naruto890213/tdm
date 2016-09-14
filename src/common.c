@@ -599,8 +599,11 @@ int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)
 {
     int ret = -1;
 	char buff[1024] = {'\0'};
+	struct timeval start;
+    struct timeval end;
 
     pthread_mutex_lock(lock);
+	gettimeofday(&start, NULL);
 
     if(*Fd <= 0)
     {
@@ -633,6 +636,8 @@ int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)
 	}
 
 ret:
+	gettimeofday(&end, NULL);
+	printf("the %s:time speen is %ld ms\n", __func__, ((end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)/1000));
     pthread_mutex_unlock(lock);
 
     return 0;
