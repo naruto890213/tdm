@@ -26,6 +26,7 @@
 #define SQL_TIMEOUT					600
 #define	LOGIN_TIMEOUT				1800
 
+#define Java_TIMEOUT				5
 #define SOCKET_NUM					5
 #define Web_Port					10160
 #define Web_IP						"218.17.107.11"
@@ -503,7 +504,6 @@ typedef struct _Log_Data
 
 extern int SIM_Allocate_Proc(Data_Spm *Src);
 extern int Heart_Log_Pack(char *sn, char *imsi, HB_NEW_t *Src, char *Dst);
-extern int TT_Log(char *sn, int cnt, char *imsi, unsigned char *Buff, int len);
 extern int SetFd_From_Device(char *SN, int socket1, int socket2);
 extern int Set_Deal_From_SimPool(char *sn, char *imsi, int userCountry, int factoryFlag, int *minite_Remain);
 extern int LOG_OUT_Log_Pack(char *sn, char *sIMSI, char *Dst);
@@ -519,7 +519,6 @@ extern int Deal_Proc(Data_Spm *para, int MCC);
 extern int GetVPN_From_SimPool(Data_Spm *para, int *code);
 extern int SetVPN_Status(char *vpn, char *SN, char *dst, int *code);
 extern int VPN_Log(char *SN, char *vpn, int Result, int code, int type);
-extern int Login_Log(AccessAuth_Def *Src, int Result, char *imsi, int flag, int logtime, unsigned int apkversion);
 extern int add_data_list(char *imsi, time_t now, struct list_head *head);
 extern int del_data_list(char *imsi, struct list_head *head);
 extern int add_data_list_by_sn(char *imsi, char *SN, time_t now, time_t logtime, time_t outtime, struct list_head *head);
@@ -528,7 +527,6 @@ extern time_t Get_time_by_sn(char *SN, time_t now, int type);
 extern void Init_imsi_Data(void);
 extern Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head);
 extern int add_data_imsi_list(char *imsi, time_t now, struct list_head *head, imsi_node *node);
-extern int Login_Log_Pack(AccessAuth_Def *Src, Data_Spm *para, int type);
 extern int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int version, char *Dst);
 extern int Local_Confirm_Pack(char *sn, char *imsi, char *Version, int apkversion, char *iccid, char *Dst);
 extern void *work_func(void *arg);

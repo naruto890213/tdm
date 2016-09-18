@@ -630,7 +630,7 @@ int Coding_With_Low_Vsim(int socket_fd, unsigned char *TempBuf, int num, char *s
 	return 0;
 }
 
-int Coding_With_Deal(Data_Spm *para)
+static int Coding_With_Deal(Data_Spm *para)
 {
     unsigned char SendBuf[256] = {'\0'};
     Deal_t Deal_Data;
@@ -639,19 +639,18 @@ int Coding_With_Deal(Data_Spm *para)
     memcpy(&Deal_Data, para->Buff, sizeof(Deal_t));
     p_send->Cmd_TAG = TAG_DEAL_RET;
     p_send->Result = 0;
-    p_send->FrameSizeL = 4;
+    p_send->FrameSizeL = 5;
 
     Hex2String(Deal_Data.IMSI, para->sIMSI, LEN_OF_IMSI); //add by lk 20150902
 
     Deal_Proc(para, Deal_Data.MCC);
     memcpy(p_send->Frame_Data, &para->minite_Remain, p_send->FrameSizeL);
+	p_send->Frame_Data[4] = para->lastStart;
 
-    LogMsg(MSG_MONITOR, "This come from %s imsi is %s, SN is %s, MCC is %d, new_start_flag is %d, the minite_Remain is %d\n", 
-									__func__, para->sIMSI, para->SN, Deal_Data.MCC, para->new_start_flag, para->minite_Remain);
+    LogMsg(MSG_MONITOR, "This come from %s imsi is %s, SN is %s, MCC is %d, the minite_Remain is %d, the lastStart is %d\n",
+			 __func__, para->sIMSI, para->SN, Deal_Data.MCC, para->minite_Remain, para->lastStart);
 
     write(para->fd1, (char *)SendBuf, p_send->FrameSizeL + 4);
-
-	//Login_Log_Pack(NULL, para, 1);
 
     return 0;
 }
@@ -1380,7 +1379,6 @@ int TDM_init(int *iServer_sock)
 	iListenPort = 11111;
 
 	LogMsg(MSG_MONITOR, "TDM:Listen to Port %d\n", iListenPort);
-
 	ConnectToMysqlInit(&Data_Fd);
 
 	return 0;

@@ -57,7 +57,7 @@ Coding_With_ACCESS_AUTH	src/TDM.c	/^int Coding_With_ACCESS_AUTH(Data_Spm *para, 
 Coding_With_ADN	src/TDM.c	/^int Coding_With_ADN(Data_Spm *para, int socket_fd)$/;"	f
 Coding_With_APN	src/TDM.c	/^int Coding_With_APN(Data_Spm *para, int socket_fd)$/;"	f
 Coding_With_CFMD	src/TDM.c	/^static int Coding_With_CFMD(Data_Spm *para)$/;"	f	file:
-Coding_With_CFMD_Soeckt	src/TDM.c	/^int Coding_With_CFMD_Soeckt(unsigned char *Buff, int fd, char *SN, int num, tmd_pthread *para)$/;"	f
+Coding_With_CFMD_Soeckt	src/TDM.c	/^static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC, int Vsim_Action_State)$/;"	f	file:
 Coding_With_CMDTT	src/TDM.c	/^int Coding_With_CMDTT(Data_Spm *para)$/;"	f
 Coding_With_CMD_Data_Pack	src/TDM.c	/^static int Coding_With_CMD_Data_Pack(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *TempBuf, tmd_pthread *para, int fd, int CMD_TAG)$/;"	f	file:
 Coding_With_CMD_Data_Pool	src/TDM.c	/^void *Coding_With_CMD_Data_Pool(void *arg)$/;"	f
@@ -122,21 +122,25 @@ FileBlock_Def	inc/tdm.h	/^}FileBlock_Def;$/;"	t	typeref:struct:__anon5
 FileContent	inc/tdm.h	/^	FileBlockInfo_Def 	FileContent[FileBlockNum_MAX];$/;"	m	struct:__anon5
 FileName	inc/tdm.h	/^	char 				FileName[128];$/;"	m	struct:__anon5
 GetVPN_From_SimPool	src/common.c	/^int GetVPN_From_SimPool(Data_Spm *para, int *code)$/;"	f
-Get_Config_By_MCC	src/common.c	/^int Get_Config_By_MCC(int code, char *buff, char *sn)$/;"	f
+Get_Config_By_MCC	src/common.c	/^int Get_Config_By_MCC(int code, char *buff, Data_Spm *para)$/;"	f
 Get_Data_From_Deal	src/common.c	/^static int Get_Data_From_Deal(char *Src, Data_Spm *para, char *SN)$/;"	f	file:
 Get_Data_IP_SN	src/common.c	/^int Get_Data_IP_SN(char *imsi, Data_Spm *para)$/;"	f
 Get_Deal_From_Remote	src/common.c	/^static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)$/;"	f	file:
 Get_Deal_From_SimPool	src/common.c	/^int Get_Deal_From_SimPool(Data_Spm *para1, char *Dst, void *para, int Data)$/;"	f
 Get_Deal_From_SimPool_socket	src/common.c	/^static int Get_Deal_From_SimPool_socket(char *buff, char *Dst, int vir_flag, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
+Get_Key_Value_Factory	src/common.c	/^static int Get_Key_Value_Factory(char *Src, Data_Spm *para)$/;"	f	file:
+Get_Key_Value_IMEI	src/common.c	/^static int Get_Key_Value_IMEI(char *Src, char *Dst, long long *IMEI)$/;"	f	file:
+Get_Key_Value_IMSI	src/common.c	/^static int Get_Key_Value_IMSI(char *Src, char *Dst, char *sIMSI, Data_Spm *para)$/;"	f	file:
+Get_Key_Value_IPAndPort	src/common.c	/^static void Get_Key_Value_IPAndPort(char *Src, char *Dst, void *para, void *para1)$/;"	f	file:
 Get_Key_Value_Int	src/common.c	/^static int Get_Key_Value_Int(char *Src, char *Dst)$/;"	f	file:
 Get_Key_Value_Str	src/common.c	/^static int Get_Key_Value_Str(char *Src, char *Dst, char *para, int len)$/;"	f	file:
-Get_Key_Value_Str_Type	src/common.c	/^static void Get_Key_Value_Str_Type(char *Src, char *Dst, void *para, void *para1, int Type)$/;"	f	file:
+Get_Key_Value_Str_Type	src/common.c	/^static void Get_Key_Value_Str_Type(char *Src, char *Dst, void *para, void *para1)$/;"	f	file:
 Get_Key_Value_VPN	src/common.c	/^static int Get_Key_Value_VPN(char *Src, Data_Spm *para)$/;"	f	file:
 Get_Key_Value_Vusim_Active_Flag	src/common.c	/^static int Get_Key_Value_Vusim_Active_Flag(char *Src, imsi_info *para)$/;"	f	file:
 Get_Low_simcards	src/common.c	/^int Get_Low_simcards(char *SN, int code, unsigned char *imsi)$/;"	f
 Get_Node_By_SN	src/TDM.c	/^Data_Spm *Get_Node_By_SN(char *SN)$/;"	f
+Get_SpeedStr_From_Socket	src/common.c	/^static int Get_SpeedStr_From_Socket(Data_Spm *para)$/;"	f	file:
 Get_VPN_From_SN_List	src/common.c	/^int Get_VPN_From_SN_List(char *SN, char *vpn)$/;"	f
-Get_time_by_sn	src/common.c	/^time_t Get_time_by_sn(char *SN, time_t now, int type)$/;"	f
 HB_NEW_t	inc/tdm.h	/^}HB_NEW_t;\/\/add by lk 20150511$/;"	t	typeref:struct:__anon3
 HOSTNAME	inc/tdm.h	39;"	d
 Heart_Log_Pack	src/common.c	/^int Heart_Log_Pack(char *sn, char *imsi, HB_NEW_t *Src, char *Dst)$/;"	f
@@ -179,7 +183,7 @@ LowPower	inc/tdm.h	/^	LowPower,\/\/7 add by 20160314$/;"	e	enum:__anon1
 MASK_NUM	src/TDM.c	33;"	d	file:
 MAXEPOLLSIZE	inc/tdm.h	11;"	d
 MAX_CON_NUM	inc/tdm.h	12;"	d
-MAX_LINE	src/TDM.c	1522;"	d	file:
+MAX_LINE	src/TDM.c	1495;"	d	file:
 MAX_SN_NUM	inc/tdm.h	24;"	d
 MCC	inc/tdm.h	/^	unsigned short		MCC;	$/;"	m	struct:__Data_Spm
 MCC	inc/tdm.h	/^	unsigned short		MCC;	$/;"	m	struct:deal_info_t
@@ -239,7 +243,7 @@ SIMActivateDate	inc/tdm.h	/^    char                SIMActivateDate[20];$/;"	m	s
 SIMActivateDate	inc/tdm.h	/^    char                SIMActivateDate[20];$/;"	m	struct:int_imsi_node_t
 SIMInfoID	inc/tdm.h	/^    char                SIMInfoID[64];\/\/sim卡信息ID$/;"	m	struct:imsi_info_t
 SIMInfoID	inc/tdm.h	/^    char                SIMInfoID[64];\/\/sim卡信息ID$/;"	m	struct:int_imsi_node_t
-SIM_Allocate_Err	src/common.c	/^int SIM_Allocate_Err(SimAlloc_Err_Code Errcode, Data_Spm *simalloc)$/;"	f
+SIM_Allocate_Err	src/common.c	/^static int SIM_Allocate_Err(SimAlloc_Err_Code Errcode, Data_Spm *simalloc)$/;"	f	file:
 SIM_Allocate_Proc	src/common.c	/^int SIM_Allocate_Proc(Data_Spm *Src)$/;"	f
 SN	inc/tdm.h	/^	char				SN[16];$/;"	m	struct:__Data_Spm
 SN	inc/tdm.h	/^	char				SN[16];$/;"	m	struct:__Node_Data_t
@@ -258,10 +262,10 @@ SRC	Makefile	/^SRC = $(wildcard ${DIR_SRC}\/*.c)  $/;"	m
 Selnet	inc/tdm.h	/^    char                Selnet[8];$/;"	m	struct:imsi_info_t
 Selnet	inc/tdm.h	/^    char                Selnet[8];$/;"	m	struct:int_imsi_node_t
 Send_Change_IP	src/TDM.c	/^int Send_Change_IP(Data_Spm *para)$/;"	f
-Send_Deal_Data	src/common.c	/^int Send_Deal_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f
+Send_Deal_Data	src/common.c	/^static int Send_Deal_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
 Send_Device_Data	src/common.c	/^int Send_Device_Data(char *Src, char *Dst, int type)$/;"	f
-Send_Logs_Data	src/common.c	/^int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)$/;"	f
-Send_Sim_Data	src/common.c	/^int Send_Sim_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f
+Send_Logs_Data	src/common.c	/^static int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
+Send_Sim_Data	src/common.c	/^static int Send_Sim_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
 ServerInfo	inc/tdm.h	/^	char				ServerInfo[256];		$/;"	m	struct:__Data_Spm
 ServerInfo	inc/tdm.h	/^	char				ServerInfo[256];		$/;"	m	struct:deal_info_t
 ServerInfo	inc/tdm.h	/^    char            	ServerInfo[256]; \/\/add by lk 20150515$/;"	m	struct:__anon8
@@ -289,7 +293,6 @@ TD_Result_t	inc/tdm.h	/^}TD_Result_t; \/\/add by lk 20150204$/;"	t	typeref:struc
 TIMEOUT_IMST	inc/tdm.h	10;"	d
 TT_INFO_t	inc/tdm.h	/^}TT_INFO_t;$/;"	t	typeref:struct:__anon6
 TT_Info_Process	src/TDM.c	/^int TT_Info_Process(unsigned char *Src, TT_RESULT_t *Dst, int iLen)$/;"	f
-TT_Log	src/common.c	/^int TT_Log(char *sn, int cnt, char *imsi, unsigned char *Buff, int len)$/;"	f
 TT_Log_Pack_Data	src/common.c	/^int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len, Data_Spm *para)$/;"	f
 TT_RESULT_t	inc/tdm.h	/^}TT_RESULT_t;$/;"	t	typeref:struct:__anon7
 TT_Result_Pack	src/TDM.c	/^int TT_Result_Pack(TT_RESULT_t * Src, TD_ComProtocl_SendFrame_t *Dst, int num, int CMD, int Result)$/;"	f
@@ -361,7 +364,6 @@ _common_Data_t	inc/tdm.h	/^typedef struct _common_Data_t$/;"	s
 _tmd_pthread	inc/tdm.h	/^typedef struct _tmd_pthread$/;"	s
 add_data_imsi_list	src/common.c	/^int add_data_imsi_list(char *imsi, time_t now, struct list_head *head, imsi_node *node)$/;"	f
 add_data_list	src/common.c	/^int add_data_list(char *imsi, time_t now, struct list_head *head)$/;"	f
-add_data_list_by_sn	src/common.c	/^int add_data_list_by_sn(char *imsi, char *SN, time_t now, time_t logtime, time_t outtime, struct list_head *head)$/;"	f
 alloc_Data_SPM	src/TDM.c	/^tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)$/;"	f
 apkversion	inc/tdm.h	/^    unsigned int    	apkversion;\/\/add by 20160125$/;"	m	struct:__anon8
 base	inc/tdm.h	/^    struct event_base 	*base;$/;"	m	struct:_common_Data_t	typeref:struct:_common_Data_t::event_base
@@ -401,7 +403,7 @@ free_flag	inc/tdm.h	/^	unsigned char		free_flag;\/\/0 is used, 1 is freed$/;"	m	
 free_imsi	inc/tdm.h	/^}free_imsi;\/\/add by 20160123$/;"	t	typeref:struct:free_imsi_t
 free_imsi_t	inc/tdm.h	/^typedef struct free_imsi_t$/;"	s
 free_tmd_pthread	src/TDM.c	/^void free_tmd_pthread(tmd_pthread *para)$/;"	f
-getNetworkType	src/common.c	/^int getNetworkType(int networkType, char *Dst)$/;"	f
+getNetworkType	src/common.c	/^static int getNetworkType(int networkType, char *Dst)$/;"	f	file:
 getValue	src/TDM.c	/^void getValue(Web_Data *para, char *sn, char *src, char *dst, int *fd1, int *fd2)$/;"	f
 get_data_list	src/common.c	/^static Data_Spm *get_data_list(char *imsi, struct list_head *head)$/;"	f	file:
 get_data_list_by_SN	src/common.c	/^Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head)$/;"	f
