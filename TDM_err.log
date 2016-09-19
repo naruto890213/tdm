@@ -1,20 +1,6 @@
-20160914102210E:0:Get_Config_By_MCC->faild!, SN->Coding_With_CFMD_Soeckt Get_Data_Config return:1275070684
-20160914114639E:0:Send_Logs_Data send faild, the errno is 104, err is Connection reset by peer, the Src is 45445445,2003,7|{'SN':'172150210001204','version':'1608010000','IMSI':'809460060049030294','versionAPK':'1608010000','TTContext':'8944502010148274353f','lastTime':'1473824799'}&&, the len is 178, the len1 is 178
-20160914114639E:0:This come from Send_Logs_Data connect err is Connection refused, the Src is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'39','wifiCount':'0','battery':'100','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'79872','downFlowAll':'25600','dayUsedFlow':'7912448','minsRemaining':'734','roamGStrenth':'55','roamUpFlowAll':'5303','roamDownFlowAll':'4443','roamDayUsedFlow':'22501','FlowDistinction':'562','IMSI':'809460060049030294','TTContext':'HSPAP','lastTime':'1473824799'}&&
-20160914114723E:0:This come from Send_Logs_Data connect err is Connection refused, the Src is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'40','wifiCount':'0','battery':'100','wifiState':'500','gSta':'1','gStrenth':'99','upFlowAll':'79872','downFlowAll':'25600','dayUsedFlow':'7913472','minsRemaining':'733','roamGStrenth':'55','roamUpFlowAll':'5303','roamDownFlowAll':'4443','roamDayUsedFlow':'22501','FlowDistinction':'681','IMSI':'809460060049030294','TTContext':'HSDPA','lastTime':'1473824843'}&&
-20160914114824E:0:This come from Send_Logs_Data connect err is Connection refused, the Src is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'41','wifiCount':'0','battery':'100','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'80896','downFlowAll':'26624','dayUsedFlow':'7915520','minsRemaining':'732','roamGStrenth':'53','roamUpFlowAll':'5303','roamDownFlowAll':'4443','roamDayUsedFlow':'22501','FlowDistinction':'1807','IMSI':'809460060049030294','TTContext':'HSPAP','lastTime':'1473824904'}&&
-20160914120024E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 456, len1 is 456
-20160914120125E:0:This come from Send_Logs_Data connect err is Connection refused, the Src is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'54','wifiCount':'0','battery':'100','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'94208','downFlowAll':'37888','dayUsedFlow':'7939072','minsRemaining':'718','roamGStrenth':'51','roamUpFlowAll':'6191','roamDownFlowAll':'5075','roamDayUsedFlow':'23817','FlowDistinction':'957','IMSI':'809460060049030294','TTContext':'HSDPA','lastTime':'1473825685'}&&
-20160914134119E:0:Deal_Fd[0] connect faild, the err is Connection refused
-20160914134119E:0:Logs_Fd[0] connect faild, the err is Connection refused
-20160914134119E:0:Deal_Fd[1] connect faild, the err is Connection refused
-20160914134119E:0:Logs_Fd[1] connect faild, the err is Connection refused
-20160914134119E:0:Deal_Fd[2] connect faild, the err is Connection refused
-20160914134119E:0:Logs_Fd[2] connect faild, the err is Connection refused
-20160914134119E:0:Deal_Fd[3] connect faild, the err is Connection refused
-20160914134119E:0:Logs_Fd[3] connect faild, the err is Connection refused
-20160914134119E:0:Deal_Fd[4] connect faild, the err is Connection refused
-20160914134119E:0:Logs_Fd[4] connect faild, the err is Connection refused
-20160914134119E:0:Device_Fd connect faild, the err is Connection refused
-20160914134119E:0:Sim_Fd connect faild, the err is Connection refused
-20160914135701E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 460, len1 is 460
+20160918202025E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 453, len1 is 453
+20160919085821E:0:Get_Data_From_Deal faild, errno is 0, err is Success
+20160919085821E:0:Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool return 4
+20160919085821E:0:Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool frist faild, return 4
+20160919092837E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 458, len1 is 458
+20160919102836E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 459, len1 is 459

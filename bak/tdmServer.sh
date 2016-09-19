@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TDM_SERVER_DIR=/home/ubuntu/TerminalDeviceManage
+TDM_SERVER_DIR=/home/SubServer/TerminalDeviceManage
 
 PS="ps aux"
 

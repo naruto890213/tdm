@@ -209,85 +209,32 @@ typedef struct Rqst_Low_Vsim_t
     int 				Mcc;
 }Rqst_Low_Vsim;
 
-typedef struct deal_info_t
-{
-	unsigned char		lastStart;//订单的最后一个周期重启
-	unsigned char		orderType;//订单模式
-	unsigned char		factoryFlag;
-	unsigned char		vpn;
-
-	unsigned short		MCC;	
-	unsigned short		minite_Remain;
-	unsigned short		threshold;
-	unsigned short		dataLimit;
-
-	time_t				start_time;
-	char				ServerInfo[256];		
-}deal_info;
-
 typedef struct imsi_info_t
 {
     char                IP[16];//IP地址
-    char                SIMInfoID[64];//sim卡信息ID
-    char                SimName[8];//sim卡编号
-    char                APN[256];//APN内容
-    char                Vusim_Active_Num[128];//sim卡激活号码
-    char                Selnet[8];
-    char                SIMActivateDate[20];
-    long long           IMEI;//IMEI号
+    char                APN[64];//APN内容
 
-    unsigned short      Port;//sim卡所在的监听端口号
-    char                SimBank_ID;//系统编号
-    char                Channel_ID;//通道编号
-
-    unsigned char       IsNet;
-    unsigned char       IsApn;
-    unsigned char       ifVPN;
-    unsigned char       Vusim_Active_Flag;//sim卡是否已经激活
-
+    char                Vusim_Active_Num[126];//sim卡激活号码
     unsigned char       speedType;
     unsigned char       NeedFile;//sim卡文件是否需要强制更新
-    unsigned char       ifRoam;
-	unsigned char		free_flag;
 
-	char				imsi[20];
-}imsi_info;//add by 20160225
-
-typedef struct int_imsi_node_t
-{
-    char                IP[16];//IP地址
-    char                SIMInfoID[64];//sim卡信息ID
-    char                SimName[8];//sim卡编号
-    char                APN[256];//APN内容
-    char                Vusim_Active_Num[128];//sim卡激活号码
     char                Selnet[8];
-    char                SIMActivateDate[20];
     long long           IMEI;//IMEI号
 
     unsigned short      Port;//sim卡所在的监听端口号
     char                SimBank_ID;//系统编号
     char                Channel_ID;//通道编号
 
+    unsigned char       ifRoam;
     unsigned char       IsNet;
     unsigned char       IsApn;
-    unsigned char       ifVPN;
     unsigned char       Vusim_Active_Flag;//sim卡是否已经激活
-
-	unsigned char		speedType;
-	unsigned char		NeedFile;//sim卡文件是否需要强制更新
-	unsigned char		ifRoam;
-	unsigned char		free_flag;//0 is used, 1 is freed
-
-	char 				imsi[20];
-	char				lastDeviceSN[16];//add by 20160309
-
-	time_t 				lastTime;
-	struct list_head	list;
-}imsi_node;//add by 20160127
+}imsi_info;//add by 20160225
 
 typedef struct __Data_Spm
 {
-	int					socket_spm;
+	int					socket_spm;//connect to spm
+	int					fd1;//Terminal socket
 
 	unsigned char 		len;
 	unsigned char		cnt;
@@ -313,13 +260,13 @@ typedef struct __Data_Spm
 	unsigned int   		versionAPK;//add by 20160125
 	unsigned char 		Buff[256];
 
-	int					fd1;
-
 	time_t				lastTime;//simcards time
 	time_t				outtime;//logout time
 	time_t				TT_time;//TT lastTime
 
 ////////////////this is deal_info///////////////////////
+	char				speedStr[40];
+
 	unsigned char		lastStart;//订单的最后一个周期重启
 	unsigned char		orderType;//订单模式
 	unsigned char		factoryFlag;
@@ -331,22 +278,18 @@ typedef struct __Data_Spm
 	unsigned short		dataLimit;
 
 	time_t				start_time;
-	char				ServerInfo[256];		
-/////////////////////end///////////////////////////////
-
+	char				ServerInfo[128];		
 	int                 ifTest;
+/////////////////////end///////////////////////////////
 
 ////////////////this is vpn_info//////////////////////
     char                vpnc[127];//add by 20160226
     unsigned char       vpn_flag;
 /////////////////////end//////////////////////////////
 
-	char				speedStr[40];
-
-	imsi_node			*node;//add by 20160222
+	imsi_info			node;//add by 20160918
 	struct threadpool	*pool;
 	struct list_head 	list;
-/*********************end**********************/
 }Data_Spm;//add by lk 20150331
 
 typedef struct _Mysql_Fd
@@ -362,9 +305,7 @@ typedef struct _Mysql_Fd
 	pthread_mutex_t 	Device_mutex;
 
 	pthread_mutex_t 	list_mutex;//add by 20160123
-	pthread_mutex_t 	imsi_mutex;//add by 20160123
 	struct list_head 	head;//add by 20160123
-	struct list_head 	imsi_list;//add by 20160123
 	time_t 				device_time;
 }Mysql_Fd;//add by lk 20150921
 
@@ -510,8 +451,8 @@ extern int LOG_OUT_Log_Pack(char *sn, char *sIMSI, char *Dst);
 extern int Get_Low_simcards(char *SN, int code, unsigned char *imsi);
 extern int Get_Data_IP_SN(char *imsi, Data_Spm *para);
 extern int Set_Sim_Status(char *imsi);
-extern void ConnectToMysqlInit(Mysql_Fd *para);
-extern void ConnectToMysqlDeInit(Mysql_Fd *para);
+extern void ConnectToMysqlInit(void);
+extern void ConnectToMysqlDeInit(void);
 extern int Set_SimCards_Status(char *sIMSI);
 extern int Set_Dada_IP(Data_IP *para, char *ip);
 extern int Get_Config_By_MCC(int code, char *buff, Data_Spm *para);
@@ -519,18 +460,13 @@ extern int Deal_Proc(Data_Spm *para, int MCC);
 extern int GetVPN_From_SimPool(Data_Spm *para, int *code);
 extern int SetVPN_Status(char *vpn, char *SN, char *dst, int *code);
 extern int VPN_Log(char *SN, char *vpn, int Result, int code, int type);
-extern int add_data_list(char *imsi, time_t now, struct list_head *head);
-extern int del_data_list(char *imsi, struct list_head *head);
 extern int add_data_list_by_sn(char *imsi, char *SN, time_t now, time_t logtime, time_t outtime, struct list_head *head);
-extern imsi_node *get_imsi_list(char *imsi, struct list_head *head);
-extern time_t Get_time_by_sn(char *SN, time_t now, int type);
-extern void Init_imsi_Data(void);
-extern Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head);
-extern int add_data_imsi_list(char *imsi, time_t now, struct list_head *head, imsi_node *node);
+extern Data_Spm *get_data_list_by_SN(char *SN);
 extern int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int version, char *Dst);
 extern int Local_Confirm_Pack(char *sn, char *imsi, char *Version, int apkversion, char *iccid, char *Dst);
 extern void *work_func(void *arg);
-extern int Add_imsi_node_by_Data(struct list_head *head, imsi_info *Data, Data_Spm *para);
 extern int Get_VPN_From_SN_List(char *SN, char *vpn);
 extern int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len, Data_Spm *para);
+extern Data_Spm *Get_Node_By_SN(char *SN);
+extern int Is_Valid_SN(char *SN);
 #endif

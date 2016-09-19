@@ -4,32 +4,30 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AA_ERR_CHARGES_OWED	inc/tdm.h	46;"	d
-AA_ERR_CONNECT_SCM	inc/tdm.h	49;"	d
-AA_ERR_NO_SIM_AVALIABLE	inc/tdm.h	48;"	d
-AA_ERR_RECVFROM_MS	inc/tdm.h	54;"	d
-AA_ERR_RECVFROM_MS_TIMEOUT	inc/tdm.h	53;"	d
-AA_ERR_RECVFROM_SCM	inc/tdm.h	51;"	d
-AA_ERR_SENDTO_MS	inc/tdm.h	52;"	d
-AA_ERR_SENDTO_SCM	inc/tdm.h	50;"	d
-AA_ERR_SERVER_ABNORMAL	inc/tdm.h	55;"	d
-AA_ERR_SN_NOT_EXIST	inc/tdm.h	45;"	d
-AA_ERR_UNKNOWN	inc/tdm.h	56;"	d
-AA_ERR_VIOLATE_AA_INFO	inc/tdm.h	47;"	d
+AA_ERR_CHARGES_OWED	inc/tdm.h	47;"	d
+AA_ERR_CONNECT_SCM	inc/tdm.h	50;"	d
+AA_ERR_NO_SIM_AVALIABLE	inc/tdm.h	49;"	d
+AA_ERR_RECVFROM_MS	inc/tdm.h	55;"	d
+AA_ERR_RECVFROM_MS_TIMEOUT	inc/tdm.h	54;"	d
+AA_ERR_RECVFROM_SCM	inc/tdm.h	52;"	d
+AA_ERR_SENDTO_MS	inc/tdm.h	53;"	d
+AA_ERR_SENDTO_SCM	inc/tdm.h	51;"	d
+AA_ERR_SERVER_ABNORMAL	inc/tdm.h	56;"	d
+AA_ERR_SN_NOT_EXIST	inc/tdm.h	46;"	d
+AA_ERR_UNKNOWN	inc/tdm.h	57;"	d
+AA_ERR_VIOLATE_AA_INFO	inc/tdm.h	48;"	d
 AA_INFO_LINKLIST_t	inc/tdm.h	/^typedef struct AA_INFO_LINKLIST_t$/;"	s
 AA_INFO_LINKLIST_t	inc/tdm.h	/^}AA_INFO_LINKLIST_t;$/;"	t	typeref:struct:AA_INFO_LINKLIST_t
-AA_RESULT_FILERQ_FALSE	inc/tdm.h	44;"	d
-AA_RESULT_FILERQ_TRUE	inc/tdm.h	43;"	d
-AA_RESULT_STATE_ERROR	inc/tdm.h	42;"	d
-AA_RESULT_STATE_FAIL	inc/tdm.h	41;"	d
-AA_RESULT_STATE_SUCCESS	inc/tdm.h	40;"	d
+AA_RESULT_FILERQ_FALSE	inc/tdm.h	45;"	d
+AA_RESULT_FILERQ_TRUE	inc/tdm.h	44;"	d
+AA_RESULT_STATE_ERROR	inc/tdm.h	43;"	d
+AA_RESULT_STATE_FAIL	inc/tdm.h	42;"	d
+AA_RESULT_STATE_SUCCESS	inc/tdm.h	41;"	d
 ACCESSAUTHENTICATE_TIMEOUT	inc/tdm.h	22;"	d
 APDU_Head	inc/tdm.h	/^	unsigned char 		APDU_Head[5];$/;"	m	struct:__anon6
-APN	inc/tdm.h	/^    char                APN[256];\/\/APN内容$/;"	m	struct:imsi_info_t
-APN	inc/tdm.h	/^    char                APN[256];\/\/APN内容$/;"	m	struct:int_imsi_node_t
+APN	inc/tdm.h	/^    char                APN[64];\/\/APN内容$/;"	m	struct:imsi_info_t
 AccessAuth_Result_Pack	src/TDM.c	/^int AccessAuth_Result_Pack(Data_Spm *Src, TD_ComProtocl_SendFrame_t *dst)$/;"	f
 AccessAuth_Result_t	inc/tdm.h	/^}AccessAuth_Result_t;$/;"	t	typeref:struct:__anon8
-Add_imsi_node_by_Data	src/common.c	/^int Add_imsi_node_by_Data(struct list_head *head, imsi_info *Data, Data_Spm *para)$/;"	f
 BALANCE_NUM	inc/tdm.h	20;"	d
 BBuf	inc/tdm.h	/^	unsigned char 		BBuf[FileTransferBlockSize];$/;"	m	struct:__anon4
 BIN_TARGET	Makefile	/^BIN_TARGET = ${DIR_BIN}\/${TARGET}$/;"	m
@@ -42,7 +40,7 @@ Buff	inc/tdm.h	/^	unsigned char 		Buff[256];$/;"	m	struct:__Data_Spm
 Buff	inc/tdm.h	/^	unsigned char 		Buff[256];$/;"	m	struct:__Node_Data_t
 Buff	inc/threadpool.h	/^	char	Buff[1024];$/;"	m	struct:job
 CC	Makefile	/^CC = gcc$/;"	m
-CELL_STATION_BUFLEN	inc/tdm.h	87;"	d
+CELL_STATION_BUFLEN	inc/tdm.h	88;"	d
 CFLAGS	Makefile	/^CFLAGS = -g -Wall -I${DIR_INC_CUR} -I${DIR_INC_PUB} -I${DIR_INC}$/;"	m
 CID	inc/tdm.h	/^	unsigned int		CID;$/;"	m	struct:__anon3
 CMD_TAG	inc/tdm.h	/^	int 				CMD_TAG;$/;"	m	struct:__Node_Data_t
@@ -50,10 +48,10 @@ CMD_TAG	inc/tdm.h	/^	unsigned char 		CMD_TAG;$/;"	m	struct:__Data_Spm
 CS	inc/tdm.h	/^	unsigned char 		CS;$/;"	m	struct:__anon4
 Cell_Station	inc/tdm.h	/^	char 				Cell_Station[CELL_STATION_BUFLEN];$/;"	m	struct:Vsim_UpLoad_Gps_t
 Channel_ID	inc/tdm.h	/^    char                Channel_ID;\/\/通道编号$/;"	m	struct:imsi_info_t
-Channel_ID	inc/tdm.h	/^    char                Channel_ID;\/\/通道编号$/;"	m	struct:int_imsi_node_t
 Client_Web_Manage	src/TDM.c	/^int Client_Web_Manage(int iclient_sock)$/;"	f
+Close_Socket_Fd	src/common.c	/^static void Close_Socket_Fd(int *Fd)$/;"	f	file:
 Cmd_Test	src/TDM.c	/^static int Cmd_Test(int CMD_TAG)$/;"	f	file:
-Coding_With_ACCESS_AUTH	src/TDM.c	/^int Coding_With_ACCESS_AUTH(Data_Spm *para, imsi_node *node)$/;"	f
+Coding_With_ACCESS_AUTH	src/TDM.c	/^static int Coding_With_ACCESS_AUTH(Data_Spm *para)$/;"	f	file:
 Coding_With_ADN	src/TDM.c	/^int Coding_With_ADN(Data_Spm *para, int socket_fd)$/;"	f
 Coding_With_APN	src/TDM.c	/^int Coding_With_APN(Data_Spm *para, int socket_fd)$/;"	f
 Coding_With_CFMD	src/TDM.c	/^static int Coding_With_CFMD(Data_Spm *para)$/;"	f	file:
@@ -61,18 +59,18 @@ Coding_With_CFMD_Soeckt	src/TDM.c	/^static int Coding_With_CFMD_Soeckt(Data_Spm 
 Coding_With_CMDTT	src/TDM.c	/^int Coding_With_CMDTT(Data_Spm *para)$/;"	f
 Coding_With_CMD_Data_Pack	src/TDM.c	/^static int Coding_With_CMD_Data_Pack(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *TempBuf, tmd_pthread *para, int fd, int CMD_TAG)$/;"	f	file:
 Coding_With_CMD_Data_Pool	src/TDM.c	/^void *Coding_With_CMD_Data_Pool(void *arg)$/;"	f
-Coding_With_Date	src/TDM.c	/^static void Coding_With_Date(imsi_node *node, Data_Spm *para, int CMD_TAG)$/;"	f	file:
-Coding_With_Deal	src/TDM.c	/^int Coding_With_Deal(Data_Spm *para)$/;"	f
+Coding_With_Date	src/TDM.c	/^static void Coding_With_Date(Data_Spm *para, int CMD_TAG)$/;"	f	file:
+Coding_With_Deal	src/TDM.c	/^static int Coding_With_Deal(Data_Spm *para)$/;"	f	file:
 Coding_With_Err	src/TDM.c	/^int Coding_With_Err(int type, int spm_fd, char *SN)$/;"	f
 Coding_With_Frame_Data	src/TDM.c	/^static void Coding_With_Frame_Data(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthread *para, unsigned char *TempBuf)$/;"	f	file:
 Coding_With_HB	src/TDM.c	/^int Coding_With_HB(Data_Spm *para)$/;"	f
 Coding_With_HB_Socket	src/TDM.c	/^int Coding_With_HB_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthread *para, unsigned char *TempBuf, int fd)$/;"	f
-Coding_With_Local	src/TDM.c	/^static int Coding_With_Local(Data_Spm *para, imsi_node *node)$/;"	f	file:
+Coding_With_Local	src/TDM.c	/^static int Coding_With_Local(Data_Spm *para)$/;"	f	file:
 Coding_With_Local_Socket	src/TDM.c	/^int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *Buff, int fd, tmd_pthread *para, int *CMD_TAG)$/;"	f
 Coding_With_LogOut	src/TDM.c	/^int Coding_With_LogOut(Data_Spm *para)$/;"	f
 Coding_With_LogOut_Socket	src/TDM.c	/^int Coding_With_LogOut_Socket(int fd)$/;"	f
 Coding_With_Low_Vsim	src/TDM.c	/^int Coding_With_Low_Vsim(int socket_fd, unsigned char *TempBuf, int num, char *sIMSI)$/;"	f
-Coding_With_NewHB	src/TDM.c	/^int Coding_With_NewHB(Data_Spm *para, imsi_node *node)$/;"	f
+Coding_With_NewHB	src/TDM.c	/^int Coding_With_NewHB(Data_Spm *para)$/;"	f
 Coding_With_NewHB_Socket	src/TDM.c	/^int Coding_With_NewHB_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthread *para, unsigned char *TempBuf, int fd)$/;"	f
 Coding_With_Out_Sql	src/TDM.c	/^static void Coding_With_Out_Sql(tmd_pthread *para, int *CMD_TAG, int fd)$/;"	f	file:
 Coding_With_Recv_Data	src/TDM.c	/^static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempBuf)$/;"	f	file:
@@ -87,7 +85,6 @@ Con_Data	inc/tdm.h	/^}Con_Data;$/;"	t	typeref:struct:_Con_Data_t
 Config	inc/tdm.h	/^    char    			Config[40];$/;"	m	struct:_Config_Data
 Config_DATA	src/common.c	/^Config_Data Config_DATA[MAX_CON_NUM];\/\/add by lk 20151016$/;"	v
 Config_Data	inc/tdm.h	/^}Config_Data;\/\/add by lk 20151013$/;"	t	typeref:struct:_Config_Data
-ConnectToJavaServer	src/common.c	/^static int ConnectToJavaServer(Mysql_Fd *para)$/;"	f	file:
 ConnectToMysqlDeInit	src/common.c	/^void ConnectToMysqlDeInit(Mysql_Fd *para)$/;"	f
 ConnectToMysqlInit	src/common.c	/^void ConnectToMysqlInit(Mysql_Fd *para)$/;"	f
 Create_Epoll_Pthread	src/TDM.c	/^void *Create_Epoll_Pthread(void *arg)$/;"	f
@@ -126,11 +123,11 @@ Get_Config_By_MCC	src/common.c	/^int Get_Config_By_MCC(int code, char *buff, Dat
 Get_Data_From_Deal	src/common.c	/^static int Get_Data_From_Deal(char *Src, Data_Spm *para, char *SN)$/;"	f	file:
 Get_Data_IP_SN	src/common.c	/^int Get_Data_IP_SN(char *imsi, Data_Spm *para)$/;"	f
 Get_Deal_From_Remote	src/common.c	/^static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)$/;"	f	file:
-Get_Deal_From_SimPool	src/common.c	/^int Get_Deal_From_SimPool(Data_Spm *para1, char *Dst, void *para, int Data)$/;"	f
+Get_Deal_From_SimPool	src/common.c	/^static int Get_Deal_From_SimPool(Data_Spm *para1, char *Src, char *Dst)$/;"	f	file:
 Get_Deal_From_SimPool_socket	src/common.c	/^static int Get_Deal_From_SimPool_socket(char *buff, char *Dst, int vir_flag, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
 Get_Key_Value_Factory	src/common.c	/^static int Get_Key_Value_Factory(char *Src, Data_Spm *para)$/;"	f	file:
 Get_Key_Value_IMEI	src/common.c	/^static int Get_Key_Value_IMEI(char *Src, char *Dst, long long *IMEI)$/;"	f	file:
-Get_Key_Value_IMSI	src/common.c	/^static int Get_Key_Value_IMSI(char *Src, char *Dst, char *sIMSI, Data_Spm *para)$/;"	f	file:
+Get_Key_Value_IMSI	src/common.c	/^static int Get_Key_Value_IMSI(char *Src, char *Dst, Data_Spm *para)$/;"	f	file:
 Get_Key_Value_IPAndPort	src/common.c	/^static void Get_Key_Value_IPAndPort(char *Src, char *Dst, void *para, void *para1)$/;"	f	file:
 Get_Key_Value_Int	src/common.c	/^static int Get_Key_Value_Int(char *Src, char *Dst)$/;"	f	file:
 Get_Key_Value_Str	src/common.c	/^static int Get_Key_Value_Str(char *Src, char *Dst, char *para, int len)$/;"	f	file:
@@ -142,10 +139,9 @@ Get_Node_By_SN	src/TDM.c	/^Data_Spm *Get_Node_By_SN(char *SN)$/;"	f
 Get_SpeedStr_From_Socket	src/common.c	/^static int Get_SpeedStr_From_Socket(Data_Spm *para)$/;"	f	file:
 Get_VPN_From_SN_List	src/common.c	/^int Get_VPN_From_SN_List(char *SN, char *vpn)$/;"	f
 HB_NEW_t	inc/tdm.h	/^}HB_NEW_t;\/\/add by lk 20150511$/;"	t	typeref:struct:__anon3
-HOSTNAME	inc/tdm.h	39;"	d
+HOSTNAME	inc/tdm.h	40;"	d
 Heart_Log_Pack	src/common.c	/^int Heart_Log_Pack(char *sn, char *imsi, HB_NEW_t *Src, char *Dst)$/;"	f
 IMEI	inc/tdm.h	/^    long long           IMEI;\/\/IMEI号$/;"	m	struct:imsi_info_t
-IMEI	inc/tdm.h	/^    long long           IMEI;\/\/IMEI号$/;"	m	struct:int_imsi_node_t
 IMSI	inc/tdm.h	/^	unsigned char		IMSI[12];$/;"	m	struct:__Node_Data_t
 IMSI	inc/tdm.h	/^	unsigned char		IMSI[9];$/;"	m	struct:__Data_Spm
 IMSI	inc/tdm.h	/^	unsigned char 		IMSI[12];$/;"	m	struct:_tmd_pthread
@@ -155,15 +151,13 @@ IMSI	inc/tdm.h	/^    unsigned char   	IMSI[LEN_OF_IMSI];$/;"	m	struct:__anon8
 INIT_LIST_HEAD	inc/list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
 IP	inc/tdm.h	/^	unsigned char		IP[4];\/\/add by 20151008$/;"	m	struct:__result_sock_t
 IP	inc/tdm.h	/^    char                IP[16];\/\/IP地址$/;"	m	struct:imsi_info_t
-IP	inc/tdm.h	/^    char                IP[16];\/\/IP地址$/;"	m	struct:int_imsi_node_t
 Init_Data_Spm	src/TDM.c	/^int Init_Data_Spm(Data_Spm *para)$/;"	f
 IpChange	inc/tdm.h	/^	IpChange,\/\/6$/;"	e	enum:__anon1
 IsApn	inc/tdm.h	/^    unsigned char       IsApn;$/;"	m	struct:imsi_info_t
-IsApn	inc/tdm.h	/^    unsigned char       IsApn;$/;"	m	struct:int_imsi_node_t
 IsConfig	inc/tdm.h	/^    unsigned char   	IsConfig;\/\/add by lk 20151102$/;"	m	struct:__anon8
 IsNet	inc/tdm.h	/^    unsigned char       IsNet;$/;"	m	struct:imsi_info_t
-IsNet	inc/tdm.h	/^    unsigned char       IsNet;$/;"	m	struct:int_imsi_node_t
 Is_Valid_SN	src/TDM.c	/^static int Is_Valid_SN(char *SN)$/;"	f	file:
+Java_TIMEOUT	inc/tdm.h	29;"	d
 LAC	inc/tdm.h	/^	unsigned int		LAC;$/;"	m	struct:__anon3
 LIAN_IP	src/common.c	/^char LIAN_IP[] = "218.17.107.11:11111,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";$/;"	v
 LIST_HEAD	inc/list.h	44;"	d
@@ -177,16 +171,16 @@ Local_Confirm_Pack	src/common.c	/^int Local_Confirm_Pack(char *sn, char *imsi, c
 Local_DataUsed	inc/tdm.h	/^	unsigned int		Local_DataUsed;$/;"	m	struct:__anon3
 Local_Log_Pack	src/common.c	/^int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int version, char *Dst)$/;"	f
 Log_Data	inc/tdm.h	/^}Log_Data;\/\/add by 20160314$/;"	t	typeref:struct:_Log_Data
+Login_Log_Pack_Data	src/common.c	/^static int Login_Log_Pack_Data(Data_Spm *para, char *Dst, AccessAuth_Def *p, int Data)$/;"	f	file:
 Logs_Fd	inc/tdm.h	/^	int 				Logs_Fd[SOCKET_NUM];$/;"	m	struct:_Mysql_Fd
 Logs_mutex	inc/tdm.h	/^	pthread_mutex_t 	Logs_mutex[SOCKET_NUM];$/;"	m	struct:_Mysql_Fd
 LowPower	inc/tdm.h	/^	LowPower,\/\/7 add by 20160314$/;"	e	enum:__anon1
 MASK_NUM	src/TDM.c	33;"	d	file:
 MAXEPOLLSIZE	inc/tdm.h	11;"	d
 MAX_CON_NUM	inc/tdm.h	12;"	d
-MAX_LINE	src/TDM.c	1495;"	d	file:
+MAX_LINE	src/TDM.c	1471;"	d	file:
 MAX_SN_NUM	inc/tdm.h	24;"	d
 MCC	inc/tdm.h	/^	unsigned short		MCC;	$/;"	m	struct:__Data_Spm
-MCC	inc/tdm.h	/^	unsigned short		MCC;	$/;"	m	struct:deal_info_t
 MCC	inc/tdm.h	/^	unsigned short		MCC;$/;"	m	struct:__anon3
 MCC	inc/tdm.h	/^    int     			MCC;$/;"	m	struct:_Config_Data
 MCC	inc/tdm.h	/^    int                 MCC;\/\/add by 20160126$/;"	m	struct:int_node_sn
@@ -212,7 +206,6 @@ NETWORK_TYPE_IDEN	inc/tdm.h	/^    NETWORK_TYPE_IDEN,$/;"	e	enum:__anon2
 NETWORK_TYPE_LTE	inc/tdm.h	/^    NETWORK_TYPE_LTE,$/;"	e	enum:__anon2
 NETWORK_TYPE_UMTS	inc/tdm.h	/^    NETWORK_TYPE_UMTS,$/;"	e	enum:__anon2
 NETWORK_TYPE_UNKNOWN	inc/tdm.h	/^    NETWORK_TYPE_UNKNOWN = 0,$/;"	e	enum:__anon2
-NeedFile	inc/tdm.h	/^	unsigned char		NeedFile;\/\/sim卡文件是否需要强制更新$/;"	m	struct:int_imsi_node_t
 NeedFile	inc/tdm.h	/^    unsigned char		NeedFile;$/;"	m	struct:__result_sock_t
 NeedFile	inc/tdm.h	/^    unsigned char       NeedFile;\/\/sim卡文件是否需要强制更新$/;"	m	struct:imsi_info_t
 Net_Type_Code	inc/tdm.h	/^}Net_Type_Code;\/\/add by 20160303$/;"	t	typeref:enum:__anon2
@@ -221,11 +214,10 @@ NoSimUsable	inc/tdm.h	/^	NoSimUsable,\/\/4$/;"	e	enum:__anon1
 Node_Data	inc/tdm.h	/^}Node_Data;$/;"	t	typeref:struct:__Node_Data_t
 OBJ	Makefile	/^OBJ = $(patsubst %.c,${DIR_OBJ}\/%.o,$(notdir ${SRC})) $/;"	m
 OutOfService	inc/tdm.h	/^	OutOfService,\/\/3$/;"	e	enum:__anon1
-POOL_NUM	inc/tdm.h	33;"	d
+POOL_NUM	inc/tdm.h	34;"	d
 PickUp_Data_Spm	src/TDM.c	/^int PickUp_Data_Spm(unsigned char *Dst, Data_Spm *para, int *sendbytes)$/;"	f
 PickUp_Web_Data	src/TDM.c	/^int PickUp_Web_Data(TD_ComProtocl_SendFrame_t *para, int len, void *Src, int fd)$/;"	f
 Port	inc/tdm.h	/^    unsigned short      Port;\/\/sim卡所在的监听端口号$/;"	m	struct:imsi_info_t
-Port	inc/tdm.h	/^    unsigned short      Port;\/\/sim卡所在的监听端口号$/;"	m	struct:int_imsi_node_t
 Print_Data_Spm	src/common.c	/^void Print_Data_Spm(Data_Spm Src, char *Buff)$/;"	f
 Printf	src/TDM.c	/^void Printf(void *Src, int len)$/;"	f
 RECV_WAIT_TIME	inc/tdm.h	23;"	d
@@ -239,10 +231,6 @@ Rqst_Low_Vsim	inc/tdm.h	/^}Rqst_Low_Vsim;$/;"	t	typeref:struct:Rqst_Low_Vsim_t
 Rqst_Low_Vsim_t	inc/tdm.h	/^typedef struct Rqst_Low_Vsim_t$/;"	s
 Rqst_Vpn_Profile	inc/tdm.h	/^}Rqst_Vpn_Profile;\/\/add by 20160106$/;"	t	typeref:struct:Rqst_Vpn_Profile_t
 Rqst_Vpn_Profile_t	inc/tdm.h	/^typedef struct Rqst_Vpn_Profile_t$/;"	s
-SIMActivateDate	inc/tdm.h	/^    char                SIMActivateDate[20];$/;"	m	struct:imsi_info_t
-SIMActivateDate	inc/tdm.h	/^    char                SIMActivateDate[20];$/;"	m	struct:int_imsi_node_t
-SIMInfoID	inc/tdm.h	/^    char                SIMInfoID[64];\/\/sim卡信息ID$/;"	m	struct:imsi_info_t
-SIMInfoID	inc/tdm.h	/^    char                SIMInfoID[64];\/\/sim卡信息ID$/;"	m	struct:int_imsi_node_t
 SIM_Allocate_Err	src/common.c	/^static int SIM_Allocate_Err(SimAlloc_Err_Code Errcode, Data_Spm *simalloc)$/;"	f	file:
 SIM_Allocate_Proc	src/common.c	/^int SIM_Allocate_Proc(Data_Spm *Src)$/;"	f
 SN	inc/tdm.h	/^	char				SN[16];$/;"	m	struct:__Data_Spm
@@ -256,18 +244,16 @@ SN	inc/tdm.h	/^    char 				SN[16];$/;"	m	struct:Rqst_Vpn_Profile_t
 SN	inc/tdm.h	/^    char            	SN[16];$/;"	m	struct:__anon8
 SN	inc/tdm.h	/^    char                SN[16];$/;"	m	struct:int_node_sn
 SN	inc/tdm.h	/^    unsigned long long  SN;$/;"	m	struct:__anon9
-SOCKET_NUM	inc/tdm.h	29;"	d
+SOCKET_NUM	inc/tdm.h	30;"	d
 SQL_TIMEOUT	inc/tdm.h	26;"	d
 SRC	Makefile	/^SRC = $(wildcard ${DIR_SRC}\/*.c)  $/;"	m
 Selnet	inc/tdm.h	/^    char                Selnet[8];$/;"	m	struct:imsi_info_t
-Selnet	inc/tdm.h	/^    char                Selnet[8];$/;"	m	struct:int_imsi_node_t
 Send_Change_IP	src/TDM.c	/^int Send_Change_IP(Data_Spm *para)$/;"	f
 Send_Deal_Data	src/common.c	/^static int Send_Deal_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
 Send_Device_Data	src/common.c	/^int Send_Device_Data(char *Src, char *Dst, int type)$/;"	f
 Send_Logs_Data	src/common.c	/^static int Send_Logs_Data(char *Src, int len, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
 Send_Sim_Data	src/common.c	/^static int Send_Sim_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)$/;"	f	file:
-ServerInfo	inc/tdm.h	/^	char				ServerInfo[256];		$/;"	m	struct:__Data_Spm
-ServerInfo	inc/tdm.h	/^	char				ServerInfo[256];		$/;"	m	struct:deal_info_t
+ServerInfo	inc/tdm.h	/^	char				ServerInfo[128];		$/;"	m	struct:__Data_Spm
 ServerInfo	inc/tdm.h	/^    char            	ServerInfo[256]; \/\/add by lk 20150515$/;"	m	struct:__anon8
 SetFd_From_Device	src/common.c	/^int SetFd_From_Device(char *SN, int socket1, int socket2)$/;"	f
 SetVPN_Status	src/common.c	/^int SetVPN_Status(char *vpn, char *SN, char *dst, int *code)$/;"	f
@@ -278,16 +264,13 @@ Set_SimCards_Status	src/common.c	/^int Set_SimCards_Status(char *sIMSI)$/;"	f
 Sig_Strength	inc/tdm.h	/^	unsigned char		Sig_Strength;$/;"	m	struct:__anon3
 SimAlloc_Err_Code	inc/tdm.h	/^}SimAlloc_Err_Code;$/;"	t	typeref:enum:__anon1
 SimBank_ID	inc/tdm.h	/^    char                SimBank_ID;\/\/系统编号$/;"	m	struct:imsi_info_t
-SimBank_ID	inc/tdm.h	/^    char                SimBank_ID;\/\/系统编号$/;"	m	struct:int_imsi_node_t
-SimName	inc/tdm.h	/^    char                SimName[8];\/\/sim卡编号$/;"	m	struct:imsi_info_t
-SimName	inc/tdm.h	/^    char                SimName[8];\/\/sim卡编号$/;"	m	struct:int_imsi_node_t
 Sim_Fd	inc/tdm.h	/^	int 				Sim_Fd;$/;"	m	struct:_Mysql_Fd
 Sim_mutex	inc/tdm.h	/^	pthread_mutex_t 	Sim_mutex;$/;"	m	struct:_Mysql_Fd
 SockErr	inc/tdm.h	/^	SockErr,\/\/8$/;"	e	enum:__anon1
 TARGET	Makefile	/^TARGET = tdm$/;"	m
-TDM_LOG_FILE_NAME	inc/tdm.h	59;"	d
-TDM_LOG_FILE_NAME_ERR	inc/tdm.h	60;"	d
-TDM_LOG_LEVEL	inc/tdm.h	58;"	d
+TDM_LOG_FILE_NAME	inc/tdm.h	60;"	d
+TDM_LOG_FILE_NAME_ERR	inc/tdm.h	61;"	d
+TDM_LOG_LEVEL	inc/tdm.h	59;"	d
 TDM_init	src/TDM.c	/^int TDM_init(int *iServer_sock)$/;"	f
 TD_Result_t	inc/tdm.h	/^}TD_Result_t; \/\/add by lk 20150204$/;"	t	typeref:struct:__result_sock_t
 TIMEOUT_IMST	inc/tdm.h	10;"	d
@@ -301,9 +284,9 @@ TT_local_date	inc/tdm.h	/^}TT_local_date;\/\/add by lk 20150227$/;"	t	typeref:st
 TT_time	inc/tdm.h	/^	time_t				TT_time;\/\/TT lastTime$/;"	m	struct:__Data_Spm
 Test_IP	src/common.c	/^char Test_IP[] = "58.250.57.153:11115,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";$/;"	v
 Total	inc/tdm.h	/^	unsigned char 		Total;$/;"	m	struct:__anon5
-UnConnect	inc/tdm.h	84;"	d
-UnRede	inc/tdm.h	86;"	d
-UnWrite	inc/tdm.h	85;"	d
+UnConnect	inc/tdm.h	85;"	d
+UnRede	inc/tdm.h	87;"	d
+UnWrite	inc/tdm.h	86;"	d
 UnrecognizedDevSN	inc/tdm.h	/^	UnrecognizedDevSN = 1,$/;"	e	enum:__anon1
 Unused	inc/tdm.h	/^	unsigned char		Unused[2];$/;"	m	struct:__result_sock_t
 UpdateFlag	inc/tdm.h	/^    unsigned char		UpdateFlag;$/;"	m	struct:__result_sock_t
@@ -316,33 +299,31 @@ Vsim_UpLoad_Gps	inc/tdm.h	/^}Vsim_UpLoad_Gps;\/\/add by lk 20151217$/;"	t	typere
 Vsim_UpLoad_Gps_t	inc/tdm.h	/^typedef struct Vsim_UpLoad_Gps_t$/;"	s
 Vusim_Active_Flag	inc/tdm.h	/^	unsigned char		Vusim_Active_Flag;   \/\/ywy add 20150209$/;"	m	struct:__result_sock_t
 Vusim_Active_Flag	inc/tdm.h	/^    unsigned char       Vusim_Active_Flag;\/\/sim卡是否已经激活$/;"	m	struct:imsi_info_t
-Vusim_Active_Flag	inc/tdm.h	/^    unsigned char       Vusim_Active_Flag;\/\/sim卡是否已经激活$/;"	m	struct:int_imsi_node_t
-Vusim_Active_Num	inc/tdm.h	/^    char                Vusim_Active_Num[128];\/\/sim卡激活号码$/;"	m	struct:imsi_info_t
-Vusim_Active_Num	inc/tdm.h	/^    char                Vusim_Active_Num[128];\/\/sim卡激活号码$/;"	m	struct:int_imsi_node_t
-Web_APN	inc/tdm.h	72;"	d
-Web_AUTONET	inc/tdm.h	73;"	d
+Vusim_Active_Num	inc/tdm.h	/^    char                Vusim_Active_Num[126];\/\/sim卡激活号码$/;"	m	struct:imsi_info_t
+Web_APN	inc/tdm.h	73;"	d
+Web_AUTONET	inc/tdm.h	74;"	d
 Web_Data	inc/tdm.h	/^}Web_Data; \/\/add by 20150331$/;"	t	typeref:struct:_Web_Data
-Web_IP	inc/tdm.h	31;"	d
-Web_IP1	inc/tdm.h	32;"	d
-Web_Loc_Log	inc/tdm.h	63;"	d
-Web_Loc_Up	inc/tdm.h	65;"	d
-Web_Loc_Up_Apk	inc/tdm.h	67;"	d
-Web_MIP_Up	inc/tdm.h	68;"	d
-Web_NUM	inc/tdm.h	80;"	d
-Web_Port	inc/tdm.h	30;"	d
-Web_RET	inc/tdm.h	82;"	d
-Web_Reinsert_Sim	inc/tdm.h	74;"	d
-Web_Remote_shutdown	inc/tdm.h	75;"	d
-Web_Rom_Log	inc/tdm.h	62;"	d
-Web_Rom_Up	inc/tdm.h	64;"	d
-Web_Rom_Up_Apk	inc/tdm.h	66;"	d
-Web_SPEED	inc/tdm.h	71;"	d
-Web_STR	inc/tdm.h	81;"	d
-Web_SWAP_VUSIM	inc/tdm.h	70;"	d
-Web_Set_Up_Apk	inc/tdm.h	78;"	d
-Web_VPN	inc/tdm.h	76;"	d
-Web_Wifi_PWD	inc/tdm.h	77;"	d
-Web_iMsg	inc/tdm.h	69;"	d
+Web_IP	inc/tdm.h	32;"	d
+Web_IP1	inc/tdm.h	33;"	d
+Web_Loc_Log	inc/tdm.h	64;"	d
+Web_Loc_Up	inc/tdm.h	66;"	d
+Web_Loc_Up_Apk	inc/tdm.h	68;"	d
+Web_MIP_Up	inc/tdm.h	69;"	d
+Web_NUM	inc/tdm.h	81;"	d
+Web_Port	inc/tdm.h	31;"	d
+Web_RET	inc/tdm.h	83;"	d
+Web_Reinsert_Sim	inc/tdm.h	75;"	d
+Web_Remote_shutdown	inc/tdm.h	76;"	d
+Web_Rom_Log	inc/tdm.h	63;"	d
+Web_Rom_Up	inc/tdm.h	65;"	d
+Web_Rom_Up_Apk	inc/tdm.h	67;"	d
+Web_SPEED	inc/tdm.h	72;"	d
+Web_STR	inc/tdm.h	82;"	d
+Web_SWAP_VUSIM	inc/tdm.h	71;"	d
+Web_Set_Up_Apk	inc/tdm.h	79;"	d
+Web_VPN	inc/tdm.h	77;"	d
+Web_Wifi_PWD	inc/tdm.h	78;"	d
+Web_iMsg	inc/tdm.h	70;"	d
 _Con_Data_t	inc/tdm.h	/^typedef struct _Con_Data_t$/;"	s
 _Config_Data	inc/tdm.h	/^typedef struct _Config_Data$/;"	s
 _Log_Data	inc/tdm.h	/^typedef struct _Log_Data$/;"	s
@@ -362,7 +343,6 @@ __list_splice	inc/list.h	/^static inline void __list_splice(struct list_head *li
 __result_sock_t	inc/tdm.h	/^typedef struct __result_sock_t$/;"	s
 _common_Data_t	inc/tdm.h	/^typedef struct _common_Data_t$/;"	s
 _tmd_pthread	inc/tdm.h	/^typedef struct _tmd_pthread$/;"	s
-add_data_imsi_list	src/common.c	/^int add_data_imsi_list(char *imsi, time_t now, struct list_head *head, imsi_node *node)$/;"	f
 add_data_list	src/common.c	/^int add_data_list(char *imsi, time_t now, struct list_head *head)$/;"	f
 alloc_Data_SPM	src/TDM.c	/^tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)$/;"	f
 apkversion	inc/tdm.h	/^    unsigned int    	apkversion;\/\/add by 20160125$/;"	m	struct:__anon8
@@ -378,28 +358,21 @@ common_data	inc/tdm.h	/^}common_data;$/;"	t	typeref:struct:_common_Data_t
 config	inc/tdm.h	/^    char 				config[40];$/;"	m	struct:_Con_Data_t
 container_of	inc/list.h	18;"	d
 dataLimit	inc/tdm.h	/^	unsigned short		dataLimit;$/;"	m	struct:__Data_Spm
-dataLimit	inc/tdm.h	/^	unsigned short		dataLimit;$/;"	m	struct:deal_info_t
 dataLimit	inc/tdm.h	/^    unsigned char   	dataLimit;$/;"	m	struct:__anon8
 dataSpeed	inc/tdm.h	/^	unsigned short		dataSpeed;$/;"	m	struct:__result_sock_t
 dataSpeed	inc/tdm.h	/^    int             	dataSpeed;$/;"	m	struct:__anon8
-deal_info	inc/tdm.h	/^}deal_info;$/;"	t	typeref:struct:deal_info_t
-deal_info_t	inc/tdm.h	/^typedef struct deal_info_t$/;"	s
 del_data_list	src/common.c	/^int del_data_list(char *imsi, struct list_head *head)$/;"	f
-destory_imsi_list	src/common.c	/^static void destory_imsi_list(struct list_head *head)$/;"	f	file:
 destory_list	src/common.c	/^static void destory_list(struct list_head *head)$/;"	f	file:
 device_time	inc/tdm.h	/^	time_t 				device_time;$/;"	m	struct:_Mysql_Fd
 display_list	src/common.c	/^void display_list(struct list_head *head)$/;"	f
 do_accept	src/TDM.c	/^void do_accept(evutil_socket_t listener, short event, void *arg)$/;"	f
 factoryFlag	inc/tdm.h	/^	unsigned char		factoryFlag;$/;"	m	struct:__Data_Spm
-factoryFlag	inc/tdm.h	/^	unsigned char		factoryFlag;$/;"	m	struct:deal_info_t
 factoryFlag	inc/tdm.h	/^    int             	factoryFlag; \/\/add by lk 20150515$/;"	m	struct:__anon8
 fd	inc/tdm.h	/^	int					fd;$/;"	m	struct:__Node_Data_t
-fd1	inc/tdm.h	/^	int					fd1;$/;"	m	struct:__Data_Spm
+fd1	inc/tdm.h	/^	int					fd1;\/\/Terminal socket$/;"	m	struct:__Data_Spm
 fd1	inc/tdm.h	/^    int                 fd1;$/;"	m	struct:int_node_sn
 fd2	inc/tdm.h	/^    int                 fd2;$/;"	m	struct:int_node_sn
 flag	inc/tdm.h	/^	int					flag;$/;"	m	struct:_TT_local_date
-free_flag	inc/tdm.h	/^	unsigned char		free_flag;$/;"	m	struct:imsi_info_t
-free_flag	inc/tdm.h	/^	unsigned char		free_flag;\/\/0 is used, 1 is freed$/;"	m	struct:int_imsi_node_t
 free_imsi	inc/tdm.h	/^}free_imsi;\/\/add by 20160123$/;"	t	typeref:struct:free_imsi_t
 free_imsi_t	inc/tdm.h	/^typedef struct free_imsi_t$/;"	s
 free_tmd_pthread	src/TDM.c	/^void free_tmd_pthread(tmd_pthread *para)$/;"	f
@@ -407,36 +380,23 @@ getNetworkType	src/common.c	/^static int getNetworkType(int networkType, char *D
 getValue	src/TDM.c	/^void getValue(Web_Data *para, char *sn, char *src, char *dst, int *fd1, int *fd2)$/;"	f
 get_data_list	src/common.c	/^static Data_Spm *get_data_list(char *imsi, struct list_head *head)$/;"	f	file:
 get_data_list_by_SN	src/common.c	/^Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head)$/;"	f
-get_imsi_list	src/common.c	/^imsi_node *get_imsi_list(char *imsi, struct list_head *head)$/;"	f
 head	inc/tdm.h	/^	struct list_head 	head;\/\/add by 20160123$/;"	m	struct:_Mysql_Fd	typeref:struct:_Mysql_Fd::list_head
 head	inc/threadpool.h	/^    struct job *head;                 		\/\/指向job的头指针$/;"	m	struct:threadpool	typeref:struct:threadpool::job
-ifRoam	inc/tdm.h	/^	unsigned char		ifRoam;$/;"	m	struct:int_imsi_node_t
 ifRoam	inc/tdm.h	/^    unsigned char       ifRoam;$/;"	m	struct:imsi_info_t
 ifTest	inc/tdm.h	/^	int                 ifTest;$/;"	m	struct:__Data_Spm
 ifVPN	inc/tdm.h	/^	unsigned char	 	ifVPN;	$/;"	m	struct:__Data_Spm
-ifVPN	inc/tdm.h	/^    unsigned char       ifVPN;$/;"	m	struct:imsi_info_t
-ifVPN	inc/tdm.h	/^    unsigned char       ifVPN;$/;"	m	struct:int_imsi_node_t
-imsi	inc/tdm.h	/^	char				imsi[20];$/;"	m	struct:imsi_info_t
-imsi	inc/tdm.h	/^	char 				imsi[20];$/;"	m	struct:int_imsi_node_t
 imsi	inc/tdm.h	/^	char 				imsi[800][20];$/;"	m	struct:free_imsi_t
 imsi	inc/tdm.h	/^	char 				imsi[800][20];$/;"	m	struct:left_imsi_t
 imsi	inc/tdm.h	/^	unsigned char		imsi[9];$/;"	m	struct:__result_sock_t
 imsi	inc/tdm.h	/^    char                imsi[20];$/;"	m	struct:int_node_sn
 imsi_info	inc/tdm.h	/^}imsi_info;\/\/add by 20160225$/;"	t	typeref:struct:imsi_info_t
 imsi_info_t	inc/tdm.h	/^typedef struct imsi_info_t$/;"	s
-imsi_list	inc/tdm.h	/^	struct list_head 	imsi_list;\/\/add by 20160123$/;"	m	struct:_Mysql_Fd	typeref:struct:_Mysql_Fd::list_head
-imsi_mutex	inc/tdm.h	/^	pthread_mutex_t 	imsi_mutex;\/\/add by 20160123$/;"	m	struct:_Mysql_Fd
-imsi_node	inc/tdm.h	/^}imsi_node;\/\/add by 20160127$/;"	t	typeref:struct:int_imsi_node_t
-int_imsi_node_t	inc/tdm.h	/^typedef struct int_imsi_node_t$/;"	s
 int_node	inc/tdm.h	/^}int_node;\/\/add by 20160123$/;"	t	typeref:struct:int_node_sn
 int_node_sn	inc/tdm.h	/^typedef struct int_node_sn$/;"	s
 ip	inc/tdm.h	/^	unsigned char		ip[4];$/;"	m	struct:__Data_IP
 job	inc/threadpool.h	/^struct job$/;"	s
-lastDeviceSN	inc/tdm.h	/^	char				lastDeviceSN[16];\/\/add by 20160309$/;"	m	struct:int_imsi_node_t
 lastStart	inc/tdm.h	/^	unsigned char		lastStart;\/\/订单的最后一个周期重启$/;"	m	struct:__Data_Spm
-lastStart	inc/tdm.h	/^	unsigned char		lastStart;\/\/订单的最后一个周期重启$/;"	m	struct:deal_info_t
 lastTime	inc/tdm.h	/^	time_t				lastTime;\/\/simcards time$/;"	m	struct:__Data_Spm
-lastTime	inc/tdm.h	/^	time_t 				lastTime;$/;"	m	struct:int_imsi_node_t
 lastTime	inc/tdm.h	/^    time_t              lastTime;\/\/simcards time$/;"	m	struct:int_node_sn
 lastTime	src/common.c	/^time_t lastTime = 0;$/;"	v
 left_imsi	inc/tdm.h	/^}left_imsi;\/\/add by 20160123$/;"	t	typeref:struct:left_imsi_t
@@ -445,7 +405,6 @@ len	inc/tdm.h	/^	int					len;$/;"	m	struct:__Node_Data_t
 len	inc/tdm.h	/^	unsigned char 		len;$/;"	m	struct:AA_INFO_LINKLIST_t
 len	inc/tdm.h	/^	unsigned char 		len;$/;"	m	struct:__Data_Spm
 len	inc/tdm.h	/^	unsigned int		len;$/;"	m	struct:_Log_Data
-list	inc/tdm.h	/^	struct list_head	list;$/;"	m	struct:int_imsi_node_t	typeref:struct:int_imsi_node_t::list_head
 list	inc/tdm.h	/^	struct list_head 	list;$/;"	m	struct:__Data_Spm	typeref:struct:__Data_Spm::list_head
 list	inc/tdm.h	/^    struct list_head    list;$/;"	m	struct:int_node_sn	typeref:struct:int_node_sn::list_head
 list_add_tail	inc/list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	f
@@ -466,22 +425,19 @@ main	src/TDM.c	/^int main(int argc, char ** argv )$/;"	f
 main	test.c	/^int main(void)$/;"	f
 minite_Remain	inc/tdm.h	/^	int					minite_Remain;$/;"	m	struct:__result_sock_t
 minite_Remain	inc/tdm.h	/^	unsigned short		minite_Remain;$/;"	m	struct:__Data_Spm
-minite_Remain	inc/tdm.h	/^	unsigned short		minite_Remain;$/;"	m	struct:deal_info_t
 minite_Remain	inc/tdm.h	/^    unsigned short  	minite_Remain;$/;"	m	struct:__anon8
 mutex	inc/threadpool.h	/^    pthread_mutex_t mutex;            		\/\/互斥信号量$/;"	m	struct:threadpool
-mysql_fd	src/TDM.c	/^int mysql_fd = -1;\/\/add by lk 20150628$/;"	v
 mysql_mutex	src/TDM.c	/^pthread_mutex_t mysql_mutex = PTHREAD_MUTEX_INITIALIZER;$/;"	v
 new_start_flag	inc/tdm.h	/^	unsigned char		new_start_flag;$/;"	m	struct:__Data_Spm
 next	inc/list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
 next	inc/threadpool.h	/^    struct job *next;$/;"	m	struct:job	typeref:struct:job::job
 node	inc/tdm.h	/^	Data_Spm			*node;$/;"	m	struct:_tmd_pthread
-node	inc/tdm.h	/^	imsi_node			*node;\/\/add by 20160222$/;"	m	struct:__Data_Spm
+node	inc/tdm.h	/^	imsi_info			node;\/\/add by 20160918$/;"	m	struct:__Data_Spm
 num	inc/tdm.h	/^	int					num;$/;"	m	struct:_tmd_pthread
 num	inc/tdm.h	/^	int 				num;\/\/add by 20160128$/;"	m	struct:left_imsi_t
 num	inc/tdm.h	/^	unsigned char 		num;$/;"	m	struct:_Web_Data
 offsetoflist	inc/list.h	9;"	d
 orderType	inc/tdm.h	/^	unsigned char		orderType;\/\/订单模式$/;"	m	struct:__Data_Spm
-orderType	inc/tdm.h	/^	unsigned char		orderType;\/\/订单模式$/;"	m	struct:deal_info_t
 orderType	inc/tdm.h	/^    unsigned char   	orderType;\/\/add by 20160104$/;"	m	struct:__anon8
 outtime	inc/tdm.h	/^	time_t				outtime;\/\/logout time$/;"	m	struct:__Data_Spm
 outtime	inc/tdm.h	/^    time_t              outtime;\/\/logout time$/;"	m	struct:int_node_sn
@@ -498,7 +454,6 @@ port	inc/tdm.h	/^	unsigned short		port;$/;"	m	struct:__Data_IP
 port	inc/tdm.h	/^    int             	port;\/\/add by lk 20150820$/;"	m	struct:__anon8
 prev	inc/list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
 priority	inc/tdm.h	/^    int             	priority; \/\/add by lk 20150805$/;"	m	struct:__anon8
-pthread_mysql_tdm	src/common.c	/^pthread_mutex_t pthread_mysql_tdm = PTHREAD_MUTEX_INITIALIZER;$/;"	v
 pthreads	inc/threadpool.h	/^    pthread_t *pthreads;              		\/\/线程池中所有线程的pthread_t$/;"	m	struct:threadpool
 queue_close	inc/threadpool.h	/^    int queue_close;                  		\/\/队列是否已经关闭$/;"	m	struct:threadpool
 queue_cur_num	inc/threadpool.h	/^    int queue_cur_num;                		\/\/队列当前的job个数$/;"	m	struct:threadpool
@@ -513,15 +468,12 @@ sIMSI	inc/tdm.h	/^	char				sIMSI[18];$/;"	m	struct:__Data_Spm
 setnonblocking	src/TDM.c	/^int setnonblocking(int sockfd)$/;"	f
 sig_chld	src/TDM.c	/^static void sig_chld(int signo)  $/;"	f	file:
 sigexit	src/TDM.c	/^static void sigexit(int dunno)$/;"	f	file:
-sim_manage	src/TDM.c	/^pthread_t sim_manage;$/;"	v
 size_t1	inc/list.h	/^typedef unsigned long     size_t1;$/;"	t
 socket_read_cb	src/TDM.c	/^void socket_read_cb(int fd, short events, void *arg)$/;"	f
-socket_spm	inc/tdm.h	/^	int					socket_spm;$/;"	m	struct:__Data_Spm
+socket_spm	inc/tdm.h	/^	int					socket_spm;\/\/connect to spm$/;"	m	struct:__Data_Spm
 speedStr	inc/tdm.h	/^	char				speedStr[40];$/;"	m	struct:__Data_Spm
-speedType	inc/tdm.h	/^	unsigned char		speedType;$/;"	m	struct:int_imsi_node_t
 speedType	inc/tdm.h	/^    unsigned char       speedType;$/;"	m	struct:imsi_info_t
 start_time	inc/tdm.h	/^	time_t				start_time;$/;"	m	struct:__Data_Spm
-start_time	inc/tdm.h	/^	time_t				start_time;$/;"	m	struct:deal_info_t
 state	inc/tdm.h	/^	unsigned char		state;$/;"	m	struct:__Data_Spm
 system_id	inc/tdm.h	/^	unsigned char		system_id;$/;"	m	struct:__Data_IP
 system_id	inc/tdm.h	/^	unsigned char		system_id;\/\/add by 20151009$/;"	m	struct:__result_sock_t
@@ -541,7 +493,6 @@ threadpool_destroy	src/threadpool.c	/^int threadpool_destroy(struct threadpool *
 threadpool_function	src/threadpool.c	/^void *threadpool_function(void* arg)$/;"	f
 threadpool_init	src/threadpool.c	/^struct threadpool* threadpool_init(int thread_num, int queue_max_num, void* (*callback_function)(void *arg))$/;"	f
 threshold	inc/tdm.h	/^	unsigned short		threshold;$/;"	m	struct:__Data_Spm
-threshold	inc/tdm.h	/^	unsigned short		threshold;$/;"	m	struct:deal_info_t
 threshold	inc/tdm.h	/^    int             	threshold; \/\/add by lk 20150203$/;"	m	struct:__anon8
 threshold_battery	inc/tdm.h	/^	unsigned char		threshold_battery;\/\/add by 20160315$/;"	m	struct:__result_sock_t
 threshold_data	inc/tdm.h	/^    unsigned short		threshold_data;$/;"	m	struct:__result_sock_t
@@ -556,7 +507,6 @@ version	inc/tdm.h	/^	unsigned int		version;\/\/add by 20160108$/;"	m	struct:__Da
 versionAPK	inc/tdm.h	/^	unsigned int   		versionAPK;\/\/add by 20160125$/;"	m	struct:__Data_Spm
 vir_flag	inc/tdm.h	/^	unsigned char		vir_flag;$/;"	m	struct:__Data_Spm
 vpn	inc/tdm.h	/^	unsigned char		vpn;$/;"	m	struct:__Data_Spm
-vpn	inc/tdm.h	/^	unsigned char		vpn;$/;"	m	struct:deal_info_t
 vpn	inc/tdm.h	/^    char 				vpn[200];\/\/add by lk 20151020$/;"	m	struct:_Con_Data_t
 vpn	inc/tdm.h	/^    char                vpn[127];\/\/add by 20160226$/;"	m	struct:int_node_sn
 vpn_flag	inc/tdm.h	/^    unsigned char       vpn_flag;$/;"	m	struct:__Data_Spm

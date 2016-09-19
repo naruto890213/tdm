@@ -10,15 +10,10 @@
 #include "pravitelib.h"
 #include "device.h"
 
-pthread_mutex_t pthread_mysql_tdm = PTHREAD_MUTEX_INITIALIZER;
-extern int mysql_fd;//add by lk 20150804
-extern pthread_mutex_t mysql_mutex;
 time_t lastTime = 0;
-extern Mysql_Fd Data_Fd;
-Config_Data Config_DATA[MAX_CON_NUM];//add by lk 20151016
+Mysql_Fd Data_Fd;
 extern char locale_ip[20]; //add by lk 20140305
 static void destory_list(struct list_head *head);//add by 20160125
-static void destory_imsi_list(struct list_head *head);
 static int Get_Data_From_Deal(char *Src, Data_Spm *para, char *SN);
 
 char LIAN_IP[] = "218.17.107.11:11111,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";
@@ -28,7 +23,7 @@ char Test_IP[] = "58.250.57.153:11115,120.24.221.252:8070,120.24.221.252:8070,DO
 void Print_Data_Spm(Data_Spm Src, char *Buff)
 {
 	printf("The SN:%s -> minite_Remain is %d, sIMSI is %s, factoryFlag is %d, IP is %s Port is %d, SimBank_ID is %d, Channel_ID is %d\n", 
-			Src.SN, Src.minite_Remain, Src.sIMSI, Src.factoryFlag, Src.node->IP, Src.node->Port, Src.node->SimBank_ID, Src.node->Channel_ID);
+			Src.SN, Src.minite_Remain, Src.sIMSI, Src.factoryFlag, Src.node.IP, Src.node.Port, Src.node.SimBank_ID, Src.node.Channel_ID);
 
 	if(Buff)
 		printf("the battery is %d\n\n", Buff[21]);
@@ -36,8 +31,31 @@ void Print_Data_Spm(Data_Spm Src, char *Buff)
 	return;
 }
 
-void ConnectToMysqlInit(Mysql_Fd *para)
+static int Init_Data_Spm(Data_Spm *para)
 {
+	memset(para, 0, sizeof(Data_Spm));
+	para->socket_spm = -1;
+
+	return 0;
+}
+
+int Is_Valid_SN(char *SN)
+{
+	unsigned long long SN_NUM = 0;
+
+	if(SN)
+		SN_NUM = atoll(SN);
+
+	if((SN_NUM > 172150210000000 && SN_NUM < 172150211000000) || (SN_NUM > 860172008100000 && SN_NUM < 860172009000000))
+		return 1;
+
+	LogMsg(MSG_ERROR, "The SN is %s, the SN_NUM is %lu\n", SN, SN_NUM);
+	return 0;
+}
+
+void ConnectToMysqlInit(void)
+{
+	Mysql_Fd *para = &Data_Fd;
 	int i;
 
 	for(i = 0; i < SOCKET_NUM; i++)
@@ -55,13 +73,25 @@ void ConnectToMysqlInit(Mysql_Fd *para)
 	pthread_mutex_init(&para->Device_mutex, NULL);
 
 	pthread_mutex_init(&para->list_mutex, NULL);//add by 20160123
-	pthread_mutex_init(&para->imsi_mutex, NULL);//add by 20160123
 
 	INIT_LIST_HEAD(&para->head);
-	INIT_LIST_HEAD(&para->imsi_list);
-	para->device_time = time(NULL);
 
 	return;
+}
+
+static int ReConectJavaServer(int *Fd)
+{
+	if(*Fd <= 0)
+	{
+		*Fd = ConnectToServerTimeOut(ServerIp, ServerPort, 3);
+		if(*Fd <= 0)
+		{
+            LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
+			return -1;
+		}
+	}
+
+	return 0;
 }
 
 static void Close_Socket_Fd(int *Fd)
@@ -75,9 +105,10 @@ static void Close_Socket_Fd(int *Fd)
 	return;
 }
 
-void ConnectToMysqlDeInit(Mysql_Fd *para)
+void ConnectToMysqlDeInit(void)
 {
 	int i;
+	Mysql_Fd *para = &Data_Fd;
 
 	for(i = 0; i < SOCKET_NUM; i++)
 	{
@@ -96,7 +127,6 @@ void ConnectToMysqlDeInit(Mysql_Fd *para)
 	pthread_mutex_destroy(&para->list_mutex);
 
 	destory_list(&para->head);
-	destory_imsi_list(&para->imsi_list);
 }
 
 static int getNetworkType(int networkType, char *Dst)
@@ -198,43 +228,10 @@ static int SIM_Allocate_Err(SimAlloc_Err_Code Errcode, Data_Spm *simalloc)
 	return simalloc->Result;
 }
 
-static Data_Spm *get_data_list(char *imsi, struct list_head *head)
+Data_Spm *get_data_list_by_SN(char *SN)
 {
 	Data_Spm *node = NULL;
-	struct list_head *p = NULL;
-
-	list_for_each(p, head)
-	{
-		node = list_entry(p, Data_Spm, list);
-		if(!memcmp(node->sIMSI, imsi, 18))
-		{
-			return node;
-		}
-	}
-
-	return NULL;
-}
-
-imsi_node *get_imsi_list(char *imsi, struct list_head *head)
-{
-	imsi_node *node = NULL;
-	struct list_head *p = NULL;
-
-	list_for_each(p, head)
-	{
-		node = list_entry(p, imsi_node, list);
-		if(!memcmp(node->imsi, imsi, 18))
-		{
-			return node;
-		}
-	}
-
-	return NULL;
-}
-
-Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head)
-{
-	Data_Spm *node = NULL;
+	struct list_head *head = &Data_Fd.head;
 	struct list_head *p = NULL;
 
 	list_for_each(p, head)
@@ -249,78 +246,38 @@ Data_Spm *get_data_list_by_SN(char *SN, struct list_head *head)
 	return NULL;
 }
 
-int add_data_list(char *imsi, time_t now, struct list_head *head)
+Data_Spm *Get_Node_By_SN(char *SN)
 {
-	pthread_mutex_lock(&Data_Fd.imsi_mutex);
-	imsi_node *node = get_imsi_list(imsi, head);
-	if(node)
-	{
-		node->lastTime = now;	
-	}
-	else
-	{
-		node = (imsi_node *)malloc(sizeof(imsi_node));
-		if(node == NULL)
-		{
-			perror("malloc");
-			pthread_mutex_unlock(&Data_Fd.imsi_mutex);
-			return -1;
-		}
-		memset(node, 0, sizeof(imsi_node));
-		memcpy(node->imsi, imsi, strlen(imsi));
-		node->lastTime = now;
-		list_add_tail(&node->list, head);
-	}
-	pthread_mutex_unlock(&Data_Fd.imsi_mutex);
+    Data_Spm *node = NULL;
 
-	return 0;
-}
-
-int add_data_imsi_list(char *imsi, time_t now, struct list_head *head, imsi_node *node)
-{
-    pthread_mutex_lock(&Data_Fd.imsi_mutex);
-    node = get_imsi_list(imsi, head);
-    if(node)
+    if(Is_Valid_SN(SN))
     {
-        node->lastTime = now;   
-    }
-    else
-    {
-        node = (imsi_node *)malloc(sizeof(imsi_node));
+        pthread_mutex_lock(&Data_Fd.list_mutex);
+        node = get_data_list_by_SN(SN);
         if(node == NULL)
         {
-            perror("malloc");
-            pthread_mutex_unlock(&Data_Fd.imsi_mutex);
-            return -1;
+            node = (Data_Spm *)malloc(sizeof(Data_Spm));
+            if(node == NULL)
+            {
+                LogMsg(MSG_ERROR, "%s:%d:SN->%s malloc faid err is %s\n", __func__, __LINE__, SN, strerror(errno));
+            }
+            else
+            {
+                Init_Data_Spm(node);
+                memcpy(node->SN, SN, 15);
+                printf("This come from malloc(sizeof(Data_Spm)) \n");
+                list_add_tail(&node->list, &Data_Fd.head);
+            }
         }
-        memset(node, 0, sizeof(imsi_node));
-        memcpy(node->imsi, imsi, strlen(imsi));
-        node->lastTime = now;
-        list_add_tail(&node->list, head);
+        pthread_mutex_unlock(&Data_Fd.list_mutex);
+
+        if(node)
+        {
+			Close_Socket_Fd(&node->socket_spm);
+        }
     }
-    pthread_mutex_unlock(&Data_Fd.imsi_mutex);
 
-    return 0;
-}
-
-int del_data_list(char *imsi, struct list_head *head)
-{
-	struct timeval start;
-	struct timeval end;
-
-	pthread_mutex_lock(&Data_Fd.list_mutex);
-	gettimeofday(&start, NULL);
-	Data_Spm *node = get_data_list(imsi, head);
-	if(node)
-	{
-		list_del(&node->list);
-		free(node);
-	}
-	gettimeofday(&end, NULL);
-   	printf("Time spend on %s is %ld ms\n", __func__, ((end.tv_sec-start.tv_sec) * 1000 + (end.tv_usec-start.tv_usec)/1000));
-	pthread_mutex_unlock(&Data_Fd.list_mutex);
-
-	return 0;
+    return node;
 }
 
 void display_list(struct list_head *head)
@@ -352,24 +309,6 @@ static void destory_list(struct list_head *head)
 	pthread_mutex_unlock(&Data_Fd.list_mutex);
 }
 
-static void destory_imsi_list(struct list_head *head)
-{
-    struct list_head *p = NULL;
-    imsi_node *node = NULL;
-	pthread_mutex_lock(&Data_Fd.imsi_mutex);
-    list_for_each(p, head)
-    {
-        node = list_entry(p, imsi_node, list);
-        list_del(p);
-
-		if(node)
-        	free(node);
-
-		node = NULL;
-    }
-	pthread_mutex_unlock(&Data_Fd.imsi_mutex);
-}
-
 static int Send_Deal_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex_t *lock)
 {
     Json_date Data;
@@ -380,15 +319,11 @@ static int Send_Deal_Data(char *Src, char *Dst, int type, int *Fd, pthread_mutex
 	int len = (int)strlen(Src);
 
 	pthread_mutex_lock(lock);
-	if(*Fd <= 0)
+
+	if(ReConectJavaServer(Fd))
 	{
-		*Fd = ConnectToServer(ServerIp, ServerPort);
-		if(*Fd <= 0)
-		{
-            LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
-			Delay(1, 0);
-			goto ret;
-		}
+        LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
+		goto ret;
 	}
 
     ret = send(*Fd, Src, len, 0);
@@ -558,39 +493,6 @@ void *work_func(void *arg)
 	return NULL;
 }
 
-int Send_Device_Data(char *Src, char *Dst, int type)
-{
-	int ret = -1;
-	int cnt = 0;
-	int len = (int)strlen(Src);
-
-	pthread_mutex_lock(&Data_Fd.Device_mutex);
-	if(Data_Fd.Device_Fd <= 0)
-	{
-		Data_Fd.Device_Fd = ConnectToServer(ServerIp, ServerPort);
-		cnt++;
-		if(Data_Fd.Device_Fd <= 0)
-		{
-			LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
-			Delay(0, 50);
-			goto lk;
-		}
-	}
-
-    ret = send(Data_Fd.Device_Fd, Src, len, 0);
-	if(ret <= 0)
-	{
-		close(Data_Fd.Device_Fd);
-		Data_Fd.Device_Fd = -1;
-		LogMsg(MSG_ERROR, "This come from %s send err is %s\n", __func__, strerror(errno));
-	}
-
-lk:
-	pthread_mutex_unlock(&Data_Fd.Device_mutex);
-
-	return 0;
-}
-
 int VPN_Log(char *SN, char *vpn, int Result, int code, int type)
 {
     char buff[256] = {'\0'};
@@ -609,7 +511,7 @@ int Get_Low_simcards(char *SN, int code, unsigned char *imsi)
 int Set_Device_SN_VPN(char *SN, char *vpn, int vpn_flag)//add by 20160226
 {
     pthread_mutex_lock(&Data_Fd.list_mutex);
-    Data_Spm *node = get_data_list_by_SN(SN, &Data_Fd.head);
+    Data_Spm *node = get_data_list_by_SN(SN);
     if(node == NULL)
     {
         node = (Data_Spm *)malloc(sizeof(Data_Spm));
@@ -638,7 +540,7 @@ int Get_VPN_From_SN_List(char *SN, char *vpn)
     int num = 0;
 
     pthread_mutex_lock(&Data_Fd.list_mutex);
-    Data_Spm *node = get_data_list_by_SN(SN, &Data_Fd.head);
+    Data_Spm *node = get_data_list_by_SN(SN);
     if(node)
     {
         printf("This come from %s, SN is %s, vpn is %s, the vpn_flag is %d\n", __func__, SN, node->vpnc, node->vpn_flag);
@@ -667,50 +569,6 @@ int SetVPN_Status(char *vpn, char *SN, char *dst, int *code)
 	int iNum_rows = 0;
 
 	return iNum_rows;
-}
-
-int Add_imsi_node_by_Data(struct list_head *head, imsi_info *Data, Data_Spm *para)
-{
-	pthread_mutex_lock(&Data_Fd.imsi_mutex);
-
-	if((para->node == NULL))
-	{
-ret:
-		para->node = get_imsi_list(para->sIMSI, head);
-		if(!para->node)
-		{
-			para->node = (imsi_node *)malloc(sizeof(imsi_node));
-			if(para->node)
-			{
-				memset(para->node, 0, sizeof(imsi_node));
-				memcpy(para->node->imsi, para->sIMSI, 18);
-				list_add_tail(&para->node->list, head);
-			}
-		}
-	}
-	else
-	{
-		if(memcmp(para->sIMSI, para->node->imsi, 18))
-			goto ret;
-	}
-
-	if(para->node)
-	{
-		if(Data)
-			memcpy(para->node, Data, sizeof(imsi_info));
-
-		if(para->node->free_flag == 1)
-		{
-			para->node->free_flag = 0;
-		}
-
-		memcpy(para->node->lastDeviceSN, para->SN, 15);
-		para->node->lastTime = time(NULL);
-		//printf("The SN is %s, imsi is %s, the lastTime is %ld\n", para->SN, para->sIMSI, para->node->lastTime);
-	}
-	pthread_mutex_unlock(&Data_Fd.imsi_mutex);
-
-	return 0;
 }
 
 int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int version, char *Dst)
@@ -786,7 +644,6 @@ int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len
 	printf("This come from %s, the Buff is %s\n", __func__, Data.Buff);
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
-	Delay(0, 20);
 
 	return 0;
 }
@@ -794,9 +651,7 @@ int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len
 int LOG_OUT_Log_Pack(char *sn, char *sIMSI, char *Dst)
 {
 	if(!strcmp(sIMSI, "000000000000000000"))
-	{
 		sIMSI = NULL;
-	}	
 
 	sprintf(Dst, "45445445,2001,4|{'SN':'%s','type':'06','IMSI':'%s','lastTime':%ld}&&", sn, sIMSI, time(NULL));
 
@@ -808,10 +663,13 @@ static int Get_Deal_From_SimPool_socket(char *buff, char *Dst, int vir_flag, int
     Json_date Data;
     char recvbuff[1024] = {'\0'};
     memset(&Data, 0, sizeof(Data));
+	struct timeval start;
+    struct timeval end;
     Data.Result = -1;
     int ret = -1;
 
     pthread_mutex_lock(lock);
+	gettimeofday(&start, NULL);
     if(*Fd <= 0)
     {
         *Fd = ConnectToServer(ServerIp, ServerPort);
@@ -837,10 +695,9 @@ static int Get_Deal_From_SimPool_socket(char *buff, char *Dst, int vir_flag, int
         if(ret > 0)
         {
             Data_Coing(recvbuff, &Data);
+
             if(!Data.Result)
-            {
                 memcpy(Dst, Data.Data, strlen(Data.Data));
-            }
         }
         else
         {
@@ -852,6 +709,8 @@ static int Get_Deal_From_SimPool_socket(char *buff, char *Dst, int vir_flag, int
     }
 
 ret:
+	gettimeofday(&end, NULL);
+	printf("the %s:time speen is %ld ms\n", __func__, ((end.tv_sec - start.tv_sec)*1000 + (end.tv_usec - start.tv_usec)/1000));
     pthread_mutex_unlock(lock);
 
     return Data.Result;
@@ -866,7 +725,6 @@ int Set_SimCards_Status(char *sIMSI)
 		return 0;
 
 	sprintf(buff, "45445,1005,2|{'IMSI':'%s','serverIp':''}&&", sIMSI);
-	printf("%s->buff is %s\n", __func__, buff);
 
 	return Send_Sim_Data(buff, Dst, 1, &Data_Fd.Sim_Fd, &Data_Fd.Sim_mutex);
 }
@@ -1071,14 +929,13 @@ static int Get_Key_Value_Vusim_Active_Flag(char *Src, imsi_info *para)
 	return para->Vusim_Active_Flag;
 }
 
-static int Get_Key_Value_IMSI(char *Src, char *Dst, char *sIMSI, Data_Spm *para)
+static int Get_Key_Value_IMSI(char *Src, char *Dst, Data_Spm *para)
 {
 	char Key[64] = {'\0'};
 
 	if(!Get_Key_Value(Src, "IMSI", Key))
 	{
 		printf("the IMSI is %s\n", Key);
-		memcpy(sIMSI, Key, strlen(Key));
 		memcpy(para->sIMSI, Key, strlen(Key));
 		str2Hex(Key, para->IMSI, strlen(Key));
 	}
@@ -1088,34 +945,31 @@ static int Get_Key_Value_IMSI(char *Src, char *Dst, char *sIMSI, Data_Spm *para)
 
 static int Get_Data_From_Deal(char *Src, Data_Spm *para, char *SN)
 {
-	imsi_info Data;
-	memset(&Data, 0, sizeof(imsi_info));
 	printf("the Src is %s\n", Src);
 
 	para->minite_Remain = Get_Key_Value_Int(Src, "minsRemaining");
 	para->lastStart = Get_Key_Value_Int(Src, "lastStart");
 	para->ifTest = Get_Key_Value_Int(Src, "ifTest");
 	para->orderType = Get_Key_Value_Int(Src, "orderType");
-	Data.ifRoam = Get_Key_Value_Int(Src, "ifRoam");
-	Data.speedType = Get_Key_Value_Int(Src, "speedType");
-	Data.NeedFile = Get_Key_Value_Int(Src, "fileUpdate");
-	Data.IsApn = Get_Key_Value_Str(Src, "APN", Data.APN, 3);
+	para->node.ifRoam = Get_Key_Value_Int(Src, "ifRoam");
+	para->node.speedType = Get_Key_Value_Int(Src, "speedType");
+	para->node.NeedFile = Get_Key_Value_Int(Src, "fileUpdate");
+	para->node.IsApn = Get_Key_Value_Str(Src, "APN", para->node.APN, 3);
 	Get_Key_Value_VPN(Src, para);
 	Get_Key_Value_Factory(Src, para);
-	Get_Key_Value_IPAndPort(Src, "IPAndPort", Data.IP, &Data.Port);
-	Get_Key_Value_Str_Type(Src, "slotNumber", &Data.SimBank_ID, &Data.Channel_ID);
+	Get_Key_Value_IPAndPort(Src, "IPAndPort", para->node.IP, &para->node.Port);
+	Get_Key_Value_Str_Type(Src, "slotNumber", &para->node.SimBank_ID, &para->node.Channel_ID);
 	Get_Key_Value_Str(Src, "speedStr", para->speedStr, 4);
-	Get_Key_Value_Vusim_Active_Flag(Src, &Data);
-	Get_Key_Value_IMEI(Src, "IMEI", &Data.IMEI);
-	Get_Key_Value_IMSI(Src, "IMSI", Data.imsi, para);
+	Get_Key_Value_Vusim_Active_Flag(Src, &para->node);
+	Get_Key_Value_IMEI(Src, "IMEI", &para->node.IMEI);
+	Get_Key_Value_IMSI(Src, "IMSI", para);
 
-	if(Get_Key_Value_Str(Src, "Selnet", Data.Selnet, 4))
-		Data.IsNet = 0x02;
+	if(Get_Key_Value_Str(Src, "Selnet", para->node.Selnet, 4))
+		para->node.IsNet = 0x02;
 
-    if(1 == Data.speedType)
-        Data.speedType = 0x04;
+    if(1 == para->node.speedType)
+        para->node.speedType = 0x04;
 
-	Add_imsi_node_by_Data(&Data_Fd.imsi_list, &Data, para);
 	para->Result = 0;  
 
 	return para->factoryFlag;
@@ -1165,9 +1019,6 @@ int Set_Deal_From_SimPool(char *sn, char *imsi, int userCountry, int factoryFlag
 	char Dst[256] = {'\0'};
 	char Key[56] = {'\0'};
 	
-	sprintf(buff, "45445445,3002,5|{'SN':'%s','userCountry':%d,'intradayDate':%ld,'factoryFlag':%d,'IMSI':'%s'}&&", sn, \
-			userCountry, time(NULL), factoryFlag, imsi);
-
 	int sn_num = (atoll(sn) % SOCKET_NUM);
 	
 	if(minite_Remain == NULL)
@@ -1256,8 +1107,6 @@ static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
 		if(Get_Data_From_Deal(Dst, para, para->SN))
         	return SIM_Allocate_Err(IpChange, para);
 
-	para->minite_Remain = 3;//add for test
-
 	return cnt;
 }
 
@@ -1268,21 +1117,16 @@ int Deal_Proc(Data_Spm *para, int MCC)
 	if(!MCC)
 		MCC = 460;
 
-	sprintf(buff, "45445445,3003,3|{'SN':'%s','MCC':%d}&&", para->SN, MCC);
+	sprintf(buff, "45445445,3003,3|{'SN':'%s','MCC':'%d','nowtime':'%ld'}&&", para->SN, MCC, time(NULL));
 	int cnt = Get_Deal_From_SimPool(para, buff, Dst);
+	printf("the Dst is %s\n", Dst);
 	if(!cnt)
 	{
 		para->lastStart = Get_Key_Value_Int(Dst, "lastStart");
 		para->minite_Remain = Get_Key_Value_Int(Dst, "minsRemaining");
 	}
-
-	if((para->lastStart == 1) || (para->minite_Remain > 1))//add by 20160315
-    {
-        if(para->orderType == 2)
-            para->minite_Remain = 1439;
-        else
-            para->minite_Remain = 1440;
-    }
+	else
+		para->minite_Remain = 2;
 
     return 0;
 }

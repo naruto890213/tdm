@@ -1,0 +1,1017 @@
+the ip is 192.168.0.127
+the IP is 192.168.0.127
+>TDM:Listen to Port 11111
+the 111111111 CMD_TAG is 85
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 12, Battery is 92, after send shutdown_cmd, the para->node is (nil)
+This come from malloc(sizeof(Data_Spm)) 
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000, ifTest is 0
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'12','wifiCount':'0','battery':'92','wifiState':'500','gSta':'1','gStrenth':'99','upFlowAll':'12288','downFlowAll':'8192','dayUsedFlow':'20480','minsRemaining':'235','roamGStrenth':'51','roamUpFlowAll':'30559','roamDownFlowAll':'25225','roamDayUsedFlow':'7668','FlowDistinction':'726','IMSI':'','TTContext':'HSPA','lastTime':'1474200235'}&&, the strlen(Dst) is 433
+the Send_Logs_Data:time speen is 76 ms
+the Get_Deal_From_SimPool_socket:time speen is 402 ms
+the Dst is "minsRemaining":"236","lastStart":"0"}&
+the lastStart is 0
+the minsRemaining is 236
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000
+the Send_Logs_Data:time speen is 28 ms
+the 111111111 CMD_TAG is 81
+the vir_flag is 0, the SN is 172150210001204
+the Get_Deal_From_SimPool_socket:time speen is 77 ms
+the Src is "minsRemaining":"235","factoryFlag":"0","serverInfo":"null","speedStr":"0-500|200-300|300-100|400-50|600-30","IPAndPort":"192.168.0.162:8091","IMSI":"809460012944220834","SIMIfActivated":"是","Vusim_Active_Num":"待修改","ifRoam":"0","slotNumber":"13-10","fileUpdate":"0","APN":"","Selnet":" ","speedType":"0","IMEI":"0","ifTest":"1","ifVPN":"0","orderType":"1","lastStart":"0"}&
+the minsRemaining is 235
+the lastStart is 0
+the ifTest is 1
+the orderType is 1
+the ifRoam is 0
+the speedType is 0
+the fileUpdate is 0
+the APN is ,, the strlen is 1
+the ifVPN is 0
+the factoryFlag is 0
+the IPAndPort is 192.168.0.162:8091
+the slotNumber is 13-10
+the speedStr is 0-500|200-300|300-100|400-50|600-30, the strlen is 35
+the SIMIfActivated is 是, the strlen of Key is 3
+the IMEI is 0, the IMEI is 0
+the IMSI is 809460012944220834
+the Selnet is  , the strlen is 1
+the NeedFile is 0, IsApn is 0, ifVPN is 0 the Unused[0] is 0, the IMEI is 0, ifRoam is 0, the Src->node->IsNet is 0
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':1,'IMSI':'809460012944220834','TTContext':'C0DB084AAE247EF35E169B1091A9104A1D0651CCFDE03D1F91A899E11029B23066B676BC697209AE6BD431E9020837F2B358EEE99D469000','ContextLen':'56','lastTime':'1474200283'}&&
+the Send_Logs_Data:time speen is 16 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':2,'IMSI':'809460012944220834','TTContext':'C0DB08C730B881712F56CC10328C5FAD0811C44C6A03518D0992D43A100C989CF7D79141D66CC2548EAF8B997B0838D5C6597999C8DB9000','ContextLen':'56','lastTime':'1474200285'}&&
+the Send_Logs_Data:time speen is 15 ms
+the 111111111 CMD_TAG is 85
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000, ifTest is 1
+
+This come from TAG_CFMD:172150210001204 the Config is 0-500|200-300|300-100|400-50|600-30
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 13, Battery is 92, after send shutdown_cmd, the para->node is (nil)
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 1, fd is 26, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'0.0.0.0','UploadFlowCount':'13','wifiCount':'0','battery':'92','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'12288','downFlowAll':'8192','dayUsedFlow':'21504','minsRemaining':'235','roamGStrenth':'51','roamUpFlowAll':'30997','roamDownFlowAll':'25521','roamDayUsedFlow':'7668','FlowDistinction':'294','IMSI':'809460012944220834','TTContext':'','lastTime':'1474200297'}&&, the strlen(Dst) is 434
+the Send_Logs_Data:time speen is 17 ms
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 14, Battery is 92, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'14','wifiCount':'0','battery':'92','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'12288','downFlowAll':'8192','dayUsedFlow':'21504','minsRemaining':'235','roamGStrenth':'51','roamUpFlowAll':'30997','roamDownFlowAll':'25521','roamDayUsedFlow':'7668','FlowDistinction':'502','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200325'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 15, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 3, fd is 26, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'15','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'14336','downFlowAll':'10240','dayUsedFlow':'24576','minsRemaining':'234','roamGStrenth':'51','roamUpFlowAll':'31331','roamDownFlowAll':'25849','roamDayUsedFlow':'8860','FlowDistinction':'2614','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200385'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 16, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'16','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'14336','downFlowAll':'10240','dayUsedFlow':'25600','minsRemaining':'233','roamGStrenth':'51','roamUpFlowAll':'31383','roamDownFlowAll':'25901','roamDayUsedFlow':'8964','FlowDistinction':'1429','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200444'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 14 ms
+the 111111111 CMD_TAG is 81
+the vir_flag is 0, the SN is 172150210001204
+the Get_Deal_From_SimPool_socket:time speen is 56 ms
+the Src is "minsRemaining":"231","factoryFlag":"0","serverInfo":"null","speedStr":"0-500|200-300|300-100|400-50|600-30","IPAndPort":"192.168.0.162:8091","IMSI":"809460012944220834","SIMIfActivated":"是","Vusim_Active_Num":"待修改","ifRoam":"0","slotNumber":"13-10","fileUpdate":"0","APN":"","Selnet":" ","speedType":"0","IMEI":"0","ifTest":"1","ifVPN":"0","orderType":"1","lastStart":"1"}&
+the minsRemaining is 231
+the lastStart is 1
+the ifTest is 1
+the orderType is 1
+the ifRoam is 0
+the speedType is 0
+the fileUpdate is 0
+the APN is ,, the strlen is 1
+the ifVPN is 0
+the factoryFlag is 0
+the IPAndPort is 192.168.0.162:8091
+the slotNumber is 13-10
+the speedStr is 0-500|200-300|300-100|400-50|600-30, the strlen is 35
+the SIMIfActivated is 是, the strlen of Key is 3
+the IMEI is 0, the IMEI is 0
+the IMSI is 809460012944220834
+the Selnet is  , the strlen is 1
+the NeedFile is 0, IsApn is 0, ifVPN is 0 the Unused[0] is 0, the IMEI is 0, ifRoam is 0, the Src->node->IsNet is 0
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':1,'IMSI':'809460012944220834','TTContext':'C0DB08909C3FEDCE82B8B51013B33A6AE0E657F1167D8668AF0D2F7E10E5C58801DEC55C4B58F62F8E00E5C64E08B8FD1B8D91CBE28A9000','ContextLen':'56','lastTime':'1474200495'}&&
+the Send_Logs_Data:time speen is 18 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':2,'IMSI':'809460012944220834','TTContext':'C0DB08C3DA7EB648F2EE151099514E1439B3CB96A29352029109BFAC107286C9BA4D2B0CCB0ADC23846D196028084398F628888818D99000','ContextLen':'56','lastTime':'1474200497'}&&
+the Send_Logs_Data:time speen is 15 ms
+the 111111111 CMD_TAG is 85
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000, ifTest is 1
+
+This come from TAG_CFMD:172150210001204 the Config is 0-500|200-300|300-100|400-50|600-30
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 17, Battery is 93, after send shutdown_cmd, the para->node is (nil)
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 5, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'0.0.0.0','UploadFlowCount':'17','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'15360','downFlowAll':'10240','dayUsedFlow':'0','minsRemaining':'1440','roamGStrenth':'57','roamUpFlowAll':'31821','roamDownFlowAll':'26145','roamDayUsedFlow':'0','FlowDistinction':'294','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474200509'}&&, the strlen(Dst) is 434
+the Send_Logs_Data:time speen is 14 ms
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 18, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'18','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'15360','downFlowAll':'11264','dayUsedFlow':'1024','minsRemaining':'230','roamGStrenth':'51','roamUpFlowAll':'32155','roamDownFlowAll':'26473','roamDayUsedFlow':'1140','FlowDistinction':'502','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474200566'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 19, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 7, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'19','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'16384','downFlowAll':'12288','dayUsedFlow':'3072','minsRemaining':'229','roamGStrenth':'51','roamUpFlowAll':'32271','roamDownFlowAll':'26577','roamDayUsedFlow':'1360','FlowDistinction':'2127','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474200625'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 20, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'20','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'18432','downFlowAll':'13312','dayUsedFlow':'5120','minsRemaining':'228','roamGStrenth':'53','roamUpFlowAll':'32271','roamDownFlowAll':'26577','roamDayUsedFlow':'1360','FlowDistinction':'2532','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200685'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 21, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 9, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'21','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'101','upFlowAll':'18432','downFlowAll':'13312','dayUsedFlow':'7168','minsRemaining':'227','roamGStrenth':'51','roamUpFlowAll':'32271','roamDownFlowAll':'26577','roamDayUsedFlow':'1360','FlowDistinction':'1233','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474200755'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 22, Battery is 93, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130171','UploadFlowCount':'22','wifiCount':'0','battery':'93','wifiState':'500','gSta':'1','gStrenth':'102','upFlowAll':'19456','downFlowAll':'14336','dayUsedFlow':'7168','minsRemaining':'226','roamGStrenth':'51','roamUpFlowAll':'32271','roamDownFlowAll':'26577','roamDayUsedFlow':'1360','FlowDistinction':'678','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474200805'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 23, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 11, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130171','UploadFlowCount':'23','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'100','upFlowAll':'19456','downFlowAll':'14336','dayUsedFlow':'7168','minsRemaining':'225','roamGStrenth':'51','roamUpFlowAll':'32271','roamDownFlowAll':'26577','roamDayUsedFlow':'1360','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474200883'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 14 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':3,'IMSI':'809460012944220834','TTContext':'C0DB08A5FA0F5002DB1D3E107B848E8B277579A7F10696935B484CCD10BD60600AD66116D7DB84092EB2CE083908EC66713C18922B849000','ContextLen':'56','lastTime':'1474200885'}&&
+the Send_Logs_Data:time speen is 15 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':4,'IMSI':'809460012944220834','TTContext':'C0DB087A4A8169C5ADFA8310F5B9ABA043E516DA5A8051AB02DE223E1018A0F9998C6551744118759319D1B04F08F6817601D48FD5DF9000','ContextLen':'56','lastTime':'1474200902'}&&
+the Send_Logs_Data:time speen is 27 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 24, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'24','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'20480','downFlowAll':'14336','dayUsedFlow':'9216','minsRemaining':'224','roamGStrenth':'53','roamUpFlowAll':'32769','roamDownFlowAll':'26893','roamDayUsedFlow':'2007','FlowDistinction':'2053','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200926'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 25, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 13, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'25','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'21504','downFlowAll':'16384','dayUsedFlow':'12288','minsRemaining':'223','roamGStrenth':'55','roamUpFlowAll':'32821','roamDownFlowAll':'27005','roamDayUsedFlow':'2338','FlowDistinction':'2900','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474200985'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 26, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'26','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'22528','downFlowAll':'17408','dayUsedFlow':'14336','minsRemaining':'221','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1413','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201045'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 27, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 15, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'27','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'22528','downFlowAll':'17408','dayUsedFlow':'14336','minsRemaining':'220','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'346','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201106'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 28, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'28','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'22528','downFlowAll':'17408','dayUsedFlow':'14336','minsRemaining':'219','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201165'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 29, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 17, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'29','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'23552','downFlowAll':'18432','dayUsedFlow':'16384','minsRemaining':'218','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1481','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201225'}&&, the strlen(Dst) is 453
+>Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 453, len1 is 453
+the Send_Logs_Data:time speen is 0 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 30, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'30','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'24576','downFlowAll':'19456','dayUsedFlow':'18432','minsRemaining':'217','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'2480','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474201285'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 96 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 31, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 19, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'31','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'25600','downFlowAll':'19456','dayUsedFlow':'19456','minsRemaining':'216','roamGStrenth':'51','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1413','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201345'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 32, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'32','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'25600','downFlowAll':'20480','dayUsedFlow':'20480','minsRemaining':'215','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'346','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201405'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 14 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 33, Battery is 94, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 21, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'33','wifiCount':'0','battery':'94','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'26624','downFlowAll':'20480','dayUsedFlow':'20480','minsRemaining':'214','roamGStrenth':'53','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201465'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 34, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'34','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'26624','downFlowAll':'20480','dayUsedFlow':'22528','minsRemaining':'213','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1597','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201525'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 35, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 23, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'35','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'27648','downFlowAll':'21504','dayUsedFlow':'24576','minsRemaining':'212','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'2172','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474201586'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 36, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'36','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'28672','downFlowAll':'22528','dayUsedFlow':'25600','minsRemaining':'211','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1309','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474201645'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 37, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 25, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'37','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'28672','downFlowAll':'22528','dayUsedFlow':'25600','minsRemaining':'211','roamGStrenth':'55','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'346','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201705'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 38, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'38','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'29696','downFlowAll':'22528','dayUsedFlow':'26624','minsRemaining':'210','roamGStrenth':'53','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201765'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 39, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 27, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'39','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'29696','downFlowAll':'23552','dayUsedFlow':'27648','minsRemaining':'209','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1181','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201825'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 40, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'40','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'30720','downFlowAll':'24576','dayUsedFlow':'29696','minsRemaining':'208','roamGStrenth':'59','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'2396','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474201886'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 41, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 29, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'41','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'31744','downFlowAll':'24576','dayUsedFlow':'31744','minsRemaining':'207','roamGStrenth':'53','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1581','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474201945'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 42, Battery is 95, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'42','wifiCount':'0','battery':'95','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'31744','downFlowAll':'25600','dayUsedFlow':'31744','minsRemaining':'206','roamGStrenth':'55','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'346','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474202006'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 43, Battery is 96, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 31, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'43','wifiCount':'0','battery':'96','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'32768','downFlowAll':'25600','dayUsedFlow':'31744','minsRemaining':'205','roamGStrenth':'55','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474202066'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 44, Battery is 96, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'44','wifiCount':'0','battery':'96','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'32768','downFlowAll':'25600','dayUsedFlow':'33792','minsRemaining':'204','roamGStrenth':'59','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1413','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474202126'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 45, Battery is 96, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 33, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'45','wifiCount':'0','battery':'96','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'34816','downFlowAll':'26624','dayUsedFlow':'35840','minsRemaining':'203','roamGStrenth':'57','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'2236','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474202185'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 46, Battery is 96, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'46','wifiCount':'0','battery':'96','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'34816','downFlowAll':'27648','dayUsedFlow':'36864','minsRemaining':'202','roamGStrenth':'55','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'1309','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474202246'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 47, Battery is 96, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 35, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'47','wifiCount':'0','battery':'96','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'34816','downFlowAll':'27648','dayUsedFlow':'36864','minsRemaining':'201','roamGStrenth':'55','roamUpFlowAll':'32873','roamDownFlowAll':'27057','roamDayUsedFlow':'2442','FlowDistinction':'346','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474202307'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 81
+the vir_flag is 0, the SN is 172150210001204
+>Get_Data_From_Deal faild, errno is 0, err is Success
+the Get_Deal_From_SimPool_socket:time speen is 0 ms
+>Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool return 4
+>Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool frist faild, return 4
+the Get_Deal_From_SimPool_socket:time speen is 86 ms
+the Src is "minsRemaining":"901","factoryFlag":"0","serverInfo":"null","speedStr":"0-500|200-300|300-100|400-50|600-30","IPAndPort":"192.168.0.162:8091","IMSI":"809460012944220834","SIMIfActivated":"是","Vusim_Active_Num":"待修改","ifRoam":"0","slotNumber":"13-10","fileUpdate":"0","APN":"","Selnet":" ","speedType":"0","IMEI":"0","ifTest":"1","ifVPN":"0","orderType":"1","lastStart":"1"}&
+the minsRemaining is 901
+the lastStart is 1
+the ifTest is 1
+the orderType is 1
+the ifRoam is 0
+the speedType is 0
+the fileUpdate is 0
+the APN is ,, the strlen is 1
+the ifVPN is 0
+the factoryFlag is 0
+the IPAndPort is 192.168.0.162:8091
+the slotNumber is 13-10
+the speedStr is 0-500|200-300|300-100|400-50|600-30, the strlen is 35
+the SIMIfActivated is 是, the strlen of Key is 3
+the IMEI is 0, the IMEI is 0
+the IMSI is 809460012944220834
+the Selnet is  , the strlen is 1
+the NeedFile is 0, IsApn is 0, ifVPN is 0 the Unused[0] is 0, the IMEI is 0, ifRoam is 0, the Src->node->IsNet is 0
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':1,'IMSI':'809460012944220834','TTContext':'C0DB081E8F1B1E25B39D171095CB71CEB47C7CC19A463E910ACD393410CFCCB8BFC8586098C0EB3FB9C1FDB62A0800AAC859B71493479000','ContextLen':'56','lastTime':'1474246715'}&&
+the Send_Logs_Data:time speen is 19 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':2,'IMSI':'809460012944220834','TTContext':'C0DB086489BA9A070B17E4108DE47D43BAA57256AD1EE9A374931EA110D9E3AB637B16BF79AC7BB98E9F9AE735085562860D2ABA34BB9000','ContextLen':'56','lastTime':'1474246717'}&&
+the Send_Logs_Data:time speen is 15 ms
+the 111111111 CMD_TAG is 85
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 48, Battery is 52, after send shutdown_cmd, the para->node is (nil)
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000, ifTest is 1
+
+This come from TAG_CFMD:172150210001204 the Config is 0-500|200-300|300-100|400-50|600-30
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'808464432.460.1440.1608010000','UploadFlowCount':'3420210','wifiCount':'48','battery':'56','wifiState':'98','gSta':'48','gStrenth':'48','upFlowAll':'1375731712','downFlowAll':'279184384','dayUsedFlow':'3301974016','minsRemaining':'1714631987','roamGStrenth':'876032568','roamUpFlowAll':'875837752','roamDownFlowAll':'808595509','roamDayUsedFlow':'875638833','FlowDistinction':'0','IMSI':'809460012944220834','TTContext':'','lastTime':'1474246739'}&&, the strlen(Dst) is 502
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 0, the MCC is 460, the version is 1608010000
+the Send_Logs_Data:time speen is 11 ms
+the Send_Logs_Data:time speen is 20 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 49, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 37, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'49','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'35840','downFlowAll':'28672','dayUsedFlow':'0','minsRemaining':'900','roamGStrenth':'55','roamUpFlowAll':'37201','roamDownFlowAll':'28529','roamDayUsedFlow':'1264','FlowDistinction':'626','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474246772'}&&, the strlen(Dst) is 448
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 50, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'50','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'37888','downFlowAll':'29696','dayUsedFlow':'3072','minsRemaining':'899','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'2432','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474246831'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 51, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 39, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'51','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'38912','downFlowAll':'30720','dayUsedFlow':'5120','minsRemaining':'898','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'2572','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474246892'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 52, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'52','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'39936','downFlowAll':'31744','dayUsedFlow':'7168','minsRemaining':'897','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'1365','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474246951'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 53, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 41, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'53','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'39936','downFlowAll':'31744','dayUsedFlow':'7168','minsRemaining':'896','roamGStrenth':'67','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247011'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 54, Battery is 53, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'54','wifiCount':'0','battery':'53','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'39936','downFlowAll':'31744','dayUsedFlow':'7168','minsRemaining':'895','roamGStrenth':'65','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247071'}&&, the strlen(Dst) is 452
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 55, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 43, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'55','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'40960','downFlowAll':'32768','dayUsedFlow':'9216','minsRemaining':'894','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'2308','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247131'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 56, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'56','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'43008','downFlowAll':'33792','dayUsedFlow':'12288','minsRemaining':'892','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'2820','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247190'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 57, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 45, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'57','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'44032','downFlowAll':'34816','dayUsedFlow':'13312','minsRemaining':'891','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'1241','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474247251'}&&, the strlen(Dst) is 454
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 58, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'58','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'97','upFlowAll':'44032','downFlowAll':'34816','dayUsedFlow':'14336','minsRemaining':'890','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247312'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 59, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 47, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'59','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'44032','downFlowAll':'34816','dayUsedFlow':'14336','minsRemaining':'889','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247371'}&&, the strlen(Dst) is 453
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 60, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'60','wifiCount':'1','battery':'54','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'455680','downFlowAll':'3548160','dayUsedFlow':'3940352','minsRemaining':'888','roamGStrenth':'67','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'3926153','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474247435'}&&, the strlen(Dst) is 462
+the Send_Logs_Data:time speen is 18 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 61, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 49, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'61','wifiCount':'1','battery':'54','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'699392','downFlowAll':'5478400','dayUsedFlow':'6114304','minsRemaining':'887','roamGStrenth':'71','roamUpFlowAll':'37253','roamDownFlowAll':'28581','roamDayUsedFlow':'1368','FlowDistinction':'2173839','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474247495'}&&, the strlen(Dst) is 462
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 62, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'62','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'700416','downFlowAll':'5484544','dayUsedFlow':'6121472','minsRemaining':'886','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'7025','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474247556'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 63, Battery is 54, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 51, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'63','wifiCount':'0','battery':'54','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'701440','downFlowAll':'5485568','dayUsedFlow':'6123520','minsRemaining':'885','roamGStrenth':'65','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2114','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474247617'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 14 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 64, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'64','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'702464','downFlowAll':'5485568','dayUsedFlow':'6123520','minsRemaining':'884','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'654','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247676'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 65, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 53, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'65','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'703488','downFlowAll':'5487616','dayUsedFlow':'6126592','minsRemaining':'883','roamGStrenth':'67','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2988','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474247736'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 66, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'66','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'709632','downFlowAll':'5491712','dayUsedFlow':'6136832','minsRemaining':'882','roamGStrenth':'67','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'9396','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474247795'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 67, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 55, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'67','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'714752','downFlowAll':'5494784','dayUsedFlow':'6146048','minsRemaining':'881','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'9675','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474247855'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 68, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'68','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'717824','downFlowAll':'5496832','dayUsedFlow':'6150144','minsRemaining':'880','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'4086','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474247916'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 69, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 57, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'69','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'717824','downFlowAll':'5496832','dayUsedFlow':'6151168','minsRemaining':'880','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'982','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474247977'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 70, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'70','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'719872','downFlowAll':'5497856','dayUsedFlow':'6153216','minsRemaining':'879','roamGStrenth':'71','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2488','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248038'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 71, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 59, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'71','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'720896','downFlowAll':'5499904','dayUsedFlow':'6156288','minsRemaining':'878','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'3134','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248096'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 16 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 72, Battery is 55, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'72','wifiCount':'0','battery':'55','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'722944','downFlowAll':'5500928','dayUsedFlow':'6159360','minsRemaining':'877','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2597','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474248155'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 73, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 61, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'73','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'722944','downFlowAll':'5500928','dayUsedFlow':'6159360','minsRemaining':'876','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'546','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248216'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 74, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'74','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'722944','downFlowAll':'5500928','dayUsedFlow':'6160384','minsRemaining':'875','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'438','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248277'}&&, the strlen(Dst) is 457
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 75, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 63, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'75','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'724992','downFlowAll':'5501952','dayUsedFlow':'6162432','minsRemaining':'874','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2444','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474248336'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 76, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'76','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'726016','downFlowAll':'5504000','dayUsedFlow':'6165504','minsRemaining':'873','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'3128','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248396'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 77, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 65, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'77','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'727040','downFlowAll':'5505024','dayUsedFlow':'6167552','minsRemaining':'872','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1957','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248456'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 78, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'78','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'728064','downFlowAll':'5505024','dayUsedFlow':'6168576','minsRemaining':'871','roamGStrenth':'65','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'438','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248517'}&&, the strlen(Dst) is 458
+>Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 458, len1 is 458
+the Send_Logs_Data:time speen is 0 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 79, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 67, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'79','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'728064','downFlowAll':'5505024','dayUsedFlow':'6168576','minsRemaining':'870','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'362','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248578'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 64 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 80, Battery is 56, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'80','wifiCount':'0','battery':'56','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'729088','downFlowAll':'5506048','dayUsedFlow':'6171648','minsRemaining':'869','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2938','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248636'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 15 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 81, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 69, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'81','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'731136','downFlowAll':'5507072','dayUsedFlow':'6173696','minsRemaining':'868','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2332','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248695'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 13 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 82, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'82','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'732160','downFlowAll':'5508096','dayUsedFlow':'6175744','minsRemaining':'866','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2093','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248758'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 83, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 71, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'83','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'732160','downFlowAll':'5508096','dayUsedFlow':'6176768','minsRemaining':'865','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'438','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248818'}&&, the strlen(Dst) is 457
+the Send_Logs_Data:time speen is 18 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 84, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'84','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'732160','downFlowAll':'5508096','dayUsedFlow':'6176768','minsRemaining':'864','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'438','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474248876'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 85, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 73, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'85','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'734208','downFlowAll':'5510144','dayUsedFlow':'6179840','minsRemaining':'863','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2620','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248938'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 86, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'86','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'87','upFlowAll':'735232','downFlowAll':'5511168','dayUsedFlow':'6181888','minsRemaining':'862','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2868','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474248995'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 87, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 75, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'87','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'736256','downFlowAll':'5511168','dayUsedFlow':'6183936','minsRemaining':'861','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1365','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249056'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 88, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'88','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'736256','downFlowAll':'5511168','dayUsedFlow':'6183936','minsRemaining':'860','roamGStrenth':'51','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249116'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 89, Battery is 57, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 77, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'89','wifiCount':'0','battery':'57','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'736256','downFlowAll':'5512192','dayUsedFlow':'6183936','minsRemaining':'860','roamGStrenth':'51','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249176'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 90, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'90','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'738304','downFlowAll':'5512192','dayUsedFlow':'6185984','minsRemaining':'859','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2120','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474249236'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 91, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 79, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'91','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'738304','downFlowAll':'5513216','dayUsedFlow':'6188032','minsRemaining':'858','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1789','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474249295'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 92, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'92','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'740352','downFlowAll':'5515264','dayUsedFlow':'6190080','minsRemaining':'857','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2476','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474249356'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 93, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 81, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'93','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'740352','downFlowAll':'5515264','dayUsedFlow':'6191104','minsRemaining':'856','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474249416'}&&, the strlen(Dst) is 457
+the Send_Logs_Data:time speen is 13 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 94, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'94','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'740352','downFlowAll':'5515264','dayUsedFlow':'6191104','minsRemaining':'855','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474249478'}&&, the strlen(Dst) is 457
+the Send_Logs_Data:time speen is 16 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 95, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 83, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'95','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'741376','downFlowAll':'5516288','dayUsedFlow':'6194176','minsRemaining':'854','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2608','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249538'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 96, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'96','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'742400','downFlowAll':'5516288','dayUsedFlow':'6195200','minsRemaining':'853','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1485','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474249597'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 97, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 85, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'97','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'744448','downFlowAll':'5518336','dayUsedFlow':'6198272','minsRemaining':'852','roamGStrenth':'67','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'3124','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249655'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 98, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'98','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'744448','downFlowAll':'5518336','dayUsedFlow':'6198272','minsRemaining':'851','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249717'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 99, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 87, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'99','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'744448','downFlowAll':'5518336','dayUsedFlow':'6198272','minsRemaining':'850','roamGStrenth':'65','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249777'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 100, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'100','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'746496','downFlowAll':'5519360','dayUsedFlow':'6201344','minsRemaining':'849','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2527','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474249836'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 101, Battery is 58, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 89, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'101','wifiCount':'0','battery':'58','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'746496','downFlowAll':'5519360','dayUsedFlow':'6202368','minsRemaining':'848','roamGStrenth':'63','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1197','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474249896'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 102, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'102','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'748544','downFlowAll':'5520384','dayUsedFlow':'6204416','minsRemaining':'847','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'2364','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474249955'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 103, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 91, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'103','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'97','upFlowAll':'748544','downFlowAll':'5521408','dayUsedFlow':'6205440','minsRemaining':'846','roamGStrenth':'71','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250017'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 104, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'104','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'97','upFlowAll':'748544','downFlowAll':'5521408','dayUsedFlow':'6205440','minsRemaining':'845','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250076'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 105, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 93, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'105','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'749568','downFlowAll':'5521408','dayUsedFlow':'6207488','minsRemaining':'844','roamGStrenth':'61','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474250136'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 106, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'106','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'750592','downFlowAll':'5522432','dayUsedFlow':'6208512','minsRemaining':'843','roamGStrenth':'59','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1365','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474250196'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 107, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 95, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130379','UploadFlowCount':'107','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'751616','downFlowAll':'5523456','dayUsedFlow':'6210560','minsRemaining':'842','roamGStrenth':'65','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1537','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250256'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 108, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'108','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'751616','downFlowAll':'5523456','dayUsedFlow':'6211584','minsRemaining':'840','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'1233','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250317'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 85
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000, ifTest is 1
+
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000
+the Send_Logs_Data:time speen is 29 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 109, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 97, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'109','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'752640','downFlowAll':'5523456','dayUsedFlow':'6211584','minsRemaining':'840','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28621','roamDayUsedFlow':'1408','FlowDistinction':'476','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250377'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 110, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'110','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'753664','downFlowAll':'5524480','dayUsedFlow':'6213632','minsRemaining':'839','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'2180','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250436'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 111, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 99, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'111','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'754688','downFlowAll':'5525504','dayUsedFlow':'6215680','minsRemaining':'838','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1485','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474250497'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 112, Battery is 59, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'112','wifiCount':'0','battery':'59','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'754688','downFlowAll':'5525504','dayUsedFlow':'6216704','minsRemaining':'837','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1129','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474250556'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 113, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 101, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'113','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'755712','downFlowAll':'5526528','dayUsedFlow':'6217728','minsRemaining':'836','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1285','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250617'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 114, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'114','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'97','upFlowAll':'755712','downFlowAll':'5526528','dayUsedFlow':'6218752','minsRemaining':'835','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'362','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250678'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 115, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 103, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'115','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'756736','downFlowAll':'5527552','dayUsedFlow':'6220800','minsRemaining':'834','roamGStrenth':'55','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'2360','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250735'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 116, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'116','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'757760','downFlowAll':'5528576','dayUsedFlow':'6221824','minsRemaining':'833','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1421','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250795'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 117, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 105, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130380','UploadFlowCount':'117','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'758784','downFlowAll':'5529600','dayUsedFlow':'6223872','minsRemaining':'832','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1889','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474250860'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 118, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'118','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'759808','downFlowAll':'5529600','dayUsedFlow':'6225920','minsRemaining':'831','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'1531','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250917'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 119, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 107, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'119','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'759808','downFlowAll':'5529600','dayUsedFlow':'6225920','minsRemaining':'830','roamGStrenth':'57','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474250977'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 120, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'120','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'761856','downFlowAll':'5530624','dayUsedFlow':'6227968','minsRemaining':'829','roamGStrenth':'53','roamUpFlowAll':'37253','roamDownFlowAll':'28661','roamDayUsedFlow':'1448','FlowDistinction':'2304','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251036'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':3,'IMSI':'809460012944220834','TTContext':'C0DB082EB3E66BFBF3CEAF10C4D5898536C323A150266CB2C7BA36751045644C232B5200BB9127C143AFF8A79E0840B0685775D3B2F19000','ContextLen':'56','lastTime':'1474251054'}&&
+the Send_Logs_Data:time speen is 29 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 121, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 109, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'121','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'761856','downFlowAll':'5530624','dayUsedFlow':'6227968','minsRemaining':'828','roamGStrenth':'53','roamUpFlowAll':'37592','roamDownFlowAll':'28937','roamDayUsedFlow':'2063','FlowDistinction':'302','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251096'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 122, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'122','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'762880','downFlowAll':'5531648','dayUsedFlow':'6231040','minsRemaining':'827','roamGStrenth':'55','roamUpFlowAll':'37644','roamDownFlowAll':'28989','roamDayUsedFlow':'2063','FlowDistinction':'2248','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251156'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 123, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 111, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'123','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'87','upFlowAll':'763904','downFlowAll':'5532672','dayUsedFlow':'6232064','minsRemaining':'826','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1285','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251217'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 124, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'124','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'763904','downFlowAll':'5532672','dayUsedFlow':'6232064','minsRemaining':'825','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251276'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 125, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 113, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'125','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'763904','downFlowAll':'5532672','dayUsedFlow':'6233088','minsRemaining':'824','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1209','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251336'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 126, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'126','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'764928','downFlowAll':'5533696','dayUsedFlow':'6235136','minsRemaining':'823','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1337','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251396'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 12 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 127, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 115, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'127','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'765952','downFlowAll':'5534720','dayUsedFlow':'6237184','minsRemaining':'822','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2248','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251458'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 128, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'128','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'766976','downFlowAll':'5535744','dayUsedFlow':'6238208','minsRemaining':'821','roamGStrenth':'65','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1409','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251517'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 129, Battery is 60, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 117, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'129','wifiCount':'0','battery':'60','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'766976','downFlowAll':'5535744','dayUsedFlow':'6238208','minsRemaining':'820','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251578'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 130, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'130','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'768000','downFlowAll':'5535744','dayUsedFlow':'6239232','minsRemaining':'819','roamGStrenth':'61','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'362','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474251638'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 131, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 119, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130382','UploadFlowCount':'131','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'769024','downFlowAll':'5536768','dayUsedFlow':'6241280','minsRemaining':'818','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2304','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251696'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 132, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'132','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'87','upFlowAll':'770048','downFlowAll':'5537792','dayUsedFlow':'6243328','minsRemaining':'817','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2364','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251756'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 133, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 121, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'133','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'771072','downFlowAll':'5538816','dayUsedFlow':'6244352','minsRemaining':'816','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1181','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251816'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 134, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'134','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'771072','downFlowAll':'5538816','dayUsedFlow':'6245376','minsRemaining':'815','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251876'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 135, Battery is 61, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 123, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'135','wifiCount':'0','battery':'61','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'771072','downFlowAll':'5538816','dayUsedFlow':'6245376','minsRemaining':'814','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251936'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 14 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 136, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'136','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'772096','downFlowAll':'5539840','dayUsedFlow':'6247424','minsRemaining':'813','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2108','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474251996'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 137, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 125, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'137','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'773120','downFlowAll':'5540864','dayUsedFlow':'6249472','minsRemaining':'812','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2096','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252057'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 138, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'138','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'774144','downFlowAll':'5540864','dayUsedFlow':'6250496','minsRemaining':'811','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1157','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252116'}&&, the strlen(Dst) is 459
+>Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 459, len1 is 459
+the Send_Logs_Data:time speen is 0 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 139, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 127, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'139','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'99','upFlowAll':'774144','downFlowAll':'5540864','dayUsedFlow':'6250496','minsRemaining':'810','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474252187'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 88 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 140, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'140','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'774144','downFlowAll':'5540864','dayUsedFlow':'6251520','minsRemaining':'809','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'510','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252237'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 141, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 129, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130381','UploadFlowCount':'141','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'776192','downFlowAll':'5541888','dayUsedFlow':'6253568','minsRemaining':'808','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2648','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474252297'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 142, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'142','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'777216','downFlowAll':'5543936','dayUsedFlow':'6256640','minsRemaining':'807','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2964','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474252357'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 143, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 131, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'143','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'778240','downFlowAll':'5543936','dayUsedFlow':'6258688','minsRemaining':'806','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1241','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252417'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 144, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'144','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'778240','downFlowAll':'5543936','dayUsedFlow':'6258688','minsRemaining':'805','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252477'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 145, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 133, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'145','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'778240','downFlowAll':'5544960','dayUsedFlow':'6258688','minsRemaining':'804','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252537'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 146, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'146','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'98','upFlowAll':'779264','downFlowAll':'5544960','dayUsedFlow':'6260736','minsRemaining':'803','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474252599'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 147, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 135, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130169','UploadFlowCount':'147','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'102','upFlowAll':'781312','downFlowAll':'5547008','dayUsedFlow':'6263808','minsRemaining':'802','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2810','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252657'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 148, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130169','UploadFlowCount':'148','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'781312','downFlowAll':'5547008','dayUsedFlow':'6264832','minsRemaining':'801','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1293','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252717'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 149, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 137, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130169','UploadFlowCount':'149','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'782336','downFlowAll':'5547008','dayUsedFlow':'6264832','minsRemaining':'800','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252777'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 150, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130169','UploadFlowCount':'150','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'782336','downFlowAll':'5547008','dayUsedFlow':'6264832','minsRemaining':'799','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252837'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 151, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 139, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130169','UploadFlowCount':'151','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'783360','downFlowAll':'5549056','dayUsedFlow':'6267904','minsRemaining':'798','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2564','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252900'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 152, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'152','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'784384','downFlowAll':'5550080','dayUsedFlow':'6269952','minsRemaining':'797','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2210','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474252957'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 153, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 141, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'153','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'99','upFlowAll':'785408','downFlowAll':'5550080','dayUsedFlow':'6270976','minsRemaining':'796','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1137','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474253017'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 154, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'154','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'96','upFlowAll':'785408','downFlowAll':'5550080','dayUsedFlow':'6270976','minsRemaining':'795','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474253077'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 155, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 143, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'155','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'785408','downFlowAll':'5550080','dayUsedFlow':'6272000','minsRemaining':'794','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474253137'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 156, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'156','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'786432','downFlowAll':'5551104','dayUsedFlow':'6273024','minsRemaining':'793','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253197'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 157, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 145, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'157','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'787456','downFlowAll':'5552128','dayUsedFlow':'6275072','minsRemaining':'792','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253256'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 158, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'158','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'788480','downFlowAll':'5552128','dayUsedFlow':'6277120','minsRemaining':'791','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1241','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253317'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 159, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 147, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'159','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'788480','downFlowAll':'5552128','dayUsedFlow':'6277120','minsRemaining':'790','roamGStrenth':'61','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253376'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 160, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'160','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'788480','downFlowAll':'5552128','dayUsedFlow':'6277120','minsRemaining':'789','roamGStrenth':'57','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253437'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 161, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 149, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'161','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'789504','downFlowAll':'5553152','dayUsedFlow':'6279168','minsRemaining':'788','roamGStrenth':'55','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253497'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 10 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 162, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'162','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'91','upFlowAll':'790528','downFlowAll':'5554176','dayUsedFlow':'6281216','minsRemaining':'787','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253557'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 163, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 151, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'163','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'88','upFlowAll':'791552','downFlowAll':'5555200','dayUsedFlow':'6282240','minsRemaining':'786','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1077','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253616'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 11 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 164, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'164','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'791552','downFlowAll':'5555200','dayUsedFlow':'6282240','minsRemaining':'785','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253683'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 165, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 153, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'165','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'89','upFlowAll':'792576','downFlowAll':'5555200','dayUsedFlow':'6283264','minsRemaining':'784','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'750','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253737'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 166, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'166','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'793600','downFlowAll':'5556224','dayUsedFlow':'6285312','minsRemaining':'783','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2304','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253798'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 167, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 155, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172859','UploadFlowCount':'167','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'794624','downFlowAll':'5557248','dayUsedFlow':'6287360','minsRemaining':'782','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2120','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253857'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 168, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'168','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'795648','downFlowAll':'5557248','dayUsedFlow':'6288384','minsRemaining':'781','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1077','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253917'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 85
+This come from Coding_With_CFMD_Soeckt SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000, ifTest is 1
+
+This come from TAG_CFMD SN:172150210001204 Vsim_Action_State is 1, the MCC is 460, the version is 1608010000
+the Send_Logs_Data:time speen is 23 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 169, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 157, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'169','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'795648','downFlowAll':'5557248','dayUsedFlow':'6289408','minsRemaining':'780','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'476','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474253977'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 170, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'170','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'795648','downFlowAll':'5558272','dayUsedFlow':'6289408','minsRemaining':'779','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254037'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 171, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 159, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'171','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'796672','downFlowAll':'5558272','dayUsedFlow':'6291456','minsRemaining':'778','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1912','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254097'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 172, Battery is 62, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'172','wifiCount':'0','battery':'62','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'797696','downFlowAll':'5559296','dayUsedFlow':'6293504','minsRemaining':'777','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1992','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254157'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 173, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 161, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'173','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'798720','downFlowAll':'5560320','dayUsedFlow':'6294528','minsRemaining':'776','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1077','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254217'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 174, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'174','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'92','upFlowAll':'798720','downFlowAll':'5560320','dayUsedFlow':'6294528','minsRemaining':'775','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254277'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 175, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 163, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'175','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'90','upFlowAll':'798720','downFlowAll':'5560320','dayUsedFlow':'6294528','minsRemaining':'774','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254337'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 176, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'176','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'799744','downFlowAll':'5561344','dayUsedFlow':'6296576','minsRemaining':'773','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1972','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254397'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 9 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 177, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 165, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'177','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'800768','downFlowAll':'5562368','dayUsedFlow':'6298624','minsRemaining':'772','roamGStrenth':'51','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'2302','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254457'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 178, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'178','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'801792','downFlowAll':'5562368','dayUsedFlow':'6300672','minsRemaining':'771','roamGStrenth':'53','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'1241','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474254518'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 179, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 167, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'179','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'801792','downFlowAll':'5562368','dayUsedFlow':'6300672','minsRemaining':'770','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'362','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474254577'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 180, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'180','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'97','upFlowAll':'802816','downFlowAll':'5562368','dayUsedFlow':'6300672','minsRemaining':'769','roamGStrenth':'59','roamUpFlowAll':'37708','roamDownFlowAll':'29041','roamDayUsedFlow':'2283','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSDPA','lastTime':'1474254638'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 83
+This come from TT_Log_Pack_Data, the Buff is 45445445,2005,7|{'SN':'172150210001204','TTCnt':4,'IMSI':'809460012944220834','TTContext':'C0DB08869F3299749E30BF1091DF124E415A4CC7F40276217F7E8B2710E80B22A0DD71606AAA857B6D686629770827533DA28B338EFD9000','ContextLen':'56','lastTime':'1474254662'}&&
+the Send_Logs_Data:time speen is 23 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 181, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 169, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24172860','UploadFlowCount':'181','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'803840','downFlowAll':'5563392','dayUsedFlow':'6302720','minsRemaining':'768','roamGStrenth':'53','roamUpFlowAll':'38151','roamDownFlowAll':'29305','roamDayUsedFlow':'2990','FlowDistinction':'2284','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254706'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 6 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 182, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'182','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'804864','downFlowAll':'5564416','dayUsedFlow':'6305792','minsRemaining':'767','roamGStrenth':'55','roamUpFlowAll':'38151','roamDownFlowAll':'29305','roamDayUsedFlow':'2990','FlowDistinction':'2572','IMSI':'809460012944220834','TTContext':'HSPAP','lastTime':'1474254757'}&&, the strlen(Dst) is 460
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 183, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 171, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'183','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'95','upFlowAll':'805888','downFlowAll':'5565440','dayUsedFlow':'6306816','minsRemaining':'766','roamGStrenth':'59','roamUpFlowAll':'38267','roamDownFlowAll':'29409','roamDayUsedFlow':'3210','FlowDistinction':'1365','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254817'}&&, the strlen(Dst) is 459
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 184, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'184','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'805888','downFlowAll':'5565440','dayUsedFlow':'6306816','minsRemaining':'765','roamGStrenth':'51','roamUpFlowAll':'38267','roamDownFlowAll':'29409','roamDayUsedFlow':'3210','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254877'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 8 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 185, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 173, fd is 25, sIMSI is 809460012944220834
+
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'185','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'94','upFlowAll':'805888','downFlowAll':'5565440','dayUsedFlow':'6307840','minsRemaining':'764','roamGStrenth':'51','roamUpFlowAll':'38267','roamDownFlowAll':'29409','roamDayUsedFlow':'3210','FlowDistinction':'242','IMSI':'809460012944220834','TTContext':'HSPA','lastTime':'1474254937'}&&, the strlen(Dst) is 458
+the Send_Logs_Data:time speen is 7 ms
+the 111111111 CMD_TAG is 87
+This come from TAG_LOCAL_STA the SN is 172150210001204, the cnt is 186, Battery is 63, after send shutdown_cmd, the para->node is 0xd00470
+the Dst is 45445445,2001,20|{'SN':'172150210001204','location':'460.1.42303.24130172','UploadFlowCount':'186','wifiCount':'0','battery':'63','wifiState':'500','gSta':'1','gStrenth':'93','upFlowAll':'807936','downFlowAll':'5566464','dayUsedFlow':'6309888','minsRemaining':'763','roamGStrenth':'51','roamUpFlowAll':'38267','roamDownFlowAll':'29409','roamDayUsedFlow':'3210','FlowDistinction':'2759','IMSI':'809460012944220834
