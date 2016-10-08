@@ -7,6 +7,7 @@
 #include "errlog.h"
 #include "list.h"
 
+#define MASK_NUM 					0x1F
 #define TIMEOUT_IMST				3600
 #define MAXEPOLLSIZE 				10000
 #define MAX_CON_NUM                 100//add by lk 20151016
@@ -26,8 +27,8 @@
 #define SQL_TIMEOUT					600
 #define	LOGIN_TIMEOUT				1800
 
-#define Java_TIMEOUT				5
-#define SOCKET_NUM					5
+#define Java_TIMEOUT				3
+#define SOCKET_NUM					50
 #define Web_Port					10160
 #define Web_IP						"218.17.107.11"
 #define Web_IP1						"113.88.197.13"
@@ -56,9 +57,10 @@ the Macro definition for access authenticate of terminal device
 #define AA_ERR_SERVER_ABNORMAL		0x38
 #define AA_ERR_UNKNOWN				0x39
 
-#define	TDM_LOG_LEVEL MSG_MONITOR
-#define	TDM_LOG_FILE_NAME 			"TDM.log"
-#define	TDM_LOG_FILE_NAME_ERR 		"TDM_err.log"
+#define	TDM_LOG_LEVEL 				MSG_MONITOR
+#define	TDM_LOG_FILE_NAME 			"/home/run/tdm/TDM.log"
+#define	TDM_LOG_FILE_NAME_ERR 		"/home/run/tdm/TDM_err.log"
+#define TDM_CONFIG_FILE				"config/IPconfig"
 
 #define Web_Rom_Log					0x01
 #define Web_Loc_Log					0x02
@@ -294,19 +296,10 @@ typedef struct __Data_Spm
 
 typedef struct _Mysql_Fd
 {
-	int 				Deal_Fd[SOCKET_NUM];
 	int 				Logs_Fd[SOCKET_NUM];
-	int 				Sim_Fd;
-	int 				Device_Fd;
-
-	pthread_mutex_t 	Deal_mutex[SOCKET_NUM];
 	pthread_mutex_t 	Logs_mutex[SOCKET_NUM];
-	pthread_mutex_t 	Sim_mutex;
-	pthread_mutex_t 	Device_mutex;
-
 	pthread_mutex_t 	list_mutex;//add by 20160123
 	struct list_head 	head;//add by 20160123
-	time_t 				device_time;
 }Mysql_Fd;//add by lk 20150921
 
 typedef struct
@@ -469,4 +462,5 @@ extern int Get_VPN_From_SN_List(char *SN, char *vpn);
 extern int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len, Data_Spm *para);
 extern Data_Spm *Get_Node_By_SN(char *SN);
 extern int Is_Valid_SN(char *SN);
+extern void Close_Socket_Fd(int *Fd);
 #endif

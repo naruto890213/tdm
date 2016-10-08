@@ -1,6 +1,0 @@
-20160918202025E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 453, len1 is 453
-20160919085821E:0:Get_Data_From_Deal faild, errno is 0, err is Success
-20160919085821E:0:Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool return 4
-20160919085821E:0:Get_Deal_From_SimPool:SN->172150210001204 Get_Deal_From_SimPool frist faild, return 4
-20160919092837E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 458, len1 is 458
-20160919102836E:0:Send_Logs_Data recv faild, the errno is 0, err is Success, ret is 0, the len is 459, len1 is 459

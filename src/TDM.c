@@ -29,8 +29,6 @@
 /*****************************************************************************************
 本文件的函数主要是tdm模块中的操作函数
 ******************************************************************************************/
-char locale_ip[20]; //add by lk 20140305
-#define MASK_NUM 0x1F
 
 /*****************************************************************************************
 sigexit：
@@ -553,7 +551,6 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
 static int Coding_With_CFMD(Data_Spm *para)
 {
     char Version[12] = {'\0'};
-    int minite_Remain = -1;
     Tell_Server_Bill Tell_Server_para;
 	Log_Data Data;
 	memset(&Data, 0, sizeof(Data));
@@ -574,31 +571,23 @@ static int Coding_With_CFMD(Data_Spm *para)
 
     switch(Tell_Server_para.Vsim_Action_State)
     {
-		case 2:
-			Set_Deal_From_SimPool(para->SN, para->sIMSI, para->MCC, 0, &minite_Remain);
 		case 0:
+		case 2:
 			para->locale_flag = 1;
 			break;
 		default:
 			break;
     }
 
-	if(para->socket_spm > 0)
-	{
-		close(para->socket_spm);
-		para->socket_spm = 0;//add by 20160308
-	}
-
+	Close_Socket_Fd(&para->socket_spm);
 	Local_Confirm_Pack(para->SN, para->sIMSI, Version, para->versionAPK, Tell_Server_para.ICCID, Data.Buff);
-
 	Data.len = strlen(Data.Buff);
-#if 1
+#if 0
     printf("This come from TAG_CFMD SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u\n", 
 			para->SN, Tell_Server_para.Vsim_Action_State, Tell_Server_para.MCC, para->version);
 #endif
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
-	SetFd_From_Device(para->SN, 0, para->fd1);
 
 	return 0;
 }
@@ -777,7 +766,6 @@ int Coding_With_LogOut(Data_Spm *para)
 	para->outtime = now;
 	printf("This come from Coding_With_LogOut->SN is %s, sIMSI is %s, now is %ld, outtime is %ld\n", logout_t.SN, para->sIMSI, now, para->outtime);
 
-	SetFd_From_Device(logout_t.SN, 0, 0);
 	memcpy(Data.SN, logout_t.SN, 15);
 	LOG_OUT_Log_Pack(logout_t.SN, para->sIMSI, Data.Buff);
 	Data.len = strlen(Data.Buff);
@@ -824,13 +812,6 @@ static int Coding_With_Local(Data_Spm *para)
 	memset(&Data, 0, sizeof(Log_Data));
 	memcpy(Data.SN, para->SN, 15);
 
-#if 0
-	int cnt = para->cnt;
-	if(cnt % 2)
-		printf("This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, fd is %d, sIMSI is %s\n\n", para->SN, cnt, para->fd1, para->sIMSI);
-    para->cnt = cnt + 1;
-#endif
-
     para->type = 2;
 	Local_Log_Pack(para->SN, para->sIMSI, para->Buff, para->len, para->version, Data.Buff);
 	Data.len = strlen(Data.Buff);
@@ -855,7 +836,7 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
         cnt = cnt - 256; //add by lk 20150427
     }                                 
                                       
-	printf("This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd, the para->node is %p\n", para->SN, cnt, Battery, para->node);
+	//printf("This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd, the para->node is %p\n", para->SN, cnt, Battery, para->node);
     SendBuf[0] = TAG_LOCAL_STA_RET;   
     SendBuf[3] = cnt;
 	write(fd, (char *)SendBuf, 4);
@@ -863,7 +844,7 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
 	if((Battery < 3) && (Battery != 0)) 
 	{
   		Coding_With_TT_Reinsert(0, fd, TAG_SHUTDOWN_CMD);
-		LogMsg(MSG_MONITOR, "This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd\n", para->SN, cnt, Battery);
+		//LogMsg(MSG_MONITOR, "This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd\n", para->SN, cnt, Battery);
 	}
 
 	if(para->node == NULL)
@@ -1042,26 +1023,6 @@ int Coding_With_SIMFILE_REQUEST(Data_Spm *para)
 	return 0;
 }
 
-int Coding_With_Err(int type, int spm_fd, char *SN)
-{
-	if(spm_fd > 0)
-	{
-		close(spm_fd);
-	}
-
-	switch(type)
-	{
-		case 1:
-			SetFd_From_Device(SN, 0, -1);
-			break;
-		case 2:
-			SetFd_From_Device(SN, -1, 0);
-			break;
-	}
-
-	return 0;
-}
-
 void Printf(void *Src, int len)
 {
 	int i;
@@ -1080,6 +1041,7 @@ static void Coding_With_Date(Data_Spm *para, int CMD_TAG)
 {
 	switch(CMD_TAG)
     {
+		printf("This come from %s, the CMD_TAG is %02x\n", __func__, CMD_TAG);
         case TAG_ACCESS_AUTH:
         {
             Coding_With_ACCESS_AUTH(para);
@@ -1313,33 +1275,10 @@ TDM_init：
 ******************************************************************************************/
 int TDM_init(int *iServer_sock)
 {
-	int iListenPort;
-	char sListenPort[8];
-	char SC_PATH[128];
-	SetMsgLevel(TDM_LOG_LEVEL);
 	RegisterLogMsg(TDM_LOG_FILE_NAME, TDM_LOG_FILE_NAME_ERR, TDM_LOG_LEVEL);
-	strcpy(SC_PATH, "/home/SubServer");
-	strcat(SC_PATH, SERVER_CONFIG);
-	ReadString(SC_PATH, "sub_server", "socket", "port", sListenPort);
-	iListenPort = 11111;
-
-	LogMsg(MSG_MONITOR, "TDM:Listen to Port %d\n", iListenPort);
 	ConnectToMysqlInit();
 
 	return 0;
-}
-
-/*****************************************************************************************
-sig_chld：
-	该函数主要是用于扑捉进程退出
-	输入参数:
-		signo：信号值
-	输出参数：无
-******************************************************************************************/
-static void sig_chld(int signo)  
-{
-    while( waitpid(-1, NULL, WNOHANG) > 0 );  
-    return;  
 }
 
 void *Create_Epoll_Pthread(void *arg)
@@ -1542,6 +1481,7 @@ static void Coding_With_Frame_Data(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthrea
 {
 	memcpy(TempBuf, p_Recv->Frame_Data, p_Recv->FrameSize);
 	para->num = p_Recv->FrameSize;
+
 	if(p_Recv->Cmd_TAG == TAG_ACCESS_AUTH)
 		memcpy(para->SN, ((AccessAuth_Def *)(p_Recv->Frame_Data))->DeviceSN, 15);
 	
@@ -1586,9 +1526,7 @@ static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempB
 	int CMD_TAG = -1;	
 	int len = read(fd, (char *)buf, sizeof(buf));
     if(len <= 0)
-    {
         return -1;
-    }
 
 	TD_ComProtocl_RecvFrame_t *p_Recv = (TD_ComProtocl_RecvFrame_t *)buf;
     CMD_TAG = Cmd_Test(p_Recv->Cmd_TAG);
@@ -1596,18 +1534,12 @@ static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempB
 		return CMD_TAG;
 
     if(p_Recv->FrameSize == 0)
-    {
         para->num = 0;
-    }
     else
-    {
         para->num = p_Recv->FrameSize - 9;
-    }
 
 	if(para->num < 0)
 		para->num = 0;
-
-	printf("the 111111111 CMD_TAG is %02x\n", CMD_TAG);
 
     switch(CMD_TAG)
     {
@@ -1673,7 +1605,7 @@ void socket_read_cb(int fd, short events, void *arg)
 	unsigned char TempBuf[256] = {'\0'};
 	Node_Data Data;
     memset(&Data, 0, sizeof(Data));
-	
+
 	int CMD_TAG = Coding_With_Recv_Data(fd, para, TempBuf);	
 	if(CMD_TAG == -1)
 	{
@@ -1737,6 +1669,7 @@ void do_accept(evutil_socket_t listener, short event, void *arg)
 
 void run(int port, void (*callback)(evutil_socket_t, short, void *))
 {
+    int one = 1;
     evutil_socket_t listener;
     struct sockaddr_in sin;
 	common_data data;
@@ -1744,7 +1677,7 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
     struct event_base *base = NULL;
     struct event *listener_event;
 
-	struct threadpool *pool = threadpool_init(POOL_NUM, POOL_NUM * 4, work_func);
+	struct threadpool *pool = threadpool_init(POOL_NUM, POOL_NUM * 5, work_func);
 	if(NULL == pool)
 	{
 		LogMsg(MSG_ERROR, "failed to malloc threadpool!\n");	
@@ -1773,7 +1706,8 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
     listener = socket(AF_INET, SOCK_STREAM, 0);
     evutil_make_socket_nonblocking(listener);
 
-    int one = 1;
+	LogMsg(MSG_MONITOR, "TDM:Listen to Port %d\n", port);
+
     setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(one));
 
     if (bind(listener, (struct sockaddr*)&sin, sizeof(sin)) < 0) 
@@ -1804,13 +1738,7 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 int main(int argc, char ** argv )
 {
 	pthread_t web_t;
-
-	memset(locale_ip, 0, sizeof(locale_ip));
-    GetLocalIp(locale_ip); //add by lk 20150305
-	printf("the IP is %s\n", locale_ip);
-
 	TDM_init(NULL);
-
 	signal(SIGINT, sigexit);
 	signal(SIGSEGV, sigexit);
 
@@ -1819,21 +1747,11 @@ int main(int argc, char ** argv )
     sigaddset(&signal_mask, SIGPIPE);
     int rc = pthread_sigmask(SIG_BLOCK, &signal_mask, NULL);
     if(rc != 0)
-    {
         printf("block sigpipe error\n");
-    }
-
-    if(signal(SIGCHLD, sig_chld) == SIG_ERR )  
-	{  
-        perror("signal(SIGCHLD) error");  
-        exit(errno);  
-	}
 
 	int server_Sockfd1 = CreateListenService(Web_Port, MAX_Connect);
 	if(server_Sockfd1 > 0)
-	{
 		pthread_create(&web_t, NULL, Create_Epoll_Pthread, &server_Sockfd1);
-	}
 
 	run(11111, do_accept);
 

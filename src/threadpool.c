@@ -99,6 +99,7 @@ int threadpool_add_job(struct threadpool* pool, void *arg, int len)
         pthread_mutex_unlock(&(pool->mutex));
         return -1;
     }
+
 	memset(pjob, 0, sizeof(struct job));
 	memcpy(pjob->Buff, arg, len);
     pjob->next = NULL;
@@ -123,6 +124,7 @@ void *threadpool_function(void* arg)
 {
     struct threadpool *pool = (struct threadpool*)arg;
     struct job *pjob = NULL;
+
     while (1)  //死循环
     {
         pthread_mutex_lock(&(pool->mutex));
@@ -136,27 +138,20 @@ void *threadpool_function(void* arg)
             pthread_mutex_unlock(&(pool->mutex));
             pthread_exit(NULL);
         }
+
         pool->queue_cur_num--;
         pjob = pool->head;
 
         if (pool->queue_cur_num == 0)
-        {
             pool->head = pool->tail = NULL;
-        }
         else
-        {
             pool->head = pjob->next;
-        }
 
         if (pool->queue_cur_num == 0)
-        {
             pthread_cond_signal(&(pool->queue_empty));        //队列为空，就可以通知threadpool_destroy函数，销毁线程函数
-        }
 
         if (pool->queue_cur_num == pool->queue_max_num - 1)
-        {
             pthread_cond_broadcast(&(pool->queue_not_full));  //队列非满，就可以通知threadpool_add_job函数，添加新任务
-        }
 
         pthread_mutex_unlock(&(pool->mutex));
 
