@@ -832,9 +832,7 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
 	*CMD_TAG = 10;
 
 	while(cnt > 255)                  
-    {                                 
         cnt = cnt - 256; //add by lk 20150427
-    }                                 
                                       
 	//printf("This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd, the para->node is %p\n", para->SN, cnt, Battery, para->node);
     SendBuf[0] = TAG_LOCAL_STA_RET;   
@@ -848,9 +846,7 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
 	}
 
 	if(para->node == NULL)
-    {
 		para->node = Get_Node_By_SN(para->SN);
-	}	
 
 	if(para->node)
 	{
@@ -1483,7 +1479,7 @@ static void Coding_With_Frame_Data(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthrea
 	para->num = p_Recv->FrameSize;
 
 	if(p_Recv->Cmd_TAG == TAG_ACCESS_AUTH)
-		memcpy(para->SN, ((AccessAuth_Def *)(p_Recv->Frame_Data))->DeviceSN, 15);
+		memcpy(para->SN, ((AccessAuth_Def *)(p_Recv->Frame_Data))->DeviceSN, 16);
 	
 	return;
 }
@@ -1607,6 +1603,7 @@ void socket_read_cb(int fd, short events, void *arg)
     memset(&Data, 0, sizeof(Data));
 
 	int CMD_TAG = Coding_With_Recv_Data(fd, para, TempBuf);	
+	printf("the CMD_TAG is %02x, the SN is %s\n", CMD_TAG, para->SN);
 	if(CMD_TAG == -1)
 	{
 		Destory_Node(para, fd);

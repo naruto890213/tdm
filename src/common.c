@@ -582,6 +582,7 @@ static int Login_Log_Pack_Data(Data_Spm *para, char *Dst, AccessAuth_Def *p, int
 	sprintf(Dst, "333,1001,12|{'SN':'%s','nowtime':'%ld','MCC':'%d','MNC':'%d','LAC':'%d','CID':'%d','Data':'%d',\
 'firmWareVer':'%d','firmWareAPKVer':'%d','battery':'%d','minsRemaining':'%d','tdmIpPort':'%s:%d','serverCode':'0'}&&", 
 	para->SN, time(NULL), para->MCC, p->MNC, p->LAC, p->CID, Data, p->FirmwareVer, para->versionAPK, p->DeviceSN[21], para->take_time, Web_IP1, Web_Port);
+	printf("Dst is %s\n", Dst);
 
 	return (int)strlen(Dst);
 }
@@ -919,16 +920,14 @@ int Deal_Proc(Data_Spm *para, int MCC)
 
 int SIM_Allocate_Proc(Data_Spm *Src)
 {
-	AccessAuth_Def * p_Src = (AccessAuth_Def *)(Src->Buff);
+	AccessAuth_Def *p_Src = (AccessAuth_Def *)(Src->Buff);
 	unsigned short data_size = 0;//add by lk 20151103
-	Src->vir_flag = p_Src->DeviceSN[18];//add by lk 20151104
-	memset(Src->speedStr, 0, sizeof(Src->speedStr));
 
+	printf("the SN is %s, the vir_flag is %d\n", p_Src->DeviceSN, Src->vir_flag);
 	memcpy(&Src->take_time, p_Src->DeviceSN + 19, 2);
 	memcpy(&data_size, p_Src->DeviceSN + 16, 2);//add by lk 20151103
 	memcpy(&Src->versionAPK, p_Src->LastIMSI, 4);
 	
-	printf("the SN is %s, the vir_flag is %d\n", p_Src->DeviceSN, Src->vir_flag);
 
 	return Get_Deal_From_Remote(Src, p_Src, data_size);
 }
