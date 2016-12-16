@@ -105,56 +105,29 @@ getValue：
 		src: 传入的数据
 	输出参数：扑捉到相应的信号值，销毁分配的内存空间，退出程序
 ******************************************************************************************/
-static void getValue(Web_Data *para, char *sn, char *src, char *dst, int *fd1, int *fd2)
+static void getValue(Web_Data *para, char *sn, char *src, char *dst)
 {
-    char *str = strstr(src, ":");
-    str = strtok(str, ",");
-	if(str)
-		*fd1 = atoi(str + 1);
+	char Dst[56];
 
-    str = strtok(NULL, ",");
-	if(str)
-	{
-		str = strstr(str, ":");
-		if(str)
-			*fd2 = atoi(str + 1);
-	}
+	if(!Find_Str_By_Key(src, "sn", Dst, sizeof(Dst)))
+		memcpy(sn, Dst, 15);
 
-    str = strtok(NULL, ",");
-	if(str)
-	{
-		str = strstr(str, ":");
-		if(str)
-			para->type = atoi(str + 1);
-	}
+	if(!Find_Str_By_Key(src, "type", Dst, sizeof(Dst)))
+		para->type = atoi(Dst);
 
-    str = strtok(NULL, ",");
-	if(str)
+	if(!Find_Str_By_Key(src, "num", Dst, sizeof(Dst)))
 	{
-		str = strstr(str, ":");
-		if(str)
-			memcpy(sn, str + 2, 15);
-	}
-
-    str = strtok(NULL, "}");
-	if(str)
-	{
-		str = strstr(str, ":");
-		if(str)
+		switch(para->type)
 		{
-			switch(para->type)
-			{
-				case 8:
-				case 10:
-				case 11:
-				case 15:
-					//printf("the str is %s, the len of str is %d\n", str + 2, (int)strlen(str + 2));
-					memcpy(dst, str + 2, (int)strlen(str + 2) - 1);
-					break;
-				default:
-					para->num = atoi(str + 1);
-					break;
-			}
+			case 8:
+			case 10:
+			case 11:
+			case 15:
+				memcpy(dst, Dst, (int)strlen(Dst));
+				break;
+			default:
+				para->num = atoi(Dst);
+				break;
 		}
 	}
 }
@@ -220,17 +193,14 @@ static int AccessAuth_Result_Pack(Data_Spm *Src, TD_ComProtocl_SendFrame_t *dst)
 		para.NeedFile = (unsigned char)(Src->node.NeedFile);
 		
 		if(Src->orderType != 2)
-		{
 			para.Data_Clr_Flag = Src->lastStart;
-		}
-
-		//printf("This come from %s, the SN is %s, IsNet:%d, IsApn:%d, speedType:%d, ifVPN:%d\n\n", __func__, Src->SN, Src->node->IsNet, Src->node->IsApn, Src->node->speedType, Src->ifVPN);
 
 		para.Unused[0] = MASK_NUM & (Src->node.IsApn | Src->node.IsNet | Src->node.speedType | Src->ifVPN);//add by lk 20150805
 
 #if 1
-		printf("the NeedFile is %d, IsApn is %d, ifVPN is %d the Unused[0] is %d, the IMEI is %lld, ifRoam is %d, the Src->node->IsNet is %d\n", 
-				para.NeedFile, Src->node.IsApn, Src->ifVPN, para.Unused[0], Src->node.IMEI, Src->node.ifRoam, Src->node.IsNet);
+		LogMsg(MSG_MONITOR, 
+			"the %s sIMSI is %s NeedFile is %d, IsApn is %d, ifVPN is %d the Unused[0] is %d, the IMEI is %lld, ifRoam is %d, the IsNet is %d\n", 
+			Src->SN, Src->sIMSI, para.NeedFile, Src->node.IsApn, Src->ifVPN, para.Unused[0], Src->node.IMEI, Src->node.ifRoam, Src->node.IsNet);
 #endif
 
 		para.Unused[1] = Src->node.ifRoam;
@@ -246,7 +216,6 @@ static int AccessAuth_Result_Pack(Data_Spm *Src, TD_ComProtocl_SendFrame_t *dst)
 		para.byteRemain = Src->node.Port;
 		dst_offset = 4 + sizeof(para);
 		memcpy(dst->Frame_Data, &para, sizeof(para));
-		//printf("The Port is %d, IP is %d.%d.%d.%d\n", para.byteRemain, para.IP[0], para.IP[1], para.IP[2], para.IP[3]);
 
 #if 0
 		if(Src->node->IMEI)
@@ -328,7 +297,7 @@ int PickUp_Data_Spm(unsigned char *Dst, Data_Spm *para, int *sendbytes)
     Tdm_to_Spm Data;
     memset(&Data, 0, sizeof(Data));
 
-	if((para->CMD_TAG == TAG_CMDTT) && (para->Buff[5] != (para->len - 6)) && (para->node.Port <= 0))
+	if((para->CMD_TAG == TAG_CMDTT) && (para->Buff[5] != (para->len - 6)))
 	{
 		Data_IP para1;
 		int size = sizeof(para1);
@@ -454,7 +423,6 @@ int Coding_With_HB_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, tmd_pthread *para, 
 	{
 		return TAG_HB;
 	}
-	LogMsg(MSG_ERROR, "The para->SN is %s\n", para->SN);
 
 	return -1;
 }
@@ -491,11 +459,9 @@ int Coding_With_NewHB(Data_Spm *para)
 	Log_Data Data;
 	memset(&Data, 0, sizeof(Data));
 	memcpy(Data.SN, para->SN, 15);
-	printf("this come from TAG_HB_NEW: the sn is %s\n\n", para->SN);
 	
 	para->type = 1;
 	Heart_Log_Pack(para->SN, para->sIMSI, (HB_NEW_t *)(para->Buff), Data.Buff);
-	printf("the Buff is %s\n", Data.Buff);
 	Data.len = strlen(Data.Buff);
 	
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
@@ -514,10 +480,7 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
     memset(&Data, 0, length);//add by lk 20151020
 
     if(version >= 1601080936)
-    {
         length = 40;
-    }
-    printf("This come from %s SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u, ifTest is %d\n\n", __func__, para->SN, Vsim_Action_State, MCC, version, para->ifTest);
 
     switch(Vsim_Action_State)
     {
@@ -532,14 +495,13 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
                 memcpy(buff + len, &(para->ifTest), 4);
                 len = len + 4;
             }
-            printf("This come from TAG_CFMD:%s the Config is %s\n", para->SN, Data.config);
             break;
         default:
             break;
     }
 
 	if(para->minite_Remain <= 0)
-		Deal_Proc(para, para->MCC);
+		Deal_Proc(para, para->MCC, 1);
 
     memcpy(buff, &para->minite_Remain, 4);
     sendbytes = TT_Result_Pack1(buff, (TD_ComProtocl_SendFrame_t *)sBuff, len, TAG_CFMD, 0);
@@ -551,6 +513,7 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
 static int Coding_With_CFMD(Data_Spm *para)
 {
     char Version[12] = {'\0'};
+	char iccid[24] = {'\0'};
     Tell_Server_Bill Tell_Server_para;
 	Log_Data Data;
 	memset(&Data, 0, sizeof(Data));
@@ -561,6 +524,7 @@ static int Coding_With_CFMD(Data_Spm *para)
     memcpy(Version, Tell_Server_para.Version, 10);
     para->version = atol(Version);//modify by lk 20160111
 	memcpy(Data.SN, para->SN, 15);
+	memcpy(iccid, Tell_Server_para.ICCID, 20);
 
 	Coding_With_CFMD_Soeckt(para, para->version, Tell_Server_para.MCC, Tell_Server_para.Vsim_Action_State);//add by 20160914
 
@@ -580,12 +544,8 @@ static int Coding_With_CFMD(Data_Spm *para)
     }
 
 	Close_Socket_Fd(&para->socket_spm);
-	Local_Confirm_Pack(para->SN, para->sIMSI, Version, para->versionAPK, Tell_Server_para.ICCID, Data.Buff);
+	Local_Confirm_Pack(para->SN, para->sIMSI, Version, para->versionAPK, iccid, Data.Buff);
 	Data.len = strlen(Data.Buff);
-#if 0
-    printf("This come from TAG_CFMD SN:%s Vsim_Action_State is %d, the MCC is %d, the version is %u\n", 
-			para->SN, Tell_Server_para.Vsim_Action_State, Tell_Server_para.MCC, para->version);
-#endif
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
 
@@ -629,7 +589,7 @@ static int Coding_With_Deal(Data_Spm *para)
 
     Hex2String(Deal_Data.IMSI, para->sIMSI, LEN_OF_IMSI); //add by lk 20150902
 
-    Deal_Proc(para, Deal_Data.MCC);
+    Deal_Proc(para, Deal_Data.MCC, 0);
     memcpy(p_send->Frame_Data, &para->minite_Remain, p_send->FrameSizeL);
 	//p_send->Frame_Data[4] = para->lastStart;
 	p_send->Frame_Data[4] = 1;
@@ -656,21 +616,14 @@ static int Coding_With_VPN_RQST(Data_Spm *para)
 		p_send->Result = 0;
 		p_send->FrameSizeL = strlen(para->vpnc);
 		memcpy(p_send->Frame_Data, para->vpnc, p_send->FrameSizeL);
-		LogMsg(MSG_MONITOR, "The SN is %s, the vpnc is %s\n", para->SN, para->vpnc);
 	}
 	else
 	{
 		p_send->Result = 1;
 		p_send->FrameSizeL = 0;
-		LogMsg(MSG_MONITOR, "The SN is %s, find not vpn\n", para->SN);
 	}
 
 	write(para->fd1, (char *)SendBuf, p_send->FrameSizeL + 4);
-
-	if(ret)
-		VPN_Log(para->SN, para->vpnc, ret, code, 0);
-	else
-		VPN_Log(para->SN, "无", ret, 0, 0);
 
 	return 0;
 }
@@ -702,13 +655,9 @@ static int Coding_With_VPN_CMD(Data_Spm *para)
 		return 0;
 
 	if(SetVPN_Status(Data.Vpn, Data.SN, vpn, &code))	
-	{
 		p_send->Result = 1;
-	}
 	else
-	{
 		p_send->Result = 0;
-	}
 	
 	para->vpn_flag = 0;
 	VPN_Log(Data.SN, Data.Vpn, 1, 0, 1);
@@ -751,26 +700,20 @@ int Coding_With_LogOut(Data_Spm *para)
 	memcpy(&logout_t, para->Buff, sizeof(logout_t));
 	Hex2String(logout_t.Imsi, para->sIMSI, 9);
 
-	if((para->MCC == 460) && (para->vpn_flag > 0) && (strlen(para->vpnc) > 5))
-	{
-		para->vpn_flag = 0;
-   		SetVPN_Status(para->vpnc, logout_t.SN, NULL, NULL);	
-    	VPN_Log(logout_t.SN, para->vpnc, 1, 0, 1);
-	}
-
+#if 1
 	now = time(NULL);
 	if((now - para->outtime) <= 25)
-	{
 		return 0;
-	}
+#endif
+
 	para->outtime = now;
-	printf("This come from Coding_With_LogOut->SN is %s, sIMSI is %s, now is %ld, outtime is %ld\n", logout_t.SN, para->sIMSI, now, para->outtime);
 
 	memcpy(Data.SN, logout_t.SN, 15);
 	LOG_OUT_Log_Pack(logout_t.SN, para->sIMSI, Data.Buff);
 	Data.len = strlen(Data.Buff);
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
+	printf("This come from %s the Buff is %s\n", __func__, Data.Buff);
 
 	if(para->socket_spm > 0)
 	{
@@ -834,7 +777,6 @@ int Coding_With_Local_Socket(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned char *B
 	while(cnt > 255)                  
         cnt = cnt - 256; //add by lk 20150427
                                       
-	//printf("This come from TAG_LOCAL_STA the SN is %s, the cnt is %d, Battery is %d, after send shutdown_cmd, the para->node is %p\n", para->SN, cnt, Battery, para->node);
     SendBuf[0] = TAG_LOCAL_STA_RET;   
     SendBuf[3] = cnt;
 	write(fd, (char *)SendBuf, 4);
@@ -869,8 +811,6 @@ int Coding_With_APN(Data_Spm *para, int socket_fd)
 	unsigned char SendBuf[SendBufSize];
 	memset(SendBuf, 0, sizeof(SendBuf));//add by lk 20150908
 
-	printf("the APN is %s\n", para->node.APN);
-
 	TD_ComProtocl_SendFrame_t *p_send = (TD_ComProtocl_SendFrame_t *)SendBuf;
 	p_send->Cmd_TAG = TAG_GET_APN_INFO;
 	p_send->Result = 0;
@@ -891,7 +831,6 @@ int Coding_with_Selnet(Data_Spm *para, int socket_fd)
 	p_send->Result = 0;
 	p_send->FrameSizeL = strlen(para->node.Selnet);
 	memcpy(p_send->Frame_Data, para->node.Selnet, p_send->FrameSizeL);	
-	printf("this come from TAG_AUTONET: selnet  is %s\n\n", para->node.Selnet);
 	write(socket_fd, (char *)SendBuf, p_send->FrameSizeL + 4);
 
 	return 0;
@@ -913,9 +852,7 @@ int Coding_With_CMDTT(Data_Spm *para)
 
 	para->socket_spm = PickUp_Data_Spm(SendBuf, para, &sendbytes);
 	if(sendbytes > 1)
-	{
 		sendbytes = Data_Coding_Spm(para, SendBuf, sendbytes, RecvBuf);
-	}
 	else
 		sendbytes = 0;
 
@@ -939,13 +876,11 @@ int Coding_With_CMDTT(Data_Spm *para)
 			case 9:
 			case 10:
 			case 11:
-				printf("this come from -10\n");
 				sendbytes = TT_Result_Pack(NULL, (TD_ComProtocl_SendFrame_t *)RecvBuf, 2, TAG_RESULT_CMDTT, para->Buff[0]);
 				break;
 			default:
 				break;
 		}
-		printf("the result is %d, the RecvBuf[0] is %d\n", result, RecvBuf[0]);
 		write(para->fd1, (char *)RecvBuf, sendbytes);//modify by lk 20151020
 		TT_Log_Pack_Data(para->SN, (int)para->tt_cnt, para->sIMSI, RecvBuf, -result, para);//modify by lk 20150908
 	}
@@ -968,11 +903,6 @@ int Coding_With_CMDTT(Data_Spm *para)
 		write(para->fd1, (char *)RecvBuf, sendbytes);//modify by lk 20151020
 		TT_Log_Pack_Data(para->SN, (int)para->tt_cnt, para->sIMSI, RecvBuf, 0, para);//modify by lk 20150908
 	}
-
-#if 0
-    LogMsg(MSG_MONITOR, "This come from %s SN:%s -> %s!, the cnt is %d, the sendbytes is %d, the ip is %s, port is %d\n",  __func__, 
-			para->SN, para->sIMSI, (int)para->tt_cnt, sendbytes, para->node->IP, para->node->Port);
-#endif
 
 	return 0;
 }
@@ -1000,21 +930,14 @@ int Coding_With_SIMFILE_REQUEST(Data_Spm *para)
 
 	para->socket_spm = PickUp_Data_Spm(SendBuf, para, &sendbytes);
 	if(sendbytes > 1)
-	{
 		sendbytes = Data_Coding_Spm(para, SendBuf, sendbytes, RecvBuf);
-		printf("The TAG_SIMFILE_REQUEST: recv %d bytes from spm\n", sendbytes);
-	}
 	else
 		sendbytes = 0;
 
 	if(5 >= sendbytes)
-	{
 		Set_SimCards_Status(para->sIMSI);//add by lk 20150917
-	}
 	else if(sendbytes > 5)
-	{
 		write(para->fd1, (char *)RecvBuf, sendbytes);
-	}
 
 	return 0;
 }
@@ -1037,7 +960,6 @@ static void Coding_With_Date(Data_Spm *para, int CMD_TAG)
 {
 	switch(CMD_TAG)
     {
-		printf("This come from %s, the CMD_TAG is %02x\n", __func__, CMD_TAG);
         case TAG_ACCESS_AUTH:
         {
             Coding_With_ACCESS_AUTH(para);
@@ -1095,13 +1017,11 @@ static void Coding_With_Date(Data_Spm *para, int CMD_TAG)
         }
         case TAG_VPN_PROFILE_RQST:
         {
-			LogMsg(MSG_MONITOR, "This come TAG_VPN_PROFILE_RQST SN is %s\n", para->SN);
             Coding_With_VPN_RQST(para);
             break;
         }
         case TAG_VPN_RELEASE_CMD:
         {
-			LogMsg(MSG_MONITOR, "This come TAG_VPN_RELEASE_CMD SN is %s\n", para->SN);
             Coding_With_VPN_CMD(para);
             break;
         }
@@ -1147,7 +1067,7 @@ Client_Web_Manage：
 int Client_Web_Manage(int iclient_sock)
 {
 	unsigned char RecvBuf[RecvBufSize] = {'\0'};
-    int recvbytes = 0, fd1 = 0, fd2 = 0, fd = 0;
+    int recvbytes = 0, fd = 0;
     char sn[16] = {'\0'};
     char dst[256] = {'\0'};
     TD_ComProtocl_SendFrame_t para;
@@ -1163,20 +1083,20 @@ int Client_Web_Manage(int iclient_sock)
         return -1;
     }
 
-    printf("this come from TAG_WEB, the RecvBuf is %s\n\n", RecvBuf);
-    getValue(&para1, sn, (char *)RecvBuf, dst, &fd1, &fd2);//add by lk 20150525
+    getValue(&para1, sn, (char *)RecvBuf, dst);//add by lk 20150525
 	node = get_data_list_by_SN(sn);
 	if(node)
-	{
 		fd = node->fd1;
-	}
 
-#if 0
-    printf("the type is %d, the num is %d\n", para1.type, para1.num);
-    printf("the sn is %s ,the para.FrameSizeH = %d, para.Result = %d\n", sn, para.FrameSizeH, para.Result);
-	printf("the fd1 is %d, fd2 is %d, the fd is %d\n", fd1, fd2, fd);
-    printf("the dst is %s, the len of dst is %d\n", dst, (int)strlen(dst));
-#endif
+	if(fd > 0)
+	{
+		write(iclient_sock, "ok\n", 3);
+	}
+	else
+	{
+		write(iclient_sock, "faild\n", 6);
+		return -2;
+	}
 
     switch(para1.type)
     {
@@ -1185,76 +1105,82 @@ int Client_Web_Manage(int iclient_sock)
             para.Cmd_TAG = TAG_WEB_RET;
 			PickUp_Web_Data(&para, 2, &para1, fd);
 			break;
+
         case Web_Rom_Up:
-            para.Cmd_TAG = TAG_UPDATE_ROAM;
-			PickUp_Web_Data(&para, 2, &para1, fd);
-			break;
         case Web_Loc_Up:
-            para.Cmd_TAG = TAG_UPDATE_LOCAL;
-			PickUp_Web_Data(&para, 2, &para1, fd);
-			break;
         case Web_Rom_Up_Apk:
-            para.Cmd_TAG = TAG_UPDATE_ROAM_APK;
-			PickUp_Web_Data(&para, 2, &para1, fd);
-			break;
 		case Web_Loc_Up_Apk:
-            para.Cmd_TAG = TAG_UPDATE_LOCAL_APK;
-			PickUp_Web_Data(&para, 2, &para1, fd);
-			break;
 		case Web_Set_Up_Apk://add by lk 20151105
-            para.Cmd_TAG = TAG_UPDATE_LOCAL_SAPK;
-            PickUp_Web_Data(&para, 2, &para1, fd);
-            break;
+		case Web_Roam_Up_Papk:
         case Web_MIP_Up:
-            para.Cmd_TAG = TAG_UPDATE_MIP;
+		case 110:
+		case 111:
+		case 112:
+		case 113:
+		case 114:
+		case 115:
+		case 116:
+		case 117:
+		case 118:
+		case 119:
+		case 120:
+		case 121:
+		case 122:
+		case 123:
+		case 218:
+		case 219:
+		case 220:
+		case 221:
+		case 222:
+		case 223:
 			PickUp_Web_Data(&para, 2, &para1, fd);
 			break;
+
         case Web_iMsg:
             para.Cmd_TAG = TAG_MSG;
 			PickUp_Web_Data(&para, strlen(dst), dst, fd);
             break;
+
         case Web_SWAP_VUSIM://add by lk 20150531
-            printf("this come from TAG_SWAP_VUSIM, the fd1 is %d\n", fd1);
             para.Cmd_TAG = TAG_SWAP_VUSIM;
 			PickUp_Web_Data(&para, 0, NULL, fd);
-
-////////////////////////////add by 20160309/////////////////////////
-			if(node)
-			{
-				node->Result = OutOfService;
-			}
-			printf("%s-SN:%s node is %p\n\n", __func__, sn, node);
-////////////////////////////////end///////////////////////////////
-
             break;
+
         case Web_SPEED:
             para.Cmd_TAG = TAG_LIMIT_SPEED_CMD;
 			PickUp_Web_Data(&para, strlen(dst), dst, fd);
 			break;
+
 		case Web_APN:
             para.Cmd_TAG = TAG_APN;
 			PickUp_Web_Data(&para, strlen(dst), dst, fd);
             break;
+
         case Web_VPN:
             para.Cmd_TAG = TAG_VPN_CMD;
 			PickUp_Web_Data(&para, strlen(dst), dst, fd);
             break;
+
         case Web_AUTONET:
             para.Cmd_TAG = TAG_AUTONET;
 			PickUp_Web_Data(&para, strlen(dst), dst, fd);
             break;
+
         case Web_Reinsert_Sim: //ywy add 150811
             para.Cmd_TAG = TAG_REINSERT_VSIM_CMD;
 			PickUp_Web_Data(&para, 0, NULL, fd);
             break;
+
         case Web_Remote_shutdown: //ywy add 150811
             para.Cmd_TAG = TAG_SHUTDOWN_CMD;
 			PickUp_Web_Data(&para, 0, NULL, fd);
             break;
+
 		case Web_Wifi_PWD:
             para.Cmd_TAG = TAG_REMOTE_RESET_PWD_CMD;
 			PickUp_Web_Data(&para, 0, NULL, fd);
 			break;
+
         default:
             break;
     }
@@ -1288,7 +1214,6 @@ void *Create_Epoll_Pthread(void *arg)
 
 	memset(&ev, 0, sizeof(struct epoll_event));//add by 20160423
     socklen_t socklen = sizeof(struct sockaddr_in);
-    char buf[MAXLINE];
 
     kdpfd = epoll_create(MAXEPOLLSIZE);
     ev.events = EPOLLIN;
@@ -1326,8 +1251,7 @@ void *Create_Epoll_Pthread(void *arg)
                     perror("accept error");
                     continue;
 				}
-				sprintf(buf, "accept form %s:%d\n", inet_ntoa(cliaddr.sin_addr), cliaddr.sin_port);
-                printf("%s", buf);
+                printf("accept form %s:%d\n", inet_ntoa(cliaddr.sin_addr), cliaddr.sin_port);
 
                 if (curfds >= MAXEPOLLSIZE)
                 {
@@ -1337,9 +1261,7 @@ void *Create_Epoll_Pthread(void *arg)
                 }
 
 				if (setnonblocking(connfd) < 0) 
-				{
 					perror("setnonblocking error");
-				}
 
                 ev.events = EPOLLIN | EPOLLET;
                 ev.data.fd = connfd;
@@ -1348,6 +1270,7 @@ void *Create_Epoll_Pthread(void *arg)
                     fprintf(stderr, "add socket '%d' to epoll failed: %s\n", connfd, strerror(errno));
                     continue;
                 }
+
                 curfds++;
                 continue;
             }
@@ -1445,8 +1368,6 @@ static int Coding_With_CMD_Data_Pack(TD_ComProtocl_RecvFrame_t *p_Recv, unsigned
 
 static void Coding_With_Out_Sql(tmd_pthread *para, int *CMD_TAG, int fd)
 {
-	printf("%s->CMD_TAG is %02x, the node is %p\n", __func__, *CMD_TAG, para->node);
-
 	if(para->node == NULL)
     {
 		para->node = Get_Node_By_SN(para->SN);
@@ -1603,7 +1524,6 @@ void socket_read_cb(int fd, short events, void *arg)
     memset(&Data, 0, sizeof(Data));
 
 	int CMD_TAG = Coding_With_Recv_Data(fd, para, TempBuf);	
-	printf("the CMD_TAG is %02x, the SN is %s\n", CMD_TAG, para->SN);
 	if(CMD_TAG == -1)
 	{
 		Destory_Node(para, fd);

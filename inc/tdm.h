@@ -32,7 +32,8 @@
 #define Web_Port					10160
 #define Web_IP						"218.17.107.11"
 #define Web_IP1						"113.88.197.13"
-#define POOL_NUM					200
+#define Log_IP						"112.74.141.241"
+#define POOL_NUM					100
 
 /*
 the Macro definition for access authenticate of terminal device
@@ -79,6 +80,7 @@ the Macro definition for access authenticate of terminal device
 #define Web_VPN             		0x0F//150812
 #define Web_Wifi_PWD				0x10 //20150901
 #define Web_Set_Up_Apk              0x11 //20151105
+#define Web_Roam_Up_Papk			0x12
 
 #define Web_NUM						0x1C
 #define Web_STR             		0x2C
@@ -122,6 +124,19 @@ typedef enum{
 
 typedef struct
 {
+    int             	MCC;
+    int             	MNC;
+    int             	CID;
+    int             	LAC;
+    int             	FirmwareVer;
+    int             	MIP_ListVer;
+    char            	DeviceSN[22];
+    unsigned char   	flag;
+    unsigned char   	LastIMSI[9];
+}AccessAuth_Def;
+
+typedef struct
+{
 	unsigned short		MCC;
 	unsigned char		MNC;
 	unsigned char		Sig_Strength;
@@ -129,6 +144,42 @@ typedef struct
 	unsigned int		CID;
 	unsigned int		Local_DataUsed;
 }HB_NEW_t;//add by lk 20150511
+
+typedef struct HeartBeatPack
+{
+    unsigned char 		DealID[12];
+    unsigned char 		WiFiState;
+    unsigned char 		_3g_sta;
+    unsigned char 		_3g_strenth;
+    unsigned char 		Vusim_Active_Result;
+    int 				data_day_used;
+}HeartBeatPack_t;
+
+typedef struct Vsim_UpLoad_Flow_t
+{
+    unsigned char   	Vsim_Imsi[LEN_OF_IMSI];
+    unsigned char   	_3g_status;
+    unsigned char   	_3g_strength;
+    unsigned char   	Wifi_State;//0:close 1:open 2 limit speed
+    unsigned int    	Upload_Flow_Id;
+    unsigned int    	Up_Flow_All;
+    unsigned int    	Down_Flow_All;
+    unsigned int    	Day_Used;
+    unsigned char   	Wifi_count;//wifi 连接用户数
+    unsigned char   	Battery;//电量
+    unsigned int    	Mcc;
+    unsigned int    	Mnc;
+    unsigned int    	Lac;
+    unsigned int    	Cid;
+    unsigned int    	Roam_Up_Flow_All;//add by lk 20150505
+    unsigned int    	Roam_Down_Flow_All;//add by lk 20150505
+    unsigned int    	Roam_Day_Used;//add by lk 20150505
+    unsigned int    	Roam_3g_Strength;
+    unsigned int    	remain_min;
+    unsigned int    	Flow_All; //add by lk 20150825
+    unsigned int    	Network_Type;
+    unsigned int    	Last_Cyc_Used;
+}Vsim_UpLoad_Flow; //add by lk 20150313
 
 typedef struct 
 {
@@ -138,6 +189,32 @@ typedef struct
 	unsigned char 		BBuf[FileTransferBlockSize];
 	unsigned char 		CS;
 }FileBlockInfo_Def;
+
+typedef struct Tell_Server_Bill_t
+{
+    char            	SN[16];
+    unsigned char   	Vsim_Action_State;
+    unsigned char   	Imsi[9];
+    char            	Version[10];
+    int             	MCC;
+    int             	minitues;
+    int             	ApkVersion;
+    char            	ICCID[20];//add by 20160303
+}Tell_Server_Bill; //add by lk 20150313
+
+typedef struct Device_Logout_t
+{
+    char 				SN[16];
+    unsigned char 		Imsi[9];
+}Device_Logout; //add by lk 20150611
+
+typedef struct
+{
+    unsigned char 		IMSI[9];
+    char 				SN[15];
+    unsigned int 		FirmwareVer;
+}heartBeatWithData_t;
+
 
 typedef struct
 {
@@ -449,7 +526,7 @@ extern void ConnectToMysqlDeInit(void);
 extern int Set_SimCards_Status(char *sIMSI);
 extern int Set_Dada_IP(Data_IP *para, char *ip);
 extern int Get_Config_By_MCC(int code, char *buff, Data_Spm *para);
-extern int Deal_Proc(Data_Spm *para, int MCC);
+extern int Deal_Proc(Data_Spm *para, int MCC, int Type);
 extern int GetVPN_From_SimPool(Data_Spm *para, int *code);
 extern int SetVPN_Status(char *vpn, char *SN, char *dst, int *code);
 extern int VPN_Log(char *SN, char *vpn, int Result, int code, int type);

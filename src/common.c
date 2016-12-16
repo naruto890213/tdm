@@ -13,9 +13,8 @@
 Mysql_Fd Data_Fd;
 char locale_ip[16]; //add by lk 20140305
 
-char LIAN_IP[] = "218.17.107.11:11111,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";
+char Test_IP[] = "218.17.107.11:11111,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";
 char Master_IP[] = "218.17.107.11:11113,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";
-char Test_IP[] = "58.250.57.153:11115,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";
 
 void Print_Data_Spm(Data_Spm Src, char *Buff)
 {
@@ -79,7 +78,7 @@ void ConnectToMysqlInit(void)
 
 	for(i = 0; i < SOCKET_NUM; i++)
 	{
-		para->Logs_Fd[i] = ConnectToServerTimeOut(ServerIp, ServerPort, Java_TIMEOUT);
+		para->Logs_Fd[i] = ConnectToServerTimeOut(Log_IP, ServerPort, Java_TIMEOUT);
 		pthread_mutex_init(&para->Logs_mutex[i], NULL);
 	}
 
@@ -93,7 +92,7 @@ static int ReConectJavaServer(int *Fd)
 {
 	if(*Fd <= 0)
 	{
-		*Fd = ConnectToServerTimeOut(ServerIp, ServerPort, 3);
+		*Fd = ConnectToServerTimeOut(Log_IP, ServerPort, 3);
 		if(*Fd <= 0)
 		{
             LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
@@ -293,7 +292,7 @@ static int Send_Sim_Data(char *Src, char *Dst, int len)
 	int fd = 0;
 	int ret = -1;
 
-	fd = ConnectToServerTimeOut(ServerIp, ServerPort, 2);
+	fd = ConnectToServerTimeOut(Log_IP, ServerPort, 2);
 	if(fd <= 0)
 	{
         LogMsg(MSG_ERROR, "This come from %s connect err is %s\n", __func__, strerror(errno));
@@ -335,13 +334,13 @@ lk:
     ret = send(*Fd, Src, len, 0);
     if(ret <= 0)
     {
-        LogMsg(MSG_ERROR, "%s send faild, the errno is %d, err is %s, the Src is %s\n", __func__, errno, strerror(errno), Src);
 		Close_Socket_Fd(Fd);
 		if(0 == count)
 		{
 			count = 1;
 			goto lk;
 		}
+        LogMsg(MSG_ERROR, "%s send faild, the errno is %d, err is %s, the Src is %s\n", __func__, errno, strerror(errno), Src);
 		goto ret;
     }
 
@@ -386,7 +385,7 @@ void *work_func(void *arg)
 int VPN_Log(char *SN, char *vpn, int Result, int code, int type)
 {
     char buff[256] = {'\0'};
-    sprintf(buff, "45445445,2001,7|{'SN':'%s','type':'07','TTContext':'%s','ContextLen':%d,'gSta':%d,'battery':%d,'lastTime':%ld}", 
+    sprintf(buff, "45445445,2001,7|{'SN':'%s','type':'07','TTContext':'%s','ContextLen':'%d','gSta':'%d','battery':'%d','lastTime':'%ld'}", 
 					SN, vpn, type, code, Result, time(NULL));
 
     int num = atoll(SN) % SOCKET_NUM;
@@ -498,7 +497,7 @@ int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int ver
 
 int Heart_Log_Pack(char *sn, char *imsi, HB_NEW_t *Src, char *Dst)
 {
-	sprintf(Dst, "45445445,2002,6|{'SN':'%s','location':'%d.%d.%d.%d','dayUsedFlow':'%d','roamGStrenth':%d,'IMSI':'%s','lastTime':'%ld'}&&", \
+	sprintf(Dst, "45445445,2002,6|{'SN':'%s','location':'%d.%d.%d.%d','dayUsedFlow':'%d','roamGStrenth':'%d','IMSI':'%s','lastTime':'%ld'}&&", \
 			sn, Src->MCC, Src->MNC, Src->LAC, Src->CID, Src->Local_DataUsed, Src->Sig_Strength, imsi, time(NULL));
 
 	return 0;
@@ -531,7 +530,6 @@ int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len
 	sprintf(Data.Buff, "45445445,2005,7|{'SN':'%s','TTCnt':'%d','IMSI':'%s','TTContext':'%s','ContextLen':'%d','lastTime':'%ld'}&&", 
 										sn, cnt, imsi, TT_buf, len, time(NULL));
 	Data.len = strlen(Data.Buff);
-	printf("This come from %s, the Buff is %s\n", __func__, Data.Buff);
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
 
@@ -543,7 +541,7 @@ int LOG_OUT_Log_Pack(char *sn, char *sIMSI, char *Dst)
 	if(!strcmp(sIMSI, "000000000000000000"))
 		sIMSI = NULL;
 
-	sprintf(Dst, "45445445,2001,4|{'SN':'%s','type':'06','IMSI':'%s','lastTime':%ld}&&", sn, sIMSI, time(NULL));
+	sprintf(Dst, "45445445,2006,3|{'SN':'%s','IMSI':'%s','lastTime':'%ld'}&&", sn, sIMSI, time(NULL));
 
 	return 0;
 }
@@ -573,6 +571,7 @@ int Set_SimCards_Status(char *sIMSI)
 		return 0;
 
 	sprintf(buff, "45445,1005,2|{'IMSI':'%s','serverIp':''}&&", sIMSI);
+	LogMsg(MSG_ERROR, "%s\n", buff);
 
 	return Send_Sim_Data(buff, Dst, strlen(buff));
 }
@@ -581,8 +580,7 @@ static int Login_Log_Pack_Data(Data_Spm *para, char *Dst, AccessAuth_Def *p, int
 {
 	sprintf(Dst, "333,1001,12|{'SN':'%s','nowtime':'%ld','MCC':'%d','MNC':'%d','LAC':'%d','CID':'%d','Data':'%d',\
 'firmWareVer':'%d','firmWareAPKVer':'%d','battery':'%d','minsRemaining':'%d','tdmIpPort':'%s:%d','serverCode':'0'}&&", 
-	para->SN, time(NULL), para->MCC, p->MNC, p->LAC, p->CID, Data, p->FirmwareVer, para->versionAPK, p->DeviceSN[21], para->take_time, Web_IP1, Web_Port);
-	printf("Dst is %s\n", Dst);
+	para->SN, time(NULL), para->MCC, p->MNC, p->LAC, p->CID, Data, p->FirmwareVer, para->versionAPK, p->DeviceSN[21], para->take_time, Web_IP, Web_Port);
 
 	return (int)strlen(Dst);
 }
@@ -616,7 +614,7 @@ static int Get_Key_Value_Int(char *Src, char *Dst)
 	char Key[64] = {'\0'};
 	int Ret = 0;
 	
-	if(!Get_Key_Value(Src, Dst, Key))
+	if(!Get_Key_Value(Src, Dst, Key, sizeof(Key)))
 		Ret = atoi(Key);
 
 	return Ret;
@@ -648,11 +646,9 @@ static int Get_Key_Value_Factory(char *Src, Data_Spm *para)
 
 	if(1 == para->factoryFlag)
 	{
-		Get_Key_Value(Src, "serverInfo", para->ServerInfo);	
+		Get_Key_Value(Src, "serverInfo", para->ServerInfo, sizeof(para->ServerInfo));	
 		if(strlen(para->ServerInfo) < 10)
 			para->factoryFlag = 0;
-
-		printf("the serverInfo is %s\n", para->ServerInfo);
 	}
 
 	return para->factoryFlag;
@@ -662,11 +658,8 @@ static int Get_Key_Value_IMEI(char *Src, char *Dst, long long *IMEI)
 {
 	char Key[64] = {'\0'};
 
-	if(!Get_Key_Value(Src, "IMEI", Key))
-    {
+	if(!Get_Key_Value(Src, "IMEI", Key, sizeof(Key)))
 		*IMEI = atoll(Key);
-		printf("the IMEI is %s, the IMEI is %lld\n", Key, *IMEI);
-    }
 
 	return 0;
 }
@@ -677,18 +670,13 @@ static void Get_Key_Value_IPAndPort(char *Src, char *Dst, void *para, void *para
 	char *outer_ptr = NULL;
 	char *p = NULL;
 
-	if(!Get_Key_Value(Src, Dst, Key))
+	if(!Get_Key_Value(Src, Dst, Key, sizeof(Key)))
 	{
-		printf("the %s is %s\n", Dst, Key);
 		if((p = strtok_r(Key, ":", &outer_ptr)) != NULL)
-        {
 			memcpy(para, p, strlen(p));
-        }
 
         if((p = strtok_r(NULL, ":", &outer_ptr)) != NULL)
-        {
 			*(int *)para1 = atoi(p);
-        }
 	}
 }
 
@@ -698,18 +686,13 @@ static void Get_Key_Value_Str_Type(char *Src, char *Dst, void *para, void *para1
     char *outer_ptr = NULL;
     char *p = NULL;
 
-    if(!Get_Key_Value(Src, Dst, Key))
+    if(!Get_Key_Value(Src, Dst, Key, sizeof(Key)))
     {
-        printf("the %s is %s\n", Dst, Key);
         if((p = strtok_r(Key, "-", &outer_ptr)) != NULL)
-        {
-        	*(int *)para = atoi(p);
-        }
+        	*(unsigned char *)para = atoi(p);
 
         if((p = strtok_r(NULL, "-", &outer_ptr)) != NULL)
-        {
-            *(int *)para1 = atoi(p);
-        }
+            *(unsigned char *)para1 = atoi(p);
     }
 }
 
@@ -718,10 +701,9 @@ static int Get_Key_Value_Str(char *Src, char *Dst, char *para, int len)
 	char Key[64] = {'\0'};
 	int	len1 = 0;
 	
-	if(!Get_Key_Value(Src, Dst, Key))
+	if(!Get_Key_Value(Src, Dst, Key, sizeof(Key)))
 	{
 		len1 = (int)strlen(Key);	
-		printf("the %s is %s, the strlen is %d\n", Dst, Key, len1);
 		if(len1 > len)
 		{
 			memcpy(para, Key, len1);
@@ -738,16 +720,18 @@ static int Get_Key_Value_Vusim_Active_Flag(char *Src, imsi_info *para)
 {
 	char Key[64] = {'\0'};	
 
-	if(!Get_Key_Value(Src, "SIMIfActivated", Key))
+	if(!Get_Key_Value(Src, "SIMIfActivated", Key, sizeof(Key)))
     {
         printf("the SIMIfActivated is %s, the strlen of Key is %d\n", Key, (int)strlen(Key));
         if(!memcmp(Key, "否", 2))
             para->Vusim_Active_Flag = 1;
+		else
+            para->Vusim_Active_Flag = 0;
     }
 
     if(1 == para->Vusim_Active_Flag)
     {
-        if(!Get_Key_Value(Src, "Vusim_Active_Num", Key))
+        if(!Get_Key_Value(Src, "Vusim_Active_Num", Key, sizeof(Key)))
         {
             if((int)strlen(Key) > 9)
                 memcpy(para->Vusim_Active_Num, Key, strlen(Key));
@@ -765,9 +749,8 @@ static int Get_Key_Value_IMSI(char *Src, char *Dst, Data_Spm *para)
 {
 	char Key[64] = {'\0'};
 
-	if(!Get_Key_Value(Src, "IMSI", Key))
+	if(!Get_Key_Value(Src, "IMSI", Key, sizeof(Key)))
 	{
-		LogMsg(MSG_MONITOR, "%s\n", Key);
 		memcpy(para->sIMSI, Key, strlen(Key));
 		str2Hex(Key, para->IMSI, strlen(Key));
 	}
@@ -866,7 +849,7 @@ static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
 	AccessAuth_Def *p = (AccessAuth_Def *)para1;
 	Close_Socket_Fd(&para->socket_spm);
 	int cnt = 0;
-    char buff[360] = {'\0'};
+    char buff[512] = {'\0'};
 	char Dst[1024] = {'\0'};
 
 	if(p->MCC == 0)
@@ -877,8 +860,6 @@ static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
 
 	switch(para->MCC)
 	{
-		case 454:
-		case 455:
 		case 460:
         	memcpy(para->ServerInfo, Test_IP, strlen(Test_IP));
 			break;
@@ -898,22 +879,28 @@ static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
 	return cnt;
 }
 
-int Deal_Proc(Data_Spm *para, int MCC)
+int Deal_Proc(Data_Spm *para, int MCC, int Type)
 {
-	char buff[128] = {'\0'};
-	char Dst[256] = {'\0'};
+	char buff[356] = {'\0'};
+	char Dst[1024] = {'\0'};
 	if(!MCC)
 		MCC = 460;
 
-	sprintf(buff, "45445445,3003,3|{'SN':'%s','MCC':'%d','nowtime':'%ld'}&&", para->SN, MCC, time(NULL));
+	if(Type)
+        sprintf(buff, "45445445,3003,3|{'SN':'%s','MCC':'%d','nowtime':'%ld'}&&", para->SN, MCC, time(NULL));
+    else
+        sprintf(buff, "333,1001,12|{'SN':'%s','nowtime':'%ld','MCC':'%d','MNC':'0','LAC':'0','CID':'0','Data':'0','firmWareVer':'0',\
+'firmWareAPKVer':'0','battery':'100','minsRemaining':'0','tdmIpPort':'%s:%d','serverCode':'0'}&&", para->SN, time(NULL), MCC, Web_IP, Web_Port);
+
 	int cnt = Get_Deal_From_SimPool(para, buff, Dst);
+	LogMsg(MSG_MONITOR, "This come from %s, Dst is %s\n", __func__, Dst);
 	if(!cnt)
 	{
 		para->lastStart = Get_Key_Value_Int(Dst, "lastStart");
 		para->minite_Remain = Get_Key_Value_Int(Dst, "minsRemaining");
 	}
 	else
-		para->minite_Remain = 2;
+		para->minite_Remain = 0;
 
     return 0;
 }
@@ -923,11 +910,9 @@ int SIM_Allocate_Proc(Data_Spm *Src)
 	AccessAuth_Def *p_Src = (AccessAuth_Def *)(Src->Buff);
 	unsigned short data_size = 0;//add by lk 20151103
 
-	printf("the SN is %s, the vir_flag is %d\n", p_Src->DeviceSN, Src->vir_flag);
 	memcpy(&Src->take_time, p_Src->DeviceSN + 19, 2);
 	memcpy(&data_size, p_Src->DeviceSN + 16, 2);//add by lk 20151103
 	memcpy(&Src->versionAPK, p_Src->LastIMSI, 4);
 	
-
 	return Get_Deal_From_Remote(Src, p_Src, data_size);
 }
