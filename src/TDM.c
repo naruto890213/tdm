@@ -482,6 +482,12 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
     if(version >= 1601080936)
         length = 40;
 
+	Deal_Proc(para, para->MCC, 1);//modify by 20161220
+    memcpy(buff, &para->minite_Remain, 4);
+
+	if(0 == para->minite_Remain)
+		goto err;
+
     switch(Vsim_Action_State)
     {
         case 0:
@@ -500,10 +506,7 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
             break;
     }
 
-	if(para->minite_Remain <= 0)
-		Deal_Proc(para, para->MCC, 1);
-
-    memcpy(buff, &para->minite_Remain, 4);
+err:
     sendbytes = TT_Result_Pack1(buff, (TD_ComProtocl_SendFrame_t *)sBuff, len, TAG_CFMD, 0);
     write(para->fd1, (char *)sBuff, sendbytes);
 
@@ -1133,6 +1136,7 @@ int Client_Web_Manage(int iclient_sock)
 		case 221:
 		case 222:
 		case 223:
+			para.Cmd_TAG = TAG_UPDATE_ROAM;
 			PickUp_Web_Data(&para, 2, &para1, fd);
 			break;
 

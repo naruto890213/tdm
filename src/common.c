@@ -385,7 +385,7 @@ void *work_func(void *arg)
 int VPN_Log(char *SN, char *vpn, int Result, int code, int type)
 {
     char buff[256] = {'\0'};
-    sprintf(buff, "45445445,2001,7|{'SN':'%s','type':'07','TTContext':'%s','ContextLen':'%d','gSta':'%d','battery':'%d','lastTime':'%ld'}", 
+    sprintf(buff, "45445445,2001,7|{'SN':'%s','type':'07','TTContext':'%s','ContextLen':'%d','gSta':'%d','battery':'%d','lastTime':'%ld'}&&", 
 					SN, vpn, type, code, Result, time(NULL));
 
     int num = atoll(SN) % SOCKET_NUM;
@@ -814,12 +814,14 @@ static int Get_SpeedStr_From_Socket(Data_Spm *para)
 	char buff[128] = {'\0'};	
 	char Dst[256] = {'\0'};
 
-	sprintf(buff, "45445445,3002,2|{'SN':'%s','MCC':'%d'}", para->SN, para->MCC);
+	sprintf(buff, "45445445,3002,2|{'SN':'%s','MCC':'%d'}&&", para->SN, para->MCC);
 
 	cnt = Get_Deal_From_SimPool_socket(buff, Dst, strlen(buff));
 
 	if(!cnt)
 		Get_Key_Value_Str(Dst, "speedStr", para->speedStr, 4);
+
+	LogMsg(MSG_MONITOR, "the SN is %s speedStr is %s, the Dst is %s\n", para->SN, para->speedStr, Dst);
 
 	return cnt;
 }
@@ -829,7 +831,7 @@ int Set_Deal_From_SimPool(char *sn, char *imsi, int userCountry, int factoryFlag
 	char buff[128] = {'\0'};
 	char Dst[256] = {'\0'};
 
-	sprintf(buff, "45445445,3001,2|{'SN':'%s','MCC':'%d'}", sn, userCountry);
+	sprintf(buff, "45445445,3001,2|{'SN':'%s','MCC':'%d'}&&", sn, userCountry);
 	
 	return Get_Deal_From_SimPool_socket(buff, Dst, strlen(buff));
 }
@@ -883,8 +885,11 @@ int Deal_Proc(Data_Spm *para, int MCC, int Type)
 {
 	char buff[356] = {'\0'};
 	char Dst[1024] = {'\0'};
+	int cnt = -1;
 	if(!MCC)
 		MCC = 460;
+
+	para->minite_Remain = 0;
 
 	if(Type)
         sprintf(buff, "45445445,3003,3|{'SN':'%s','MCC':'%d','nowtime':'%ld'}&&", para->SN, MCC, time(NULL));
@@ -892,15 +897,22 @@ int Deal_Proc(Data_Spm *para, int MCC, int Type)
         sprintf(buff, "333,1001,12|{'SN':'%s','nowtime':'%ld','MCC':'%d','MNC':'0','LAC':'0','CID':'0','Data':'0','firmWareVer':'0',\
 'firmWareAPKVer':'0','battery':'100','minsRemaining':'0','tdmIpPort':'%s:%d','serverCode':'0'}&&", para->SN, time(NULL), MCC, Web_IP, Web_Port);
 
-	int cnt = Get_Deal_From_SimPool(para, buff, Dst);
-	LogMsg(MSG_MONITOR, "This come from %s, Dst is %s\n", __func__, Dst);
+	cnt = Get_Deal_From_SimPool(para, buff, Dst);
 	if(!cnt)
 	{
 		para->lastStart = Get_Key_Value_Int(Dst, "lastStart");
 		para->minite_Remain = Get_Key_Value_Int(Dst, "minsRemaining");
+
+		if((0 == Type) && (1 == para->lastStart))//TAG_DEAL
+			para->minite_Remain = 1440;
 	}
-	else
-		para->minite_Remain = 0;
+	else if(cnt != OutOfService)
+	{
+		if(Type)
+			para->minite_Remain = -1;//TAG_CFMD
+		else
+			para->minite_Remain = 1;//TAG_DEAL
+	}
 
     return 0;
 }
