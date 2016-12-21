@@ -43,7 +43,7 @@ Buff	inc/tdm.h	/^	unsigned char 		Buff[256];$/;"	m	struct:__Data_Spm
 Buff	inc/tdm.h	/^	unsigned char 		Buff[256];$/;"	m	struct:__Node_Data_t
 Buff	inc/threadpool.h	/^	char	Buff[1024];$/;"	m	struct:job
 CC	Makefile	/^CC = gcc$/;"	m
-CELL_STATION_BUFLEN	inc/tdm.h	91;"	d
+CELL_STATION_BUFLEN	inc/tdm.h	92;"	d
 CFLAGS	Makefile	/^CFLAGS = -g -Wall -I${DIR_INC_CUR} -I${DIR_INC_PUB} -I${DIR_INC}$/;"	m
 CID	inc/tdm.h	/^	unsigned int		CID;$/;"	m	struct:__anon4
 CID	inc/tdm.h	/^    int             	CID;$/;"	m	struct:__anon3
@@ -196,7 +196,7 @@ LowPower	inc/tdm.h	/^	LowPower,\/\/7 add by 20160314$/;"	e	enum:__anon1
 MASK_NUM	inc/tdm.h	10;"	d
 MAXEPOLLSIZE	inc/tdm.h	12;"	d
 MAX_CON_NUM	inc/tdm.h	13;"	d
-MAX_LINE	src/TDM.c	1326;"	d	file:
+MAX_LINE	src/TDM.c	1301;"	d	file:
 MAX_SN_NUM	inc/tdm.h	25;"	d
 MCC	inc/tdm.h	/^	unsigned short		MCC;	$/;"	m	struct:__Data_Spm
 MCC	inc/tdm.h	/^	unsigned short		MCC;$/;"	m	struct:__anon4
@@ -315,9 +315,9 @@ Tell_Server_Bill	inc/tdm.h	/^}Tell_Server_Bill; \/\/add by lk 20150313$/;"	t	typ
 Tell_Server_Bill_t	inc/tdm.h	/^typedef struct Tell_Server_Bill_t$/;"	s
 Test_IP	src/common.c	/^char Test_IP[] = "218.17.107.11:11111,120.24.221.252:8070,120.24.221.252:8070,DOMAINNAME:test.easy2go.cn";$/;"	v
 Total	inc/tdm.h	/^	unsigned char 		Total;$/;"	m	struct:__anon7
-UnConnect	inc/tdm.h	88;"	d
-UnRede	inc/tdm.h	90;"	d
-UnWrite	inc/tdm.h	89;"	d
+UnConnect	inc/tdm.h	89;"	d
+UnRede	inc/tdm.h	91;"	d
+UnWrite	inc/tdm.h	90;"	d
 UnrecognizedDevSN	inc/tdm.h	/^	UnrecognizedDevSN = 1,$/;"	e	enum:__anon1
 Unused	inc/tdm.h	/^	unsigned char		Unused[2];$/;"	m	struct:__result_sock_t
 Up_Flow_All	inc/tdm.h	/^    unsigned int    	Up_Flow_All;$/;"	m	struct:Vsim_UpLoad_Flow_t
@@ -348,16 +348,17 @@ Web_Loc_Log	inc/tdm.h	67;"	d
 Web_Loc_Up	inc/tdm.h	69;"	d
 Web_Loc_Up_Apk	inc/tdm.h	71;"	d
 Web_MIP_Up	inc/tdm.h	72;"	d
-Web_NUM	inc/tdm.h	84;"	d
+Web_NUM	inc/tdm.h	85;"	d
 Web_Port	inc/tdm.h	32;"	d
-Web_RET	inc/tdm.h	86;"	d
+Web_RET	inc/tdm.h	87;"	d
 Web_Reinsert_Sim	inc/tdm.h	78;"	d
 Web_Remote_shutdown	inc/tdm.h	79;"	d
+Web_Roam_Up_Papk	inc/tdm.h	83;"	d
 Web_Rom_Log	inc/tdm.h	66;"	d
 Web_Rom_Up	inc/tdm.h	68;"	d
 Web_Rom_Up_Apk	inc/tdm.h	70;"	d
 Web_SPEED	inc/tdm.h	75;"	d
-Web_STR	inc/tdm.h	85;"	d
+Web_STR	inc/tdm.h	86;"	d
 Web_SWAP_VUSIM	inc/tdm.h	74;"	d
 Web_Set_Up_Apk	inc/tdm.h	82;"	d
 Web_VPN	inc/tdm.h	80;"	d
@@ -422,7 +423,7 @@ free_imsi	inc/tdm.h	/^}free_imsi;\/\/add by 20160123$/;"	t	typeref:struct:free_i
 free_imsi_t	inc/tdm.h	/^typedef struct free_imsi_t$/;"	s
 free_tmd_pthread	src/TDM.c	/^void free_tmd_pthread(tmd_pthread *para)$/;"	f
 getNetworkType	src/common.c	/^static int getNetworkType(int networkType, char *Dst)$/;"	f	file:
-getValue	src/TDM.c	/^static void getValue(Web_Data *para, char *sn, char *src, char *dst, int *fd1, int *fd2)$/;"	f	file:
+getValue	src/TDM.c	/^static void getValue(Web_Data *para, char *sn, char *src, char *dst)$/;"	f	file:
 get_data_list_by_SN	src/common.c	/^Data_Spm *get_data_list_by_SN(char *SN)$/;"	f
 head	inc/tdm.h	/^	struct list_head 	head;\/\/add by 20160123$/;"	m	struct:_Mysql_Fd	typeref:struct:_Mysql_Fd::list_head
 head	inc/threadpool.h	/^    struct job *head;                 		\/\/指向job的头指针$/;"	m	struct:threadpool	typeref:struct:threadpool::job

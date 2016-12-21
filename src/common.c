@@ -571,7 +571,7 @@ int Set_SimCards_Status(char *sIMSI)
 		return 0;
 
 	sprintf(buff, "45445,1005,2|{'IMSI':'%s','serverIp':''}&&", sIMSI);
-	LogMsg(MSG_ERROR, "%s\n", buff);
+	//LogMsg(MSG_ERROR, "%s\n", buff);
 
 	return Send_Sim_Data(buff, Dst, strlen(buff));
 }
