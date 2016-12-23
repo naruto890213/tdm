@@ -14,12 +14,11 @@
 #	-$(RM) $(TARGET)
 #	-$(RM) $(OBJSDIR)/*.o
 DIR_INC_CUR = ./
-DIR_INC_PUB = ../public 
 DIR_INC =  ./inc
 DIR_SRC = ./src
 DIR_OBJ = ./obj
-DIR_BIN = /home/run/tdm
-DIR_LIB_PUB     = ../public 
+DIR_BIN = ./
+#DIR_LIB_PUB     = ../public 
 SRC = $(wildcard ${DIR_SRC}/*.c)  
 OBJ = $(patsubst %.c,${DIR_OBJ}/%.o,$(notdir ${SRC})) 
  
@@ -28,14 +27,14 @@ TARGET = tdm
 BIN_TARGET = ${DIR_BIN}/${TARGET}
  
 CC = gcc
-CFLAGS = -g -Wall -I${DIR_INC_CUR} -I${DIR_INC_PUB} -I${DIR_INC}
+CFLAGS = -g -Wall -I${DIR_INC_CUR} -I${DIR_INC}
  
 
 ${DIR_OBJ}/%.o:${DIR_SRC}/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ 
 
 ${BIN_TARGET}:${OBJ}
-	$(CC) $(OBJ) -L$(DIR_LIB_PUB) -o $@ -lpublic -lpthread -levent
+	$(CC) $(OBJ) -o $@ -lpthread -levent
 	
 .PHONY:clean
 clean:

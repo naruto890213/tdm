@@ -1,0 +1,6 @@
+1, cd libevent-2.0.22-stable ;  make clean; make; make install
+
+
+2, cd .. ; make clean; make 
+
+
