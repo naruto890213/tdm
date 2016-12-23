@@ -703,6 +703,9 @@ int Coding_With_LogOut(Data_Spm *para)
 	memcpy(&logout_t, para->Buff, sizeof(logout_t));
 	Hex2String(logout_t.Imsi, para->sIMSI, 9);
 
+	if(para->fd1 > 0)
+		para->fd1 = 0;
+
 #if 1
 	now = time(NULL);
 	if((now - para->outtime) <= 25)
