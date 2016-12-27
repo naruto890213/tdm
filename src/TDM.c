@@ -482,7 +482,9 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
     if(version >= 1601080936)
         length = 40;
 
-	Deal_Proc(para, para->MCC, 1);//modify by 20161220
+	if(MCC)
+		Deal_Proc(para, MCC, 1);//modify by 20161220
+
     memcpy(buff, &para->minite_Remain, 4);
 
 	if(0 == para->minite_Remain)
@@ -496,7 +498,7 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
             memcpy(buff + 4, &Data, length);
             len = 4 + length;
 
-            if(version >= 1601080936)
+            if(version >= 1605041005)
             {
                 memcpy(buff + len, &(para->ifTest), 4);
                 len = len + 4;
@@ -533,7 +535,10 @@ static int Coding_With_CFMD(Data_Spm *para)
 
     Hex2String(Tell_Server_para.Imsi, para->sIMSI, LEN_OF_IMSI);
     para->versionAPK = Tell_Server_para.ApkVersion;//add by 20160125
-    para->MCC = Tell_Server_para.MCC;
+
+	if(Tell_Server_para.MCC)
+    	para->MCC = Tell_Server_para.MCC;
+
     para->state = Tell_Server_para.Vsim_Action_State;
 
     switch(Tell_Server_para.Vsim_Action_State)
@@ -1677,7 +1682,7 @@ int main(int argc, char ** argv )
 	if(server_Sockfd1 > 0)
 		pthread_create(&web_t, NULL, Create_Epoll_Pthread, &server_Sockfd1);
 
-	run(11111, do_accept);
+	run(11113, do_accept);
 
 	return 0;
 }

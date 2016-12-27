@@ -29,7 +29,7 @@
 
 #define Java_TIMEOUT				3
 #define SOCKET_NUM					50
-#define Web_Port					10160
+#define Web_Port					10162
 #define Web_IP						"218.17.107.11"
 #define Web_IP1						"113.88.197.13"
 #define Log_IP						"112.74.141.241"

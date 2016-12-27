@@ -862,13 +862,15 @@ static int Get_Deal_From_Remote(Data_Spm *para, void *para1, int Data)
 
 	switch(para->MCC)
 	{
+		case 454:
+		case 455:
 		case 460:
-        	memcpy(para->ServerInfo, Test_IP, strlen(Test_IP));
-			break;
-		default:
         	para->factoryFlag = 1;
-        	memcpy(para->ServerInfo, Master_IP, strlen(Master_IP));
+        	memcpy(para->ServerInfo, Test_IP, strlen(Test_IP));
         	return SIM_Allocate_Err(IpChange, para); //add by lk 20150211    
+		default:
+        	memcpy(para->ServerInfo, Master_IP, strlen(Master_IP));
+			break;
 	}
 
 	Login_Log_Pack_Data(para, buff, p, Data);
