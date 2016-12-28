@@ -494,15 +494,18 @@ static int Coding_With_CFMD_Soeckt(Data_Spm *para, unsigned int version, int MCC
     {
         case 0:
         case 2:
-            Get_Config_By_MCC(MCC, Data.config, para);
-            memcpy(buff + 4, &Data, length);
-            len = 4 + length;
+			if(MCC)
+			{
+            	Get_Config_By_MCC(MCC, Data.config, para);
+            	memcpy(buff + 4, &Data, length);
+            	len = 4 + length;
 
-            if(version >= 1605041005)
-            {
-                memcpy(buff + len, &(para->ifTest), 4);
-                len = len + 4;
-            }
+            	if(version >= 1605041005)
+            	{
+            	    memcpy(buff + len, &(para->ifTest), 4);
+            	    len = len + 4;
+            	}
+			}
             break;
         default:
             break;
