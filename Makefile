@@ -40,10 +40,10 @@ prepare_libevent:
 		if [ ! -f $(DIR_LIBEVNENT)/Makefile ]; then	\
 			echo "libevent Makefile not exist!";	\
 			cd $(DIR_LIBEVNENT) && ./configure;	\
-		fi	\
+		fi;	\
 		echo "libevent install"	\
 		@make -C $(DIR_LIBEVNENT) install;	\
-	fi
+	fi;	\
 
 prepare_dir:
 	echo "prepare_dir"
