@@ -28,6 +28,9 @@
 /** Size of an incr buf. */
 #define INCR_MAX_STORAGE_LEN 24
 
+#define true 1
+#define false 0
+
 #define DATA_BUFFER_SIZE 2048
 #define UDP_READ_BUFFER_SIZE 65536
 #define UDP_MAX_PAYLOAD_SIZE 1400

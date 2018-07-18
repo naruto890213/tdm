@@ -26,6 +26,13 @@
 #include "tdm.h"
 #include <pthread.h>
 
+#include "common.h"
+
+static conn *listen_conn = NULL;
+static int max_fds;
+static struct event_base *main_base;
+conn **conns;
+
 /*****************************************************************************************
 本文件的函数主要是tdm模块中的操作函数
 ******************************************************************************************/
@@ -1046,7 +1053,7 @@ static void Coding_With_Date(Data_Spm *para, int CMD_TAG)
 	return ;
 }
 
-void *Coding_With_CMD_Data_Pool(void *arg)
+void Coding_With_CMD_Data_Pool(void *arg)
 {
 	Node_Data *para = (Node_Data *)arg;
 	if(para)
@@ -1078,10 +1085,9 @@ Client_Web_Manage：
 		iclient_sock：socket文件描述符
 	输出参数：非零为失败，零值为正常退出
 ******************************************************************************************/
-int Client_Web_Manage(int iclient_sock)
+int Client_Web_Manage(char *RecvBuf, int iclient_sock)
 {
-	unsigned char RecvBuf[RecvBufSize] = {'\0'};
-    int recvbytes = 0, fd = 0;
+	int fd = 0;
     char sn[16] = {'\0'};
     char dst[256] = {'\0'};
     TD_ComProtocl_SendFrame_t para;
@@ -1089,13 +1095,6 @@ int Client_Web_Manage(int iclient_sock)
 	Data_Spm *node = NULL;
     memset(&para, 0, sizeof(para));
     memset(&para1, 0, sizeof(para1));
-
-    recvbytes = read(iclient_sock, (char *)RecvBuf, RecvBufSize);
-    if(recvbytes <= 0)
-    {
-        printf("the errno is %d, the recvbytes is %d\n\n", errno, recvbytes);
-        return -1;
-    }
 
     getValue(&para1, sn, (char *)RecvBuf, dst);//add by lk 20150525
 	node = get_data_list_by_SN(sn);
@@ -1216,88 +1215,6 @@ int TDM_init(int *iServer_sock)
 	ConnectToMysqlInit();
 
 	return 0;
-}
-
-void *Create_Epoll_Pthread(void *arg)
-{
-	pthread_detach(pthread_self());
-	int socket = *(int *)arg;
-    int connfd, kdpfd, nfds, n, curfds = 0;
-    struct epoll_event ev;
-    struct epoll_event events[MAXEPOLLSIZE];
-    struct sockaddr_in cliaddr;
-
-	memset(&ev, 0, sizeof(struct epoll_event));//add by 20160423
-    socklen_t socklen = sizeof(struct sockaddr_in);
-
-    kdpfd = epoll_create(MAXEPOLLSIZE);
-    ev.events = EPOLLIN;
-    ev.data.fd = socket;
-    if(epoll_ctl(kdpfd, EPOLL_CTL_ADD, socket, &ev) < 0)
-    {
-        fprintf(stderr, "epoll set insertion error: fd=%d\n", socket);
-        return NULL;
-    }
-
-    curfds = 1;
-
-    while(1)
-    {
-        nfds = epoll_wait(kdpfd, events, curfds, -1);
-        if (nfds == -1)
-        {
-			if(errno == EINTR)
-            	continue;
-			else
-			{
-            	perror("epoll_wait");
-				LogMsg(MSG_ERROR, "epoll_wait error, %s", strerror (errno));
-				exit(0);
-			}
-        }
-
-        for(n = 0; n < nfds; n++)
-        {
-            if(events[n].data.fd == socket)
-            {
-                connfd = accept(socket, (struct sockaddr *)&cliaddr, &socklen);
-                if (connfd < 0)
-                {
-                    perror("accept error");
-                    continue;
-				}
-                printf("accept form %s:%d\n", inet_ntoa(cliaddr.sin_addr), cliaddr.sin_port);
-
-                if (curfds >= MAXEPOLLSIZE)
-                {
-                    fprintf(stderr, "too many connection, more than %d\n", MAXEPOLLSIZE);
-                    close(connfd);
-                    continue;
-                }
-
-				if (setnonblocking(connfd) < 0) 
-					perror("setnonblocking error");
-
-                ev.events = EPOLLIN | EPOLLET;
-                ev.data.fd = connfd;
-                if (epoll_ctl(kdpfd, EPOLL_CTL_ADD, connfd, &ev) < 0)
-                {
-                    fprintf(stderr, "add socket '%d' to epoll failed: %s\n", connfd, strerror(errno));
-                    continue;
-                }
-
-                curfds++;
-                continue;
-            }
-
-			Client_Web_Manage(events[n].data.fd);
-			close(events[n].data.fd);//add by lk 20150901
-			epoll_ctl(kdpfd, EPOLL_CTL_DEL, events[n].data.fd, &ev);
-			curfds--;
-        }
-    }
-
-	pthread_exit(NULL);
 }
 
 /*****************************************************************************************
@@ -1460,55 +1377,59 @@ static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempB
     if(len <= 0)
         return -1;
 
-	TD_ComProtocl_RecvFrame_t *p_Recv = (TD_ComProtocl_RecvFrame_t *)buf;
-    CMD_TAG = Cmd_Test(p_Recv->Cmd_TAG);
-	if(-1 == CMD_TAG)
-		return CMD_TAG;
+	if(strstr((char *)buf, "sn")){
+		Client_Web_Manage((char *)buf, fd);//处理web下发的远程消息
+	}else{
+		TD_ComProtocl_RecvFrame_t *p_Recv = (TD_ComProtocl_RecvFrame_t *)buf;
+    	CMD_TAG = Cmd_Test(p_Recv->Cmd_TAG);
+		if(-1 == CMD_TAG)
+			return CMD_TAG;
 
-    if(p_Recv->FrameSize == 0)
-        para->num = 0;
-    else
-        para->num = p_Recv->FrameSize - 9;
+    	if(p_Recv->FrameSize == 0)
+    	    para->num = 0;
+    	else
+    	    para->num = p_Recv->FrameSize - 9;
 
-	if(para->num < 0)
-		para->num = 0;
+		if(para->num < 0)
+			para->num = 0;
 
-    switch(CMD_TAG)
-    {
-        case TAG_ACCESS_AUTH:
-        case TAG_SIMFILE_REQUEST:
-			Coding_With_Frame_Data(p_Recv, para, TempBuf);
-            break;
-        case TAG_CMDTT:
-			Coding_With_TT_Data(p_Recv, TempBuf, para, fd);//modify by 20160309
-            break;
-        case TAG_HB_NEW: //add by lk 20150506
-			Coding_With_NewHB_Socket(p_Recv, para, TempBuf, fd);//add by 20160218
-            break;
-        case TAG_VPN_PROFILE_RQST://add by 20160104
-        case TAG_VPN_RELEASE_CMD://add by 20160104
-        case TAG_DEAL:
-        case TAG_LOW_VSIM:
-        case TAG_LOGOUT://add by lk 20150611
-        case TAG_CFMD:
-			CMD_TAG = Coding_With_CMD_Data_Pack(p_Recv, TempBuf, para, fd, CMD_TAG);
-            break;
-        case TAG_LOCAL_STA:
-			Coding_With_Local_Socket(p_Recv, TempBuf, fd, para, &CMD_TAG);
-            break;
-        case TAG_HB:
-			CMD_TAG = Coding_With_HB_Socket(p_Recv, para, TempBuf, fd);//add by 20160218
-            break;
-        case TAG_AUTONET://add by lk 20151028
-		case TAG_GET_APN_INFO:
-		case TAG_ADN:
-			Coding_With_Out_Sql(para, &CMD_TAG, fd);
-			break;
-        case TAG_IP://add by lk 20150518
-            break;
-        default:
-            break;
-    }
+    	switch(CMD_TAG)
+    	{
+    	    case TAG_ACCESS_AUTH:
+    	    case TAG_SIMFILE_REQUEST:
+				Coding_With_Frame_Data(p_Recv, para, TempBuf);
+    	        break;
+    	    case TAG_CMDTT:
+				Coding_With_TT_Data(p_Recv, TempBuf, para, fd);//modify by 20160309
+    	        break;
+    	    case TAG_HB_NEW: //add by lk 20150506
+				Coding_With_NewHB_Socket(p_Recv, para, TempBuf, fd);//add by 20160218
+    	        break;
+    	    case TAG_VPN_PROFILE_RQST://add by 20160104
+    	    case TAG_VPN_RELEASE_CMD://add by 20160104
+    	    case TAG_DEAL:
+    	    case TAG_LOW_VSIM:
+    	    case TAG_LOGOUT://add by lk 20150611
+    	    case TAG_CFMD:
+				CMD_TAG = Coding_With_CMD_Data_Pack(p_Recv, TempBuf, para, fd, CMD_TAG);
+    	        break;
+    	    case TAG_LOCAL_STA:
+				Coding_With_Local_Socket(p_Recv, TempBuf, fd, para, &CMD_TAG);
+    	        break;
+    	    case TAG_HB:
+				CMD_TAG = Coding_With_HB_Socket(p_Recv, para, TempBuf, fd);//add by 20160218
+    	        break;
+    	    case TAG_AUTONET://add by lk 20151028
+			case TAG_GET_APN_INFO:
+			case TAG_ADN:
+				Coding_With_Out_Sql(para, &CMD_TAG, fd);
+				break;
+    	    case TAG_IP://add by lk 20150518
+    	        break;
+    	    default:
+    	        break;
+    	}
+	}
 
     return CMD_TAG;
 }
@@ -1531,34 +1452,36 @@ void Destory_Node(tmd_pthread *para, int socket_fd)
 	return;
 }
 
-void socket_read_cb(int fd, short events, void *arg)
+static void socket_read_cb(int fd, conn *c)
 {
-	tmd_pthread *para = (tmd_pthread *)arg;
+	tmd_pthread para ;
 	unsigned char TempBuf[256] = {'\0'};
 	Node_Data Data;
     memset(&Data, 0, sizeof(Data));
 
-	int CMD_TAG = Coding_With_Recv_Data(fd, para, TempBuf);	
+	int CMD_TAG = Coding_With_Recv_Data(fd, &para, TempBuf);	
 	if(CMD_TAG == -1)
 	{
-		Destory_Node(para, fd);
+		Destory_Node(&para, fd);
 		return;
 	}
 		
 	if(CMD_TAG != 10)
 	{
-		memcpy(Data.SN, para->SN, 16);
+		memcpy(Data.SN, para.SN, 16);
 		Data.fd = fd;
-		Data.len = para->num;
+		Data.len = para.num;
 		Data.CMD_TAG = CMD_TAG;
-		Data.pool = para->pool;
+		Data.pool = para.pool;
 		memcpy(Data.Buff, TempBuf, sizeof(Data.Buff));
-		memcpy(Data.IMSI, para->IMSI, 9);
+		memcpy(Data.IMSI, para.IMSI, 9);
 
-		threadpool_add_job(para->pool_rt, &Data, sizeof(Data));
+		Coding_With_CMD_Data_Pool(&Data);
+		//threadpool_add_job(para->pool_rt, &Data, sizeof(Data));
 	}
 }
 
+#if 0
 tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)
 {
 	struct timeval timeout = {90, 0};
@@ -1576,9 +1499,11 @@ tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)
 
 	return state;
 }
+#endif
 
-void do_accept(evutil_socket_t listener, short event, void *arg)
+void do_accept(conn *c)
 {
+#if 0
 	common_data *para = (common_data *)arg;
     struct sockaddr_storage ss;
     socklen_t slen = sizeof(ss);
@@ -1597,18 +1522,240 @@ void do_accept(evutil_socket_t listener, short event, void *arg)
 		tmd_pthread *client = alloc_Data_SPM(para, fd);
 		assert(client);
     }
+#else
+	bool stop = false;
+    int sfd;
+    socklen_t addrlen;
+    struct sockaddr_storage addr;
+	int nreqs = 20;
+    int res;
+    const char *str;
+	
+	assert(c != NULL);
+
+	while (!stop) {
+		switch(c->state) {
+			case conn_listening:
+				sfd = accept(c->sfd, (struct sockaddr *)&addr, &addrlen);
+				if (sfd == -1) {
+		
+				}
+
+				if (fcntl(sfd, F_SETFL, fcntl(sfd, F_GETFL) | O_NONBLOCK) < 0) {
+                    perror("setting O_NONBLOCK");
+                    close(sfd);
+                    break;
+                }
+				dispatch_conn_new(sfd, conn_new_cmd, EV_READ | EV_PERSIST,
+                                     DATA_BUFFER_SIZE);
+				stop = true;
+            	break;
+			
+			case conn_new_cmd:
+				socket_read_cb(sfd, c);
+				break;
+		}
+	}
+#endif
+}
+
+static void conn_set_state(conn *c, enum conn_states state) {
+    assert(c != NULL);
+    assert(state >= conn_listening && state < conn_max_state);
+
+    if (state != c->state) {
+            fprintf(stderr, "%d: going from to\n",
+                    c->sfd);
+        }
+
+        c->state = state;
+}
+
+void conn_free(conn *c) {
+    if (c) {
+        assert(c != NULL);
+        assert(c->sfd >= 0 && c->sfd < max_fds);
+
+        conns[c->sfd] = NULL;
+        if (c->msglist)
+            free(c->msglist);
+        if (c->rbuf)
+            free(c->rbuf);
+        if (c->wbuf)
+            free(c->wbuf);
+        if (c->ilist)
+            free(c->ilist);
+        if (c->suffixlist)
+            free(c->suffixlist);
+        if (c->iov)
+            free(c->iov);
+        free(c);
+    }
+}
+
+static void conn_release_items(conn *c) {
+    assert(c != NULL);
+
+    if (c->item) {
+        //item_remove(c->item);
+        c->item = 0;
+    }
+
+    while (c->ileft > 0) {
+        item *it = *(c->icurr);
+        assert((it->it_flags & ITEM_SLABBED) == 0);
+        //item_remove(it);
+        c->icurr++;
+        c->ileft--;
+    }
+
+    c->icurr = c->ilist;
+    c->suffixcurr = c->suffixlist;
+}
+
+static void conn_cleanup(conn *c) {
+    assert(c != NULL);
+
+    conn_release_items(c);
+
+    if (c->write_and_free) {
+        free(c->write_and_free);
+        c->write_and_free = 0;
+    }
+
+   	 conn_set_state(c, conn_read);
+}
+
+static void conn_close(conn *c) {
+    assert(c != NULL);
+
+    /* delete the event, the socket and the conn */
+    event_del(&c->event);
+
+   	fprintf(stderr, "<%d connection closed.\n", c->sfd);
+
+    conn_cleanup(c);
+
+    conn_set_state(c, conn_closed);
+    close(c->sfd);
+
+    return;
+}
+
+void event_handler(const int fd, const short which, void *arg) {
+    conn *c;
+
+    c = (conn *)arg;
+    assert(c != NULL);
+
+    c->which = which;
+
+    /* sanity */
+    if (fd != c->sfd) {
+       	fprintf(stderr, "Catastrophic: event fd doesn't match conn fd!\n");
+        conn_close(c);
+        return;
+    }
+
+    do_accept(c);
+
+    /* wait for next event */
+    return;
+}
+
+conn *conn_new(const int sfd, int init_state, const int event_flags, const int read_buffer_size, struct event_base *base)
+{
+    conn *c;
+
+    assert(sfd >= 0 && sfd < max_fds);
+    c = conns[sfd];
+
+    if (NULL == c) {
+        if (!(c = (conn *)calloc(1, sizeof(conn)))) {
+            fprintf(stderr, "Failed to allocate connection object\n");
+            return NULL;
+        }
+
+        c->rbuf = c->wbuf = 0;
+        c->ilist = 0;
+        c->suffixlist = 0;
+        c->iov = 0;
+        c->msglist = 0;
+
+        c->rsize = read_buffer_size;
+        c->wsize = DATA_BUFFER_SIZE;
+        c->isize = ITEM_LIST_INITIAL;
+        c->suffixsize = SUFFIX_LIST_INITIAL;
+        c->iovsize = IOV_LIST_INITIAL;
+        c->msgsize = MSG_LIST_INITIAL;
+        c->hdrsize = 0;
+
+		c->rbuf = (char *)malloc((size_t)c->rsize);
+        c->wbuf = (char *)malloc((size_t)c->wsize);
+        c->ilist = (item **)malloc(sizeof(item *) * c->isize);
+        c->suffixlist = (char **)malloc(sizeof(char *) * c->suffixsize);
+        c->iov = (struct iovec *)malloc(sizeof(struct iovec) * c->iovsize);
+        c->msglist = (struct msghdr *)malloc(sizeof(struct msghdr) * c->msgsize);
+
+        if (c->rbuf == 0 || c->wbuf == 0 || c->ilist == 0 || c->iov == 0 ||
+                c->msglist == 0 || c->suffixlist == 0) {
+            conn_free(c);
+            fprintf(stderr, "Failed to allocate buffers for connection\n");
+            return NULL;
+        }
+
+        c->sfd = sfd;
+        conns[sfd] = c;
+    }
+
+	c->state = init_state;
+    c->rlbytes = 0;
+    c->cmd = -1;
+    c->rbytes = c->wbytes = 0;
+    c->wcurr = c->wbuf;
+    c->rcurr = c->rbuf;
+    c->ritem = 0;
+    c->icurr = c->ilist;
+    c->suffixcurr = c->suffixlist;
+    c->ileft = 0;
+    c->suffixleft = 0;
+    c->iovused = 0;
+    c->msgcurr = 0;
+    c->msgused = 0;
+    c->authenticated = 0;
+    c->last_cmd_time = time(NULL); /* initialize for idle kicker */
+
+	c->write_and_go = init_state;
+    c->write_and_free = 0;
+    c->item = 0;
+
+    c->noreply = 0;
+
+    event_set(&c->event, sfd, event_flags, event_handler, (void *)c);
+    event_base_set(base, &c->event);
+    c->ev_flags = event_flags;
+
+    if (event_add(&c->event, 0) == -1) {
+        perror("event_add");
+        return NULL;
+    }
+
+    return c;
 }
 
 void run(int port, void (*callback)(evutil_socket_t, short, void *))
 {
     int one = 1;
+	int flags = 0;
     evutil_socket_t listener;
     struct sockaddr_in sin;
 	common_data data;
 	memset(&data, 0, sizeof(data));
-    struct event_base *base = NULL;
-    struct event *listener_event;
+	struct linger ling = {0, 0};
 
+	main_base = event_init();
+
+#if 0
 	struct threadpool *pool = threadpool_init(POOL_NUM, POOL_NUM * 5, work_func);
 	if(NULL == pool)
 	{
@@ -1630,6 +1777,7 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 	data.base = base;
 	data.pool = pool;
 	data.pool_rt = pool_rt;
+#endif
 
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = 0;
@@ -1641,6 +1789,9 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 	LogMsg(MSG_MONITOR, "TDM:Listen to Port %d\n", port);
 
     setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(one));
+	setsockopt(listener, IPPROTO_TCP, TCP_NODELAY, (void *)&flags, sizeof(flags));
+	setsockopt(listener, SOL_SOCKET, SO_LINGER, (void *)&ling, sizeof(ling));
+	setsockopt(listener, SOL_SOCKET, SO_KEEPALIVE, (void *)&flags, sizeof(flags));
 
     if (bind(listener, (struct sockaddr*)&sin, sizeof(sin)) < 0) 
 	{
@@ -1654,6 +1805,20 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
         return;
     }
 
+	conn *listen_conn_add;
+	if (!(listen_conn_add = conn_new(listener, conn_listening,
+                    EV_READ | EV_PERSIST, 1, main_base))) {
+   		fprintf(stderr, "failed to create listening connection\n");
+       	exit(EXIT_FAILURE);
+	}
+
+    listen_conn_add->next = listen_conn;
+    listen_conn = listen_conn_add;
+
+	if (event_base_loop(main_base, 0) != 0) { 
+		exit(EXIT_FAILURE);
+    }   
+#if 0
     listener_event = event_new(base, listener, EV_READ|EV_PERSIST, callback, (void*)&data);
     /*XXX check it */
     event_add(listener_event, NULL);
@@ -1664,6 +1829,7 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 	threadpool_destroy(pool);
 	threadpool_destroy(pool_rt);
 	//printf("This come from %s\n", __func__);
+#endif
 }
 #endif
 
@@ -1680,10 +1846,6 @@ int main(int argc, char ** argv )
     int rc = pthread_sigmask(SIG_BLOCK, &signal_mask, NULL);
     if(rc != 0)
         printf("block sigpipe error\n");
-
-	int server_Sockfd1 = CreateListenService(Web_Port, MAX_Connect);
-	if(server_Sockfd1 > 0)
-		pthread_create(&web_t, NULL, Create_Epoll_Pthread, &server_Sockfd1);
 
 	run(11113, do_accept);
 
