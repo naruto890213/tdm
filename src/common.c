@@ -360,28 +360,6 @@ ret:
     return 0;
 }
 
-void *work_func(void *arg)
-{
-	Log_Data *p = NULL;
-	p = (Log_Data *)arg;
-	int num = 0;
-
-	if(p)
-	{
-		num = atoll(p->SN) % SOCKET_NUM;
-
-		if((!strlen(p->Buff)))
-			LogMsg(MSG_ERROR, "The SN is %s, the Buff is %s, the len is %d\n", p->SN, p->Buff, p->len);
-		else
-		{
-			if(num >= 0 && num < SOCKET_NUM)
-				Send_Logs_Data(p->Buff, strlen(p->Buff), &Data_Fd.Logs_Fd[num], &Data_Fd.Logs_mutex[num]);
-		}
-	}
-	
-	return NULL;
-}
-
 int VPN_Log(char *SN, char *vpn, int Result, int code, int type)
 {
     char buff[256] = {'\0'};

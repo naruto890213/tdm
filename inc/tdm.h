@@ -33,7 +33,8 @@
 #define Web_IP						"218.17.107.11"
 #define Web_IP1						"113.88.197.13"
 #define Log_IP						"112.74.141.241"
-#define POOL_NUM					100
+#define RT_POOL_NUM					20
+#define POOL_NUM					10
 
 /*
 the Macro definition for access authenticate of terminal device
@@ -534,10 +535,10 @@ extern int add_data_list_by_sn(char *imsi, char *SN, time_t now, time_t logtime,
 extern Data_Spm *get_data_list_by_SN(char *SN);
 extern int Local_Log_Pack(char *sn, char *imsi, void *Src, int length, unsigned int version, char *Dst);
 extern int Local_Confirm_Pack(char *sn, char *imsi, char *Version, int apkversion, char *iccid, char *Dst);
-extern void *work_func(void *arg);
 extern int Get_VPN_From_SN_List(char *SN, char *vpn);
 extern int TT_Log_Pack_Data(char *sn, int cnt, char *imsi, unsigned char *Buff, int len, Data_Spm *para);
 extern Data_Spm *Get_Node_By_SN(char *SN);
 extern int Is_Valid_SN(char *SN);
 extern void Close_Socket_Fd(int *Fd);
+extern void thread_init_pool();
 #endif

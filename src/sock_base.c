@@ -560,10 +560,6 @@ int PutMsgToProcess(int iSock,char * sBuf,int iLen)
 	return iLen;
 }
 
-
-/*从socket取指定长度的数据放入sBuf中
-iType=MSG_PEEK或MSG_WAITALL
-iTimeOut超时时间,如果为0,则阻塞（不会超时）*/
 int GetMsgFromProcess(int iSockFd, char* sBuf, int iLen, int iTimeOut)
 {
 	int iRtn = 0, iPos = 0;

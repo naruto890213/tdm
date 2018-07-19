@@ -1074,7 +1074,7 @@ void Coding_With_CMD_Data_Pool(void *arg)
 		}
 	}
 
-	return NULL;
+	return;
 }
 
 /*****************************************************************************************
@@ -1214,6 +1214,8 @@ int TDM_init(int *iServer_sock)
 	RegisterLogMsg(TDM_LOG_FILE_NAME, TDM_LOG_FILE_NAME_ERR, TDM_LOG_LEVEL);
 	ConnectToMysqlInit();
 
+	thread_init_pool();
+
 	return 0;
 }
 
@@ -1225,8 +1227,6 @@ TDM_Proc：
 	输出参数：无
 ******************************************************************************************/
 
-#if 1
-#define MAX_LINE 65535
 void free_tmd_pthread(tmd_pthread *para)
 {
 	event_free(para->read_event);
@@ -1503,33 +1503,10 @@ tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)
 
 void do_accept(conn *c)
 {
-#if 0
-	common_data *para = (common_data *)arg;
-    struct sockaddr_storage ss;
-    socklen_t slen = sizeof(ss);
-    int fd = accept(listener, (struct sockaddr*)&ss, &slen);
-    if (fd < 0) 
-	{
-        perror("accept");
-    } 
-	else if (fd > FD_SETSIZE) 
-	{
-        close(fd);
-    } 
-	else 
-	{
-        evutil_make_socket_nonblocking(fd);
-		tmd_pthread *client = alloc_Data_SPM(para, fd);
-		assert(client);
-    }
-#else
 	bool stop = false;
     int sfd;
     socklen_t addrlen;
     struct sockaddr_storage addr;
-	int nreqs = 20;
-    int res;
-    const char *str;
 	
 	assert(c != NULL);
 
@@ -1541,7 +1518,7 @@ void do_accept(conn *c)
 		
 				}
 
-				if (fcntl(sfd, F_SETFL, fcntl(sfd, F_GETFL) | O_NONBLOCK) < 0) {
+				if(setnonblocking(sfd)){
                     perror("setting O_NONBLOCK");
                     close(sfd);
                     break;
@@ -1556,7 +1533,6 @@ void do_accept(conn *c)
 				break;
 		}
 	}
-#endif
 }
 
 static void conn_set_state(conn *c, enum conn_states state) {
@@ -1743,7 +1719,7 @@ conn *conn_new(const int sfd, int init_state, const int event_flags, const int r
     return c;
 }
 
-void run(int port, void (*callback)(evutil_socket_t, short, void *))
+void run(int port)
 {
     int one = 1;
 	int flags = 0;
@@ -1752,32 +1728,9 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 	common_data data;
 	memset(&data, 0, sizeof(data));
 	struct linger ling = {0, 0};
+	conn *listen_conn_add;
 
 	main_base = event_init();
-
-#if 0
-	struct threadpool *pool = threadpool_init(POOL_NUM, POOL_NUM * 5, work_func);
-	if(NULL == pool)
-	{
-		LogMsg(MSG_ERROR, "failed to malloc threadpool!\n");	
-		return;
-	}
-
-	struct threadpool *pool_rt = threadpool_init(POOL_NUM, POOL_NUM * 2, Coding_With_CMD_Data_Pool);
-	if(NULL == pool_rt)
-	{
-		LogMsg(MSG_ERROR, "failed to malloc threadpool pool_rt!\n");	
-		return;
-	}
-
-    base = event_base_new();
-    if (!base)
-        return; /*XXXerr*/
-
-	data.base = base;
-	data.pool = pool;
-	data.pool_rt = pool_rt;
-#endif
 
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = 0;
@@ -1799,13 +1752,12 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
         return;
     }
 
-    if (listen(listener, 16) < 0) 
+    if(listen(listener, 128) < 0) 
 	{
         perror("listen");
         return;
     }
 
-	conn *listen_conn_add;
 	if (!(listen_conn_add = conn_new(listener, conn_listening,
                     EV_READ | EV_PERSIST, 1, main_base))) {
    		fprintf(stderr, "failed to create listening connection\n");
@@ -1818,27 +1770,14 @@ void run(int port, void (*callback)(evutil_socket_t, short, void *))
 	if (event_base_loop(main_base, 0) != 0) { 
 		exit(EXIT_FAILURE);
     }   
-#if 0
-    listener_event = event_new(base, listener, EV_READ|EV_PERSIST, callback, (void*)&data);
-    /*XXX check it */
-    event_add(listener_event, NULL);
-
-    event_base_dispatch(base);
-    event_base_free(base);    
-	
-	threadpool_destroy(pool);
-	threadpool_destroy(pool_rt);
-	//printf("This come from %s\n", __func__);
-#endif
 }
-#endif
 
 int main(int argc, char ** argv )
 {
-	pthread_t web_t;
-	TDM_init(NULL);
 	signal(SIGINT, sigexit);
 	signal(SIGSEGV, sigexit);
+
+	TDM_init(NULL);
 
 	sigset_t signal_mask;
     sigemptyset(&signal_mask);
@@ -1847,7 +1786,7 @@ int main(int argc, char ** argv )
     if(rc != 0)
         printf("block sigpipe error\n");
 
-	run(11113, do_accept);
+	run(Web_Port);
 
 	return 0;
 }

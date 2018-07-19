@@ -6,54 +6,17 @@
 #include <pthread.h>
 
 #include "common.h"
+#include "tdm.h"
 
 #define ITEMS_PER_ALLOC 128
 
-#if 0
-enum conn_queue_item_modes {
-    queue_new_conn,   /* brand new connection. */
-    queue_redispatch, /* redispatching from side thread */
-};
-
-enum conn_states {
-    conn_listening,  /**< the socket which listens for connections */
-    conn_new_cmd,    /**< Prepare connection for next command */
-    conn_waiting,    /**< waiting for a readable socket */
-    conn_read,       /**< reading in a command line */
-    conn_parse_cmd,  /**< try to parse a command from the input buffer */
-    conn_write,      /**< writing out a simple response */
-    conn_nread,      /**< reading in a fixed number of bytes */
-    conn_swallow,    /**< swallowing unnecessary bytes w/o storing */
-    conn_closing,    /**< closing this connection */
-    conn_mwrite,     /**< writing out many items sequentially */
-    conn_closed,     /**< connection is closed */
-    conn_watch,      /**< held by the logger thread as a watcher */
-    conn_max_state   /**< Max state value (used for assertion) */
-};
-
-typedef struct conn_queue_item CQ_ITEM;
-struct conn_queue_item {
-    int               sfd;
-    enum conn_states  init_state;
-    int               event_flags;
-    int               read_buffer_size;
-    enum conn_queue_item_modes mode;
-    //conn *c;
-    CQ_ITEM          *next;
-};
-
-typedef struct conn_queue CQ;
-struct conn_queue {
-    CQ_ITEM *head;
-    CQ_ITEM *tail;
-    pthread_mutex_t lock;
-};
-#endif
-
 static CQ_ITEM *cqi_freelist;
+static CQ_ITEM *cqi_freelist_work;
 static pthread_mutex_t cqi_freelist_lock;
+static pthread_mutex_t cqi_freelist_work_lock;
 static pthread_mutex_t *item_locks;
 static LIBEVENT_THREAD *threads;
+static LIBEVENT_THREAD *threads_work;
 static int last_thread = -1;//用于记录上一次插入的线程索引值
 static int thread_nums = -1;
 
@@ -131,7 +94,6 @@ static void thread_libevent_process(int fd, short which, void *arg) {
     CQ_ITEM *item;
     char buf[1];
     conn *c;
-    unsigned int timeout_fd;
 
     if (read(fd, buf, 1) != 1) {
        	fprintf(stderr, "Can't read from libevent pipe\n");
@@ -147,8 +109,44 @@ static void thread_libevent_process(int fd, short which, void *arg) {
         }
 
 		switch (item->mode) {
+			case queue_new_conn:
+				c = conn_new(item->sfd, item->init_state, item->event_flags, item->read_buffer_size, me->base);
+				if (c == NULL) {
+					fprintf(stderr, "Can't listen for events on fd %d\n", item->sfd);
+					close(item->sfd);
+				}else{
+					c->thread = me;
+				}
+				break;
+		}
+
+		cqi_free(item);
+		break;
+	}
+}
+
+static void work_func(int fd, short which, void *arg)
+{
+#if 0
+	Log_Data *p = NULL;
+	p = (Log_Data *)arg;
+	int num = 0;
+
+	if(p)
+	{
+		num = atoll(p->SN) % SOCKET_NUM;
+
+		if((!strlen(p->Buff)))
+			LogMsg(MSG_ERROR, "The SN is %s, the Buff is %s, the len is %d\n", p->SN, p->Buff, p->len);
+		else
+		{
+			if(num >= 0 && num < SOCKET_NUM)
+				Send_Logs_Data(p->Buff, strlen(p->Buff), &Data_Fd.Logs_Fd[num], &Data_Fd.Logs_mutex[num]);
 		}
 	}
+#endif
+	
+	return ;
 }
 
 static void setup_thread(LIBEVENT_THREAD *me)
@@ -161,7 +159,7 @@ static void setup_thread(LIBEVENT_THREAD *me)
     }
 
 	event_set(&me->notify_event, me->notify_receive_fd,
-              EV_READ | EV_PERSIST, thread_libevent_process, me);
+              EV_READ | EV_PERSIST, me->handler, me);
     event_base_set(me->base, &me->notify_event);
 
     if (event_add(&me->notify_event, 0) == -1) {
@@ -177,16 +175,12 @@ static void setup_thread(LIBEVENT_THREAD *me)
     cq_init(me->new_conn_queue);
 }
 
-void thread_init(int nthreads, void *arg)
+static void thread_init(LIBEVENT_THREAD *me, int nthreads, tdm_event_handler_pt handler)
 {
 	int         i;
 	
-	pthread_mutex_init(&cqi_freelist_lock, NULL);
-	cqi_freelist = NULL;
-	thread_nums = nthreads;
-	
-	threads = calloc(nthreads, sizeof(LIBEVENT_THREAD));
-	if (! threads) {
+	me = calloc(nthreads, sizeof(LIBEVENT_THREAD));
+	if (!me) {
         perror("Can't allocate thread descriptors");
         exit(1);
     }
@@ -198,10 +192,22 @@ void thread_init(int nthreads, void *arg)
             exit(1);
         }
 
-		threads[i].notify_receive_fd = fds[0];
-		threads[i].notify_send_fd = fds[1];
-		setup_thread(&threads[i]);
+		me[i].notify_receive_fd = fds[0];
+		me[i].notify_send_fd = fds[1];
+		me[i].handler = handler;
+		setup_thread(&me[i]);
 	}
+}
+
+void thread_init_pool()
+{
+	pthread_mutex_init(&cqi_freelist_lock, NULL);
+	pthread_mutex_init(&cqi_freelist_work_lock, NULL);
+	cqi_freelist = NULL;
+	cqi_freelist_work = NULL;
+
+	thread_init(threads, RT_POOL_NUM, thread_libevent_process);
+	thread_init(threads_work, POOL_NUM, work_func);
 }
 
 void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, int read_buffer_size) 
