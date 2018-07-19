@@ -33,6 +33,7 @@ static int max_fds;
 static struct event_base *main_base;
 conn **conns;
 
+static void conn_close(conn *c); 
 /*****************************************************************************************
 本文件的函数主要是tdm模块中的操作函数
 ******************************************************************************************/
@@ -100,7 +101,7 @@ static void sigexit(int dunno)
 			break;
     }
 
-    ConnectToMysqlDeInit();
+    //ConnectToMysqlDeInit();
     exit(-1);
 }
 
@@ -721,11 +722,9 @@ int Coding_With_LogOut(Data_Spm *para)
 	if(para->fd1 > 0)
 		para->fd1 = 0;
 
-#if 1
 	now = time(NULL);
 	if((now - para->outtime) <= 25)
 		return 0;
-#endif
 
 	para->outtime = now;
 
@@ -734,7 +733,6 @@ int Coding_With_LogOut(Data_Spm *para)
 	Data.len = strlen(Data.Buff);
 
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
-	printf("This come from %s the Buff is %s\n", __func__, Data.Buff);
 
 	if(para->socket_spm > 0)
 	{
@@ -1476,24 +1474,24 @@ void Destory_Node(tmd_pthread *para, int socket_fd)
 	return;
 }
 
-static void socket_read_cb(int fd, conn *c)
+static void socket_read_cb(conn *c)
 {
 	tmd_pthread para ;
 	unsigned char TempBuf[256] = {'\0'};
 	Node_Data Data;
     memset(&Data, 0, sizeof(Data));
 
-	int CMD_TAG = Coding_With_Recv_Data(fd, &para, TempBuf);	
+	int CMD_TAG = Coding_With_Recv_Data(c->sfd, &para, TempBuf);	
 	if(CMD_TAG == -1)
 	{
-		Destory_Node(&para, fd);
+		conn_close(c);
 		return;
 	}
 		
 	if(CMD_TAG != 10)
 	{
 		memcpy(Data.SN, para.SN, 16);
-		Data.fd = fd;
+		Data.fd = c->sfd;
 		Data.len = para.num;
 		Data.CMD_TAG = CMD_TAG;
 		Data.pool = para.pool;
@@ -1501,29 +1499,8 @@ static void socket_read_cb(int fd, conn *c)
 		memcpy(Data.IMSI, para.IMSI, 9);
 
 		Coding_With_CMD_Data_Pool(&Data);
-		//threadpool_add_job(para->pool_rt, &Data, sizeof(Data));
 	}
 }
-
-#if 0
-tmd_pthread *alloc_Data_SPM(common_data *para, evutil_socket_t fd)
-{
-	struct timeval timeout = {90, 0};
-	tmd_pthread *state = malloc(sizeof(tmd_pthread));
-	if(!state)
-		return NULL;
-
-	memset(state, 0, sizeof(tmd_pthread));
-	state->pool = para->pool;
-	state->pool_rt = para->pool_rt;
-	
-	state->read_event = event_new(NULL, -1, 0, NULL, NULL);//仅仅是为了动态创建一个event结构体 
-	event_assign(state->read_event, para->base, fd, EV_READ | EV_PERSIST, socket_read_cb, state);
-	event_add(state->read_event, &timeout);
-
-	return state;
-}
-#endif
 
 void do_accept(conn *c)
 {
@@ -1533,7 +1510,6 @@ void do_accept(conn *c)
     struct sockaddr_storage addr;
 	
 	assert(c != NULL);
-	printf("This come from %s:%d\n", __FILE__, __LINE__);
 
 	while (!stop) {
 		switch(c->state) {
@@ -1548,14 +1524,18 @@ void do_accept(conn *c)
                     close(sfd);
                     break;
                 }
-				printf("This come from %s:%d\n", __FILE__, __LINE__);
 				dispatch_conn_new(sfd, conn_new_cmd, EV_READ | EV_PERSIST,
                                      DATA_BUFFER_SIZE);
 				stop = true;
             	break;
 			
 			case conn_new_cmd:
-				socket_read_cb(sfd, c);
+				socket_read_cb(c);
+				stop = true;
+				break;
+
+			default:
+				stop = true;
 				break;
 		}
 	}

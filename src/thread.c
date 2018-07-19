@@ -20,14 +20,20 @@ static LIBEVENT_THREAD *threads_work;
 static int last_thread = -1;//用于记录上一次插入的线程索引值
 static int thread_nums = -1;
 
-static CQ_ITEM *cqi_new(void) {
+static int init_count = 0;
+static pthread_mutex_t init_lock;
+static pthread_cond_t init_cond;
+
+static CQ_ITEM *cqi_new_base(CQ_ITEM **list, pthread_mutex_t *lock)
+{
     CQ_ITEM *item = NULL;
-    pthread_mutex_lock(&cqi_freelist_lock);
-    if (cqi_freelist) {
-        item = cqi_freelist;
-        cqi_freelist = item->next;
+
+    pthread_mutex_lock(lock);
+    if (*list) {
+        item = *list;
+        *list = item->next;
     }
-    pthread_mutex_unlock(&cqi_freelist_lock);
+    pthread_mutex_unlock(lock);
 
     if (NULL == item) {
         int i;
@@ -39,20 +45,39 @@ static CQ_ITEM *cqi_new(void) {
 		for (i = 2; i < ITEMS_PER_ALLOC; i++)
             item[i - 1].next = &item[i];
 
-        pthread_mutex_lock(&cqi_freelist_lock);
-        item[ITEMS_PER_ALLOC - 1].next = cqi_freelist;
-        cqi_freelist = &item[1];
-        pthread_mutex_unlock(&cqi_freelist_lock);
+        pthread_mutex_lock(lock);
+        item[ITEMS_PER_ALLOC - 1].next = *list;
+        *list = &item[1];
+        pthread_mutex_unlock(lock);
     }
 
     return item;
 }
 
+static CQ_ITEM *cqi_new_work(void)
+{
+	return cqi_new_base(cqi_freelist_work, &cqi_freelist_work_lock);
+}
+
+static CQ_ITEM *cqi_new(void)
+{
+	return cqi_new_base(cqi_freelist, &cqi_freelist_lock);
+}
+
+static void cqi_free_base(CQ_ITEM *item, CQ_ITEM **list, pthread_mutex_t *lock)
+{
+	pthread_mutex_lock(lock);
+	item->next = *list;
+	*list = item;
+	pthread_mutex_unlock(lock);
+}
+
 static void cqi_free(CQ_ITEM *item) {
-    pthread_mutex_lock(&cqi_freelist_lock);
-    item->next = cqi_freelist;
-    cqi_freelist = item;
-    pthread_mutex_unlock(&cqi_freelist_lock);
+	cqi_free_base(item, &cqi_freelist, &cqi_freelist_lock);
+}
+
+static void cqi_free_work(CQ_ITEM *item) {
+	cqi_free_base(item, &cqi_freelist_work, &cqi_freelist_work_lock);
 }
 
 static void cq_push(CQ *cq, CQ_ITEM *item) {
@@ -145,7 +170,13 @@ static void work_func(int fd, short which, void *arg)
 		}
 	}
 #endif
-	
+    char buf[1];
+
+    if (read(fd, buf, 1) != 1) {
+       	fprintf(stderr, "Can't read from libevent pipe\n");
+        return;
+    }
+
 	return ;
 }
 
@@ -175,12 +206,53 @@ static void setup_thread(LIBEVENT_THREAD *me)
     cq_init(me->new_conn_queue);
 }
 
-static void thread_init(LIBEVENT_THREAD *me, int nthreads, tdm_event_handler_pt handler)
+static void create_worker(void *(*func)(void *), void *arg) {
+    pthread_attr_t  attr;
+    int             ret;
+
+    pthread_attr_init(&attr);
+
+    if ((ret = pthread_create(&((LIBEVENT_THREAD*)arg)->thread_id, &attr, func, arg)) != 0) {
+        fprintf(stderr, "Can't create thread: %s\n",
+                strerror(ret));
+        exit(1);
+    }
+}
+
+static void register_thread_initialized(void) {
+    pthread_mutex_lock(&init_lock);
+    init_count++;
+    pthread_cond_signal(&init_cond);
+    pthread_mutex_unlock(&init_lock);
+}
+
+static void *worker_libevent(void *arg) {
+    LIBEVENT_THREAD *me = arg;
+
+    register_thread_initialized();
+
+    event_base_loop(me->base, 0);
+
+    event_base_free(me->base);
+
+    return NULL;
+}
+
+static void wait_for_thread_registration(int nthreads) {
+    while (init_count < nthreads) {
+        pthread_cond_wait(&init_cond, &init_lock);
+    }
+}
+
+static void thread_init(LIBEVENT_THREAD **me, int nthreads, tdm_event_handler_pt handler)
 {
 	int         i;
+	LIBEVENT_THREAD *tmp = NULL;
+
+	init_count = 0;
 	
-	me = calloc(nthreads, sizeof(LIBEVENT_THREAD));
-	if (!me) {
+	tmp = calloc(nthreads, sizeof(LIBEVENT_THREAD));
+	if (!tmp) {
         perror("Can't allocate thread descriptors");
         exit(1);
     }
@@ -192,11 +264,20 @@ static void thread_init(LIBEVENT_THREAD *me, int nthreads, tdm_event_handler_pt 
             exit(1);
         }
 
-		me[i].notify_receive_fd = fds[0];
-		me[i].notify_send_fd = fds[1];
-		me[i].handler = handler;
-		setup_thread(&me[i]);
+		tmp[i].notify_receive_fd = fds[0];
+		tmp[i].notify_send_fd = fds[1];
+		tmp[i].handler = handler;
+		setup_thread(&tmp[i]);
 	}
+	*me = tmp;
+
+	for (i = 0; i < nthreads; i++) {
+		create_worker(worker_libevent, &tmp[i]);
+	}
+
+	pthread_mutex_lock(&init_lock);
+    wait_for_thread_registration(nthreads);
+    pthread_mutex_unlock(&init_lock);
 }
 
 void thread_init_pool()
@@ -206,13 +287,11 @@ void thread_init_pool()
 	cqi_freelist = NULL;
 	cqi_freelist_work = NULL;
 
-	threads = calloc(nthreads, sizeof(LIBEVENT_THREAD)); 
+	pthread_mutex_init(&init_lock, NULL);
+    pthread_cond_init(&init_cond, NULL);
 
 	thread_init(&threads, RT_POOL_NUM, thread_libevent_process);
 	thread_init(&threads_work, POOL_NUM, work_func);
-
-	printf("thread:%p\n", threads);
-	printf("threads_work:%p\n", threads_work);
 }
 
 void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, int read_buffer_size) 
@@ -239,7 +318,6 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
 
     cq_push(thread->new_conn_queue, item);
 	buf[0] = 'c';
-	printf("This come from %s:%d\n", __FILE__, __LINE__);
     if (write(thread->notify_send_fd, buf, 1) != 1) {
         perror("Writing to thread notify pipe");
     }
