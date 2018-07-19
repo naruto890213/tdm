@@ -307,7 +307,6 @@ struct conn {
 /* array of conn structures, indexed by file descriptor */
 extern conn **conns;
 
-extern void conn_init(void);
 extern void memcached_thread_init(int nthreads, struct event_base *main_base);
 extern int server_socket(int port, struct event_base *main_base);
 extern conn *conn_new(const int sfd, int init_state, const int event_flags, const int read_buffer_size, struct event_base *base);

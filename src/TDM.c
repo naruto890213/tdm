@@ -1202,6 +1202,28 @@ int Client_Web_Manage(char *RecvBuf, int iclient_sock)
     return 0;
 }
 
+static void conn_init(void) {
+    int next_fd = dup(1);
+    int headroom = 10;      /* account for extra unexpected open FDs */
+    struct rlimit rl;
+
+    max_fds = 1024 + headroom + next_fd;
+
+    if (getrlimit(RLIMIT_NOFILE, &rl) == 0) {
+        max_fds = rl.rlim_max;
+    } else {
+        fprintf(stderr, "Failed to query maximum file descriptor; "
+                        "falling back to maxconns\n");
+    }
+
+    close(next_fd);
+
+    if ((conns = calloc(max_fds, sizeof(conn *))) == NULL) {
+        fprintf(stderr, "Failed to allocate connection structures\n");
+        exit(1);
+    }
+}
+
 /*****************************************************************************************
 TDM_init：
 	该函数主要是用于初始化TDM程序
@@ -1212,7 +1234,9 @@ TDM_init：
 int TDM_init(int *iServer_sock)
 {
 	RegisterLogMsg(TDM_LOG_FILE_NAME, TDM_LOG_FILE_NAME_ERR, TDM_LOG_LEVEL);
-	ConnectToMysqlInit();
+	//ConnectToMysqlInit();
+
+	conn_init();
 
 	thread_init_pool();
 
@@ -1509,6 +1533,7 @@ void do_accept(conn *c)
     struct sockaddr_storage addr;
 	
 	assert(c != NULL);
+	printf("This come from %s:%d\n", __FILE__, __LINE__);
 
 	while (!stop) {
 		switch(c->state) {
@@ -1523,6 +1548,7 @@ void do_accept(conn *c)
                     close(sfd);
                     break;
                 }
+				printf("This come from %s:%d\n", __FILE__, __LINE__);
 				dispatch_conn_new(sfd, conn_new_cmd, EV_READ | EV_PERSIST,
                                      DATA_BUFFER_SIZE);
 				stop = true;
@@ -1643,7 +1669,7 @@ conn *conn_new(const int sfd, int init_state, const int event_flags, const int r
 {
     conn *c;
 
-    assert(sfd >= 0 && sfd < max_fds);
+    assert(sfd >= 0);
     c = conns[sfd];
 
     if (NULL == c) {

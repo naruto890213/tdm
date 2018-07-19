@@ -206,8 +206,13 @@ void thread_init_pool()
 	cqi_freelist = NULL;
 	cqi_freelist_work = NULL;
 
-	thread_init(threads, RT_POOL_NUM, thread_libevent_process);
-	thread_init(threads_work, POOL_NUM, work_func);
+	threads = calloc(nthreads, sizeof(LIBEVENT_THREAD)); 
+
+	thread_init(&threads, RT_POOL_NUM, thread_libevent_process);
+	thread_init(&threads_work, POOL_NUM, work_func);
+
+	printf("thread:%p\n", threads);
+	printf("threads_work:%p\n", threads_work);
 }
 
 void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, int read_buffer_size) 
@@ -220,7 +225,7 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
         return ;
     }   
 
-    int tid = (last_thread + 1) % thread_nums;
+    int tid = (last_thread + 1) % RT_POOL_NUM;
 
     LIBEVENT_THREAD *thread = threads + tid;
 
@@ -234,6 +239,7 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
 
     cq_push(thread->new_conn_queue, item);
 	buf[0] = 'c';
+	printf("This come from %s:%d\n", __FILE__, __LINE__);
     if (write(thread->notify_send_fd, buf, 1) != 1) {
         perror("Writing to thread notify pipe");
     }
