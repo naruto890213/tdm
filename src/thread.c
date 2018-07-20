@@ -18,7 +18,7 @@ static pthread_mutex_t *item_locks;
 static LIBEVENT_THREAD *threads;
 static LIBEVENT_THREAD *threads_work;
 static int last_thread = -1;//用于记录上一次插入的线程索引值
-static int thread_nums = -1;
+static int last_thread_work = -1;
 
 static int init_count = 0;
 static pthread_mutex_t init_lock;
@@ -56,12 +56,12 @@ static CQ_ITEM *cqi_new_base(CQ_ITEM **list, pthread_mutex_t *lock)
 
 static CQ_ITEM *cqi_new_work(void)
 {
-	return cqi_new_base(cqi_freelist_work, &cqi_freelist_work_lock);
+	return cqi_new_base(&cqi_freelist_work, &cqi_freelist_work_lock);
 }
 
 static CQ_ITEM *cqi_new(void)
 {
-	return cqi_new_base(cqi_freelist, &cqi_freelist_lock);
+	return cqi_new_base(&cqi_freelist, &cqi_freelist_lock);
 }
 
 static void cqi_free_base(CQ_ITEM *item, CQ_ITEM **list, pthread_mutex_t *lock)
@@ -126,27 +126,27 @@ static void thread_libevent_process(int fd, short which, void *arg) {
     }
 
     switch (buf[0]) {
-    case 'c':
-        item = cq_pop(me->new_conn_queue);
+    	case 'c':
+    	    item = cq_pop(me->new_conn_queue);
 
-        if (NULL == item) {
-            break;
-        }
+    	    if (NULL == item) {
+    	        break;
+    	    }
 
-		switch (item->mode) {
-			case queue_new_conn:
-				c = conn_new(item->sfd, item->init_state, item->event_flags, item->read_buffer_size, me->base);
-				if (c == NULL) {
-					fprintf(stderr, "Can't listen for events on fd %d\n", item->sfd);
-					close(item->sfd);
-				}else{
-					c->thread = me;
-				}
-				break;
-		}
+			switch (item->mode) {
+				case queue_new_conn:
+					c = conn_new(item->sfd, item->init_state, item->event_flags, item->read_buffer_size, me->base);
+					if (c == NULL) {
+						fprintf(stderr, "Can't listen for events on fd %d\n", item->sfd);
+						close(item->sfd);
+					}else{
+						c->thread = me;
+					}
+					break;
+			}
 
-		cqi_free(item);
-		break;
+			cqi_free(item);
+			break;
 	}
 }
 
@@ -170,12 +170,30 @@ static void work_func(int fd, short which, void *arg)
 		}
 	}
 #endif
+    LIBEVENT_THREAD *me = arg;
+    CQ_ITEM *item = NULL;
+    conn *c;
     char buf[1];
 
     if (read(fd, buf, 1) != 1) {
        	fprintf(stderr, "Can't read from libevent pipe\n");
         return;
     }
+
+    switch (buf[0]) {
+    	case 'l':
+    	    item = cq_pop(me->new_conn_queue);
+
+    	    if (NULL == item) {
+    	        break;
+    	    }
+
+			cqi_free(item);
+			break;
+
+		default:
+			break;
+	}
 
 	return ;
 }
@@ -318,6 +336,29 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
 
     cq_push(thread->new_conn_queue, item);
 	buf[0] = 'c';
+    if (write(thread->notify_send_fd, buf, 1) != 1) {
+        perror("Writing to thread notify pipe");
+    }
+}
+
+void conn_new_func_worker(int sfd, int event_flags, int read_buffer_size)
+{
+	CQ_ITEM *item = cqi_new_work();
+	char buf[1];
+
+	if (item == NULL) {                                
+        close(sfd);                                    
+        fprintf(stderr, "Failed to allocate memory for connection object\n");
+        return ;                                       
+    }       
+
+	int tid = (last_thread_work + 1) % POOL_NUM;	
+	LIBEVENT_THREAD *thread = threads_work + tid;
+	last_thread_work = tid;
+	
+	item->sfd = sfd;
+	cq_push(thread->new_conn_queue, item);
+	buf[0] = 'l';
     if (write(thread->notify_send_fd, buf, 1) != 1) {
         perror("Writing to thread notify pipe");
     }
