@@ -50,6 +50,8 @@ static CQ_ITEM *cqi_new_base(CQ_ITEM **list, pthread_mutex_t *lock)
         *list = &item[1];
         pthread_mutex_unlock(lock);
     }
+	
+	memset(item, 0, sizeof(CQ_ITEM));
 
     return item;
 }
@@ -135,7 +137,7 @@ static void thread_libevent_process(int fd, short which, void *arg) {
 
 			switch (item->mode) {
 				case queue_new_conn:
-					c = conn_new(item->sfd, item->init_state, item->event_flags, item->read_buffer_size, me->base);
+					c = conn_new(item->sfd, item->init_state, item->event_flags, me->base);
 					if (c == NULL) {
 						fprintf(stderr, "Can't listen for events on fd %d\n", item->sfd);
 						close(item->sfd);
@@ -312,7 +314,7 @@ void thread_init_pool()
 	thread_init(&threads_work, POOL_NUM, work_func);
 }
 
-void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, int read_buffer_size) 
+void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags) 
 {
     CQ_ITEM *item = cqi_new();
     char buf[1];
@@ -331,7 +333,6 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
     item->sfd = sfd;
     item->init_state = init_state;
     item->event_flags = event_flags;
-    item->read_buffer_size = read_buffer_size;
     item->mode = queue_new_conn;
 
     cq_push(thread->new_conn_queue, item);
@@ -341,13 +342,12 @@ void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, in
     }
 }
 
-void conn_new_func_worker(int sfd, int event_flags, int read_buffer_size)
+void conn_new_func_worker(char *buff)
 {
 	CQ_ITEM *item = cqi_new_work();
 	char buf[1];
 
 	if (item == NULL) {                                
-        close(sfd);                                    
         fprintf(stderr, "Failed to allocate memory for connection object\n");
         return ;                                       
     }       
@@ -356,7 +356,7 @@ void conn_new_func_worker(int sfd, int event_flags, int read_buffer_size)
 	LIBEVENT_THREAD *thread = threads_work + tid;
 	last_thread_work = tid;
 	
-	item->sfd = sfd;
+	memcpy(item->buff, buff, strlen(buff));
 	cq_push(thread->new_conn_queue, item);
 	buf[0] = 'l';
     if (write(thread->notify_send_fd, buf, 1) != 1) {

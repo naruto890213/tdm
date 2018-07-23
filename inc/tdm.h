@@ -228,7 +228,6 @@ typedef struct __Node_Data_t
 {
 	int 				CMD_TAG;
 	int					fd;
-	void				*pool;
 	int					len;
 	char				SN[16];
 	unsigned char		IMSI[12];

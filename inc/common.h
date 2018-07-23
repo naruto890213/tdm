@@ -31,7 +31,7 @@
 #define true 1
 #define false 0
 
-#define DATA_BUFFER_SIZE 2048
+#define DATA_BUFFER_SIZE 1024
 #define UDP_READ_BUFFER_SIZE 65536
 #define UDP_MAX_PAYLOAD_SIZE 1400
 #define UDP_HEADER_SIZE 8
@@ -148,12 +148,12 @@ enum conn_queue_item_modes {
 
 typedef struct conn_queue_item CQ_ITEM;
 struct conn_queue_item {
-    int               sfd;
-    enum conn_states  init_state;
-    int               event_flags;
-    int               read_buffer_size;
-	enum conn_queue_item_modes mode;
-    CQ_ITEM          *next;
+    int               			sfd;
+    enum conn_states  			init_state;
+    int               			event_flags;
+	enum conn_queue_item_modes 	mode;
+	char						buff[DATA_BUFFER_SIZE];	
+    CQ_ITEM          			*next;
 };
 
 /* A connection queue. */
@@ -213,83 +213,14 @@ enum try_read_result {
 typedef struct conn conn;
 struct conn {
     int    sfd;
-    bool authenticated;
     enum conn_states  state;
-    enum bin_substates substate;
     rel_time_t last_cmd_time;
     struct event event;
     short  ev_flags;
     short  which;   /** which events were just triggered */
 
-    char   *rbuf;   /** buffer to read commands into */
-    char   *rcurr;  /** but if we parsed some already, this is where we stopped */
-    int    rsize;   /** total allocated size of rbuf */
-    int    rbytes;  /** how much data, starting from rcur, do we have unparsed */
-
-    char   *wbuf;
-    char   *wcurr;
-    int    wsize;
-    int    wbytes;
-    /** which state to go into after finishing current write */
-    enum conn_states  write_and_go;
-    void   *write_and_free; /** free this memory after finishing writing */
-
-    char   *ritem;  /** when we read in an item's value, it goes here */
-    int    rlbytes;
-
-    /* data for the nread state */
-
-    /**
-     * item is used to hold an item structure created after reading the command
-     * line of set/add/replace commands, but before we finished reading the actual
-     * data. The data is read into ITEM_data(item) to avoid extra copying.
-     */
-
     void   *item;     /* for commands set/add/replace  */
-
-    /* data for the swallow state */
-    int    sbytes;    /* how many bytes to swallow */
-
-    /* data for the mwrite state */
-    struct iovec *iov;
-    int    iovsize;   /* number of elements allocated in iov[] */
-    int    iovused;   /* number of elements used in iov[] */
-
-    struct msghdr *msglist;
-    int    msgsize;   /* number of elements allocated in msglist[] */
-    int    msgused;   /* number of elements used in msglist[] */
-    int    msgcurr;   /* element in msglist[] being transmitted now */
-    int    msgbytes;  /* number of bytes in current msg */
-
-    item   **ilist;   /* list of items to write out */
-    int    isize;
-    item   **icurr;
-    int    ileft;
-
-    char   **suffixlist;
-    int    suffixsize;
-    char   **suffixcurr;
-    int    suffixleft;
-
-    /* data for UDP clients */
     socklen_t request_addr_size;
-    int    hdrsize;   /* number of headers' worth of space is allocated */
-
-    bool   noreply;   /* True if the reply should not be sent. */
-    /* current stats command */
-    struct {
-        char *buffer;
-        size_t size;
-        size_t offset;
-    } stats;
-
-    /* Binary protocol stuff */
-    /* This is where the binary header goes */
-    protocol_binary_request_header binary_header;
-    uint64_t cas; /* the cas to return */
-    short cmd; /* current command being processed */
-    int opaque;
-    int keylen;
     conn   *next;     /* Used for generating a list of conn structures */
     LIBEVENT_THREAD *thread; /* Pointer to the thread object serving this connection */
 };
@@ -309,7 +240,7 @@ extern conn **conns;
 
 extern void memcached_thread_init(int nthreads, struct event_base *main_base);
 extern int server_socket(int port, struct event_base *main_base);
-extern conn *conn_new(const int sfd, int init_state, const int event_flags, const int read_buffer_size, struct event_base *base);
-extern void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags, int read_buffer_size); 
+extern conn *conn_new(const int sfd, int init_state, const int event_flags, struct event_base *base);
+extern void dispatch_conn_new(int sfd, enum conn_states init_state, int event_flags); 
 extern void item_remove(item *item);
 #endif

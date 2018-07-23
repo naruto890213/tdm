@@ -473,6 +473,8 @@ int Coding_With_NewHB(Data_Spm *para)
 	Data.len = strlen(Data.Buff);
 	
 	threadpool_add_job(para->pool, &Data, sizeof(Data));
+	
+	//conn_new_func_worker();
 
 	return 0;
 }
@@ -1061,7 +1063,6 @@ void Coding_With_CMD_Data_Pool(void *arg)
 		{
 			node->CMD_TAG = para->CMD_TAG;
 			node->fd1 = para->fd;
-			node->pool = para->pool;
 			node->len = para->len;
 			memcpy(node->Buff, para->Buff, sizeof(node->Buff));
 			
@@ -1494,7 +1495,6 @@ static void socket_read_cb(conn *c)
 		Data.fd = c->sfd;
 		Data.len = para.num;
 		Data.CMD_TAG = CMD_TAG;
-		Data.pool = para.pool;
 		memcpy(Data.Buff, TempBuf, sizeof(Data.Buff));
 		memcpy(Data.IMSI, para.IMSI, 9);
 
@@ -1524,8 +1524,7 @@ void do_accept(conn *c)
                     close(sfd);
                     break;
                 }
-				dispatch_conn_new(sfd, conn_new_cmd, EV_READ | EV_PERSIST,
-                                     DATA_BUFFER_SIZE);
+				dispatch_conn_new(sfd, conn_new_cmd, EV_READ | EV_PERSIST);
 				stop = true;
             	break;
 			
@@ -1546,11 +1545,10 @@ static void conn_set_state(conn *c, enum conn_states state) {
     assert(state >= conn_listening && state < conn_max_state);
 
     if (state != c->state) {
-            fprintf(stderr, "%d: going from to\n",
-                    c->sfd);
+            fprintf(stderr, "%d: going %d from to %d\n", c->sfd, c->state, state);
         }
 
-        c->state = state;
+	c->state = state;
 }
 
 void conn_free(conn *c) {
@@ -1559,18 +1557,6 @@ void conn_free(conn *c) {
         assert(c->sfd >= 0 && c->sfd < max_fds);
 
         conns[c->sfd] = NULL;
-        if (c->msglist)
-            free(c->msglist);
-        if (c->rbuf)
-            free(c->rbuf);
-        if (c->wbuf)
-            free(c->wbuf);
-        if (c->ilist)
-            free(c->ilist);
-        if (c->suffixlist)
-            free(c->suffixlist);
-        if (c->iov)
-            free(c->iov);
         free(c);
     }
 }
@@ -1582,30 +1568,12 @@ static void conn_release_items(conn *c) {
         //item_remove(c->item);
         c->item = 0;
     }
-
-    while (c->ileft > 0) {
-        item *it = *(c->icurr);
-        assert((it->it_flags & ITEM_SLABBED) == 0);
-        //item_remove(it);
-        c->icurr++;
-        c->ileft--;
-    }
-
-    c->icurr = c->ilist;
-    c->suffixcurr = c->suffixlist;
 }
 
 static void conn_cleanup(conn *c) {
     assert(c != NULL);
 
     conn_release_items(c);
-
-    if (c->write_and_free) {
-        free(c->write_and_free);
-        c->write_and_free = 0;
-    }
-
-   	 conn_set_state(c, conn_read);
 }
 
 static void conn_close(conn *c) {
@@ -1645,7 +1613,7 @@ void event_handler(const int fd, const short which, void *arg) {
     return;
 }
 
-conn *conn_new(const int sfd, int init_state, const int event_flags, const int read_buffer_size, struct event_base *base)
+conn *conn_new(const int sfd, int init_state, const int event_flags, struct event_base *base)
 {
     conn *c;
 
@@ -1658,60 +1626,12 @@ conn *conn_new(const int sfd, int init_state, const int event_flags, const int r
             return NULL;
         }
 
-        c->rbuf = c->wbuf = 0;
-        c->ilist = 0;
-        c->suffixlist = 0;
-        c->iov = 0;
-        c->msglist = 0;
-
-        c->rsize = read_buffer_size;
-        c->wsize = DATA_BUFFER_SIZE;
-        c->isize = ITEM_LIST_INITIAL;
-        c->suffixsize = SUFFIX_LIST_INITIAL;
-        c->iovsize = IOV_LIST_INITIAL;
-        c->msgsize = MSG_LIST_INITIAL;
-        c->hdrsize = 0;
-
-		c->rbuf = (char *)malloc((size_t)c->rsize);
-        c->wbuf = (char *)malloc((size_t)c->wsize);
-        c->ilist = (item **)malloc(sizeof(item *) * c->isize);
-        c->suffixlist = (char **)malloc(sizeof(char *) * c->suffixsize);
-        c->iov = (struct iovec *)malloc(sizeof(struct iovec) * c->iovsize);
-        c->msglist = (struct msghdr *)malloc(sizeof(struct msghdr) * c->msgsize);
-
-        if (c->rbuf == 0 || c->wbuf == 0 || c->ilist == 0 || c->iov == 0 ||
-                c->msglist == 0 || c->suffixlist == 0) {
-            conn_free(c);
-            fprintf(stderr, "Failed to allocate buffers for connection\n");
-            return NULL;
-        }
-
         c->sfd = sfd;
         conns[sfd] = c;
     }
 
 	c->state = init_state;
-    c->rlbytes = 0;
-    c->cmd = -1;
-    c->rbytes = c->wbytes = 0;
-    c->wcurr = c->wbuf;
-    c->rcurr = c->rbuf;
-    c->ritem = 0;
-    c->icurr = c->ilist;
-    c->suffixcurr = c->suffixlist;
-    c->ileft = 0;
-    c->suffixleft = 0;
-    c->iovused = 0;
-    c->msgcurr = 0;
-    c->msgused = 0;
-    c->authenticated = 0;
     c->last_cmd_time = time(NULL); /* initialize for idle kicker */
-
-	c->write_and_go = init_state;
-    c->write_and_free = 0;
-    c->item = 0;
-
-    c->noreply = 0;
 
     event_set(&c->event, sfd, event_flags, event_handler, (void *)c);
     event_base_set(base, &c->event);
@@ -1765,7 +1685,7 @@ void run(int port)
     }
 
 	if (!(listen_conn_add = conn_new(listener, conn_listening,
-                    EV_READ | EV_PERSIST, 1, main_base))) {
+                    EV_READ | EV_PERSIST, main_base))) {
    		fprintf(stderr, "failed to create listening connection\n");
        	exit(EXIT_FAILURE);
 	}
