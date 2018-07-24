@@ -1400,6 +1400,8 @@ static int Coding_With_Recv_Data(int fd, tmd_pthread *para, unsigned char *TempB
     if(len <= 0)
         return -1;
 
+	memcpy((char *)TempBuf, buf, len);
+
 	if(strstr((char *)buf, "sn")){
 		Client_Web_Manage((char *)buf, fd);//处理web下发的远程消息
 	}else{
@@ -1482,6 +1484,10 @@ static void socket_read_cb(conn *c)
 	Node_Data Data;
     memset(&Data, 0, sizeof(Data));
 
+	Coding_With_Recv_Data(c->sfd, &para, TempBuf);	
+	printf("This come from %s:%d, TempBuf:%s\n", __FILE__, __LINE__, (char *)TempBuf);
+	conn_new_func_worker((char *)TempBuf);
+#if 0
 	int CMD_TAG = Coding_With_Recv_Data(c->sfd, &para, TempBuf);	
 	if(CMD_TAG == -1)
 	{
@@ -1500,6 +1506,7 @@ static void socket_read_cb(conn *c)
 
 		Coding_With_CMD_Data_Pool(&Data);
 	}
+#endif
 }
 
 void do_accept(conn *c)

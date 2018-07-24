@@ -174,7 +174,6 @@ static void work_func(int fd, short which, void *arg)
 #endif
     LIBEVENT_THREAD *me = arg;
     CQ_ITEM *item = NULL;
-    conn *c;
     char buf[1];
 
     if (read(fd, buf, 1) != 1) {
@@ -182,20 +181,20 @@ static void work_func(int fd, short which, void *arg)
         return;
     }
 
+   	item = cq_pop(me->new_conn_queue);
+    if (NULL == item) {
+        return;
+    }
+
     switch (buf[0]) {
     	case 'l':
-    	    item = cq_pop(me->new_conn_queue);
-
-    	    if (NULL == item) {
-    	        break;
-    	    }
-
-			cqi_free(item);
+			printf("This come from %s:%d, buff:%s\n", __FILE__, __LINE__, item->buff);
 			break;
 
 		default:
 			break;
 	}
+	cqi_free_work(item);
 
 	return ;
 }

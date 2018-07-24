@@ -28,7 +28,7 @@
 #define	LOGIN_TIMEOUT				1800
 
 #define Java_TIMEOUT				3
-#define SOCKET_NUM					50
+#define SOCKET_NUM					10
 #define Web_Port					10162
 #define Web_IP						"218.17.107.11"
 #define Web_IP1						"113.88.197.13"
